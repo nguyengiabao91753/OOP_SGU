@@ -1,7 +1,4 @@
 import java.util.*;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 public class ve {
     private int ma_ve;
     private int gia;
