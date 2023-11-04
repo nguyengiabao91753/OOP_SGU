@@ -67,14 +67,14 @@ class quanly_giohang {
     public void suagiohang(String name, int maso, ve ve){
         if(quanlygiohang.containsKey(name)){
             giohang giohang = quanlygiohang.get(name);
-            giohang.getVegiohang().suave(maso,ve);
+            giohang.getVegiohang().suave(maso-1,ve);
         }
     }
 
     public void xoagiohang(String name, int maso){
         if(quanlygiohang.containsKey(name)){
             giohang giohang = quanlygiohang.get(name);
-            giohang.getVegiohang().xoave(maso);
+            giohang.getVegiohang().xoave(maso-1);
         }
     }
 
@@ -86,15 +86,6 @@ class quanly_giohang {
 
 class hienthi_giohang{
     public static void main(String[] args) {
-        quanly_giohang quanly = new quanly_giohang();
-        ve ve = new ve();
-        ve ve2 = new ve();
-
-        ve.nhap();
-        ve2.nhap();
-        quanly.themgiohang("Gia Bao", ve);
-        quanly.themgiohang("Bao", ve2);
-
-        quanly.xuatgiohang("Gia Bao");
+        
     }
 }

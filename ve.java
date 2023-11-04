@@ -103,6 +103,10 @@ class quanly_ve {
         }
     }
 
+    public List<ve> getDanhsachve() {
+        return danhsachve;
+    }
+
     public void timve(int ma_ve){
         for (ve ve : danhsachve) {
             if(ve.getMa_ve() == ma_ve){
