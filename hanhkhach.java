@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 class hanhkhach extends nguoi {
     private String maHK;
     Scanner sc = new Scanner(System.in);

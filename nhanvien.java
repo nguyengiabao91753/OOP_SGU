@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 class nhanvien extends nguoi {
     private String maNV, chucvu;
     Scanner sc = new Scanner(System.in);
@@ -83,5 +83,71 @@ class nhanvien extends nguoi {
     }
     public void setsdt(String sdt){
         this.sdt=sdt;
+    }
+}
+
+
+
+class DSNV {
+    nhanvien[] dsnv;
+    int n;
+    Scanner sc = new Scanner(System.in);
+
+
+
+    public DSNV(){
+        dsnv = new nhanvien[0];
+        n = 0;
+    }
+    public DSNV(nhanvien[] ds, int nn){
+        dsnv = Arrays.copyOf(ds,nn);
+        n = nn;
+    }
+
+
+
+    public void nhap(){
+        System.out.println("Nhap so luong nhan vien: ");
+        n = sc.nextInt(); sc.nextLine();
+        dsnv = new nhanvien[n];
+        for(int i=0; i<n; i++){
+            System.out.println("Nhap thong tin nhan vien thu " + (i+1) + ": ");
+            dsnv[i] = new nhanvien();
+            dsnv[i].nhap();
+        }
+    }
+    public void xuat(){
+        for(int i=0; i<n; i++)
+            dsnv[i].xuat();
+    }
+
+
+
+    public void them(){
+        dsnv = Arrays.copyOf(dsnv,n+1);
+        dsnv[n] = new nhanvien();
+        System.out.println("Nhap thong tin nhan vien duoc them: ");
+        dsnv[n].nhap();
+        n++;
+    }
+
+
+
+    public void xoa(){
+        System.out.println("Nhap ma nhan vien can xoa: ");
+        String tmp = sc.nextLine();
+        xoa(tmp);
+    }
+    public void xoa(String ma){
+        for(int i=0; i<n; i++){
+            if( dsnv[i].getmaNV().equals(ma) ){
+                for(int j=i; j<n-1; j++){
+                    dsnv[j] = dsnv[j+1];
+                }
+                dsnv = Arrays.copyOf(dsnv,n-1);
+                n--;
+                break;
+            }
+        }
     }
 }
