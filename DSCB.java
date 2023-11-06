@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -61,15 +62,18 @@ public class DSCB {
         int flag;
         while(true){
             Scanner input=new Scanner(System.in);
+            System.out.println(">Menu-------------------------<");
             System.out.println("1.Khoi tao mot danh sach moi.");
             System.out.println("2.Xuat danh sach chuyen bay");
             System.out.println("3.Them chuyen bay vao danh sach");
             System.out.println("4.Xoa phan tu cuoi cung danh sach.");
             System.out.println("5.Xoa chuyen bay theo ma so chuyen.");
+            System.out.println("6.Luu du lieu.");
+            System.out.println("7.Doc du lieu da luu.");
             System.out.println("0.Quay lai.");
             System.out.println("Hay nhap lua chon.");
             flag=input.nextInt();
-            if(flag>5 || flag<0){
+            if(flag>7 || flag<0){
                 System.out.println("Lua chon khong hop le, nhap lai!");
                 continue;
             }
@@ -78,7 +82,7 @@ public class DSCB {
             }
             switch(flag){
                 case 1:
-                    System.out.println("Co co chac muon khoi tao Danh Sach khong, du lieu cu se mat het. 'co' hoac phim bat ky.");
+                    System.out.println("Co co chac muon khoi tao Danh Sach khong, danh sach se lam moi hoan toan. 'co' hoac phim bat ky.");
                     input.nextLine();
                     String flag1=input.nextLine();
                     if(flag1.equals("co")){
@@ -102,6 +106,49 @@ public class DSCB {
                     input.nextLine();
                     String cmp=input.nextLine();
                     xoa(cmp);
+                    break;
+                case 6:
+                    try {
+                        File fileo=new File("./dataDSCB.txt");
+                        OutputStream os=new FileOutputStream(fileo); 
+                        ObjectOutputStream oos=new ObjectOutputStream(os);
+                        oos.writeObject(sochuyenbay);
+                        for(int i=0;i<sochuyenbay;i++){
+                            oos.writeObject(danhsachchuyenbay[i]);
+                        }
+                        oos.flush();
+                        oos.close();
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+                    System.out.println("Du lieu da duoc luu vao file!");
+                    break;
+                case 7:
+                    try {
+                        File filei= new File("./dataDSCB.txt");
+                        InputStream is=new FileInputStream(filei);
+                        ObjectInputStream ois=new ObjectInputStream(is);
+                        // chuyenbay tmp=new chuyenbay();
+                        Object oj=new Object();
+                        sochuyenbay=(int)ois.readObject();
+                        for(int i=0;i<sochuyenbay;i++){
+                            // tmp=(chuyenbay)ois.readObject();
+                            danhsachchuyenbay[i]=new chuyenbay();
+                            oj=ois.readObject();
+                            danhsachchuyenbay[i]=(chuyenbay) oj;
+                        }
+                        ois.close();
+                        // while(true){
+                        //     danhsachchuyenbay[i]=new chuyenbay();
+                        //     tmp=(chuyenbay)ois.readObject();
+                        //     danhsachchuyenbay[i]=new chuyenbay(tmp);
+                        // }
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+                    // System.out.println("Du lieu chuyen bay da duoc lay thanh cong!");
+                    System.out.println(""+sochuyenbay);
+                    danhsachchuyenbay[0].xuat();
                     break;
             }
         }
