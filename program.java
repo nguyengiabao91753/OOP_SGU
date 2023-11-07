@@ -32,6 +32,11 @@ public class program {
                 case 1:
 
                     break;
+                case 4:            
+                    System.out.println("Quản lý Chuyến bay");
+                    DSCB tmp=new DSCB();
+                    tmp.quanlyDSCB();
+                    break;
                 case 5:
 
                    
@@ -91,7 +96,7 @@ public class program {
                 case 8:
                     quanly_giohang quanly_giohang = new quanly_giohang();
                     for (ve ve : danhsachve.getDanhsachve()) {
-                        quanly_giohang.themgiohang(ve.getHanhkhach().getten(), ve );
+                        // quanly_giohang.themgiohang(ve.getHanhkhach().getten(), ve );
                     }
                     while (again == 1) {
                         System.out.println("    Quản lý giỏ hàng");
