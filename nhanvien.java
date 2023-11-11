@@ -28,7 +28,12 @@ class nhanvien extends nguoi {
         super.nhap();
     }
     @Override public void xuat(){
-        System.out.println("Nhan vien {" + maNV + ", " + chucvu + ", " + hoten + ", " + gioitinh + ", " + diachi + ", " + sdt +"}");
+        System.out.println("Ma nhan vien: " + maNV);
+        System.out.println("Chuc vu: " + chucvu);
+        System.out.println("Ho ten nhan vien: " + hoten);
+        System.out.println("Gioi tinh: " + gioitinh);
+        System.out.println("Dia chi: " + diachi);
+        System.out.println("So dien thoai: " + sdt);
     }
 
 
@@ -117,8 +122,10 @@ class DSNV {
         }
     }
     public void xuat(){
-        for(int i=0; i<n; i++)
+        for(int i=0; i<n; i++){
+            System.out.println("\nThong tin nhan vien thu " + i + ":");
             dsnv[i].xuat();
+        }
     }
 
 

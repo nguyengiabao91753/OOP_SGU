@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
 public class chuyenbay {
@@ -13,6 +14,14 @@ public class chuyenbay {
         diemxuatphat=" ";
         diemden=" ";
         soghe=0;
+    }
+    public chuyenbay(chuyenbay tmp){
+        machuyenbay=tmp.machuyenbay;
+        thoigiankhoihanh=tmp.thoigiankhoihanh;
+        diemxuatphat=tmp.diemxuatphat;
+        diemden=tmp.diemden;
+        soghe=tmp.soghe;
+        giave=tmp.giave;
     }
     public void nhap(){
         Scanner input=new Scanner(System.in);

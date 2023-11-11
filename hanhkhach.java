@@ -25,7 +25,11 @@ class hanhkhach extends nguoi {
         super.nhap();
     }
     @Override public void xuat(){
-        System.out.println("hanh khach {" + maHK + ", " + hoten + ", " + gioitinh + ", " + diachi + ", " + sdt +"}");
+        System.out.println("Ma hanh khach: " + maHK);
+        System.out.println("Ho ten hanh khach: " + hoten);
+        System.out.println("Gioi tinh: " + gioitinh);
+        System.out.println("Dia chi: " + diachi);
+        System.out.println("So dien thoai: " + sdt);
     }
 
 
@@ -107,8 +111,10 @@ class DSHK {
         }
     }
     public void xuat(){
-        for(int i=0; i<n; i++)
+        for(int i=0; i<n; i++){
+            System.out.println("\nThong tin hanh khach thu " + i + ":");
             dshk[i].xuat();
+        }
     }
 
 
