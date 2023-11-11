@@ -1,5 +1,6 @@
 import java.util.*;
 
+
 public class giohang {
     quanly_ve vegiohang;
     private int soluong;
@@ -35,57 +36,84 @@ public class giohang {
         this.tongtien = tongtien;
     }
 
-    public void themve(ve vemoi) {
-        vegiohang.themve(vemoi);
-        soluong++;
-        tongtien += vemoi.getGia();
+    public void them(ve vemoi) {
+        vegiohang.them(vemoi);
+        
     }
-    // public void nhap(){
-    // Scanner nhap = new Scanner(System.in);
-    // ve.nhap();
-    // System.out.println("Nhap so luong");
-    // soluong = nhap.nextInt();
-    // tongtien = soluong* ve.getGia();
-    // System.out.println("Tong tien: "+tongtien);
-    // }
+
+    public double tinhtien(quanly_ve vegiohang){
+        tongtien=0;
+        for (ve ve : vegiohang.getDanhsachve()) {
+            soluong++;
+            if(ve.getTrangthai().equals("chua thanh toan")){
+                tongtien+=ve.getGia();
+            }
+        }
+        return tongtien;
+    }
+
 }
 
-class quanly_giohang {
+class quanly_giohang implements crud {
     private Map<String, giohang> quanlygiohang = new HashMap<>();
 
-    public void themgiohang(String name, ve ve) {
+    public void them(String name, ve ve) {
         if (!quanlygiohang.containsKey(name)) {
             giohang giohangmoi = new giohang();
-            giohangmoi.themve(ve);
+            giohangmoi.them(ve);
             quanlygiohang.put(name, giohangmoi);
         } else {
             giohang giohang = quanlygiohang.get(name);
-            giohang.themve(ve);
+            giohang.them(ve);
         }
     }
 
-    public void suagiohang(String name, int maso, ve ve){
+    public void sua(String name, String maso, ve ve){
         if(quanlygiohang.containsKey(name)){
             giohang giohang = quanlygiohang.get(name);
-            giohang.getVegiohang().suave(maso-1,ve);
+            giohang.getVegiohang().sua(maso,ve);
         }
     }
 
-    public void xoagiohang(String name, int maso){
+    public void xoa(String name, String maso){
         if(quanlygiohang.containsKey(name)){
             giohang giohang = quanlygiohang.get(name);
-            giohang.getVegiohang().xoave(maso-1);
+            giohang.getVegiohang().xoa(maso);
         }
     }
 
-    public void xuatgiohang(String name) {
+    public void tim(String name) {
         giohang giohang = quanlygiohang.get(name);
-        giohang.getVegiohang().xuatve();
+        System.out.println("Giỏ hàng của khách hàng: "+ name);
+        giohang.getVegiohang().xuat();
+        System.out.println("<>---------------------------------<>");
+        System.out.println("Tổng tiền: " + giohang.tinhtien(giohang.getVegiohang()));
+    }
+
+    public void xuat(){
+        
+        for (String name : quanlygiohang.keySet()) {
+            giohang giohang = quanlygiohang.get(name);
+            giohang.getVegiohang().xuat();
+        }
     }
 }
 
 class hienthi_giohang{
     public static void main(String[] args) {
+        quanly_giohang quanly_giohang = new quanly_giohang();
+        ve ve1 = new ve();
+        ve ve2 = new ve();
+        ve1.nhap();
+        ve2.nhap();
+        quanly_giohang.them("Gia Bao", ve1);
+        quanly_giohang.them("Gia Bao", ve2);
+        quanly_giohang.tim("Gia Bao");
+
+        quanly_giohang.xoa("Gia Bao", "111");
         
+        quanly_giohang.tim("Gia Bao");
+
+
     }
 }

@@ -5,10 +5,9 @@ public class program {
         int chay = 1;
         int luachon;
         int again = 1;
-        Scanner inp = new Scanner(System.in);
+        Scanner nhap = new Scanner(System.in);
         quanly_ve danhsachve = new quanly_ve();
         do {
-            Scanner nhap = new Scanner(System.in);
             System.out.println("Chủ đề: Quản lý bán vé máy bay ");
             System.out.println("    1. Quản lý Hành khách");
             System.out.println("    2. Quản lý nhân viên");
@@ -33,8 +32,6 @@ public class program {
 
                     break;
                 case 5:
-
-                   
                     while (again == 1) {
                         System.out.println("    Quản lý vé chuyến bay");
                         System.out.println(">---------------------------<");
@@ -46,37 +43,37 @@ public class program {
                         System.out.println(">---------------------------<");
 
                         System.out.println("Nhập lựa chọn:");
-                        luachon = inp.nextInt();
+                        luachon = nhap.nextInt();
                         if (luachon >= 1 && luachon <= 6) {
                             switch (luachon) {
                                 case 1:
                                     ve ve = new ve();
                                     ve.nhap();
-                                    danhsachve.themve(ve);
+                                    danhsachve.them(ve);
                                     break;
                                 case 2:
                                     ve vemoi = new ve();
-                                    int ma_sua;
+                                    String ma_sua;
                                     System.out.println("Nhập mã vé cần chỉnh sửa");
-                                    ma_sua = inp.nextInt();
+                                    ma_sua = nhap.nextLine();
                                     System.out.println("Nhập vé mới để sửa");
                                     vemoi.nhap();
-                                    danhsachve.suave(ma_sua, vemoi);
+                                    danhsachve.sua(ma_sua, vemoi);
                                     break;
                                 case 3:
-                                    int ma_xoa;
+                                    String ma_xoa;
                                     System.out.println("Nhap mã vé muốn xóa");
-                                    ma_xoa = inp.nextInt();
-                                    danhsachve.xoave(ma_xoa);
+                                    ma_xoa = nhap.nextLine();
+                                    danhsachve.xoa(ma_xoa);
                                     break;
                                 case 4:
-                                    int ma_tim;
+                                    String ma_tim;
                                     System.out.println("Nhập mã vé cần tìm");
-                                    ma_tim = inp.nextInt();
-                                    danhsachve.timve(ma_tim);
+                                    ma_tim = nhap.nextLine();
+                                    danhsachve.tim(ma_tim);
                                     break;
                                 case 5:
-                                    danhsachve.xuatve();
+                                    danhsachve.xuat();
                                 default:
                                     break;
                             }
@@ -85,13 +82,14 @@ public class program {
                         }
 
                         System.out.println("Bạn có muốn chọn lại?  1: Có / 2: Không");
-                        again = inp.nextInt();
+                        again = nhap.nextInt();
                     }
                     break;
                 case 8:
+                    again=1;
                     quanly_giohang quanly_giohang = new quanly_giohang();
                     for (ve ve : danhsachve.getDanhsachve()) {
-                        quanly_giohang.themgiohang(ve.getHanhkhach().getten(), ve );
+                        quanly_giohang.them(ve.getHanhkhach().gethoten(), ve );
                     }
                     while (again == 1) {
                         System.out.println("    Quản lý giỏ hàng");
@@ -103,36 +101,36 @@ public class program {
                         System.out.println(">---------------------------<");
 
                         System.out.println("Nhập lựa chọn:");
-                        luachon = inp.nextInt();
+                        luachon = nhap.nextInt();
                         if (luachon >= 1 && luachon <= 4) {
                             switch (luachon) {
                                 case 1:
                                     System.out.println("Nhập tên khách hàng: ");
-                                    String name = inp.nextLine();
+                                    String name = nhap.nextLine();
                                     System.out.println("Nhập số thứ tự vé muốn xóa: ");
-                                    int maso = inp.nextInt();
+                                    String maso = nhap.nextLine();
                                     System.out.println("Nhập vé mới: ");
                                     ve vemoi = new ve();
                                     vemoi.nhap();
-                                    quanly_giohang.suagiohang(name, maso, vemoi);
+                                    quanly_giohang.sua(name, maso, vemoi);
                                     break;
                                 case 2:
                                     
                                     break;
                                 case 3:
-                                    int ma_xoa;
+                                    String ma_xoa;
                                     System.out.println("Nhap mã vé muốn xóa");
-                                    ma_xoa = inp.nextInt();
-                                    danhsachve.xoave(ma_xoa);
+                                    ma_xoa = nhap.nextLine();
+                                    danhsachve.xoa(ma_xoa);
                                     break;
                                 case 4:
-                                    int ma_tim;
+                                    String ma_tim;
                                     System.out.println("Nhập mã vé cần tìm");
-                                    ma_tim = inp.nextInt();
-                                    danhsachve.timve(ma_tim);
+                                    ma_tim = nhap.nextLine();
+                                    danhsachve.tim(ma_tim);
                                     break;
                                 case 5:
-                                    danhsachve.xuatve();
+                                    danhsachve.xuat();
                                 default:
                                     break;
                             }
@@ -141,7 +139,7 @@ public class program {
                         }
 
                         System.out.println("Bạn có muốn chọn lại?  1: Có / 2: Không");
-                        again = inp.nextInt();
+                        again = nhap.nextInt();
                     }
                     break;
                 case 11:
@@ -151,5 +149,10 @@ public class program {
                     break;
             }
         } while (chay == 1);
+
+
+        nhap.close();
     }
+
+
 }

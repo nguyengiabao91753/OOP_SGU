@@ -88,6 +88,7 @@ class DSHK {
         dshk = new hanhkhach[0];
         n = 0;
     }
+    
     public DSHK(hanhkhach[] ds, int nn){
         dshk = Arrays.copyOf(ds,nn);
         n = nn;

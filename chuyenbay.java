@@ -13,7 +13,6 @@ public class chuyenbay {
         diemxuatphat=" ";
         diemden=" ";
         soghe=0;
-        giave=0;
     }
     public void nhap(){
         Scanner input=new Scanner(System.in);
@@ -27,8 +26,6 @@ public class chuyenbay {
         diemden=input.nextLine();
         System.out.println("Nhap so luong ghe: ");
         soghe=input.nextInt();
-        System.out.println("Nhap gia ve: ");
-        giave=input.nextInt()    ;
     }
     public void xuat(){
         System.out.printf("Ma chuyen bay: %s || Thoi gian: %s || Diem xuat phat: %s || Diem den: %s || So ghe: %d || Gia ve: %d\n",machuyenbay,thoigiankhoihanh,diemxuatphat,diemden,soghe,giave);
