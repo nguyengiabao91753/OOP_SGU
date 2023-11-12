@@ -36,7 +36,7 @@ public class program {
                     break;
                 case 2:
                     System.out.println("Quản lý nhân viên:");
-                     QuanLyNV qlnv = new QuanLyNV();
+                    QuanLyNV qlnv = new QuanLyNV();
                     qlnv.menu();
                     break;
                 case 4:            
