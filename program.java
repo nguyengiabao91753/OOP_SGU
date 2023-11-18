@@ -7,8 +7,6 @@ public class program {
         int luachon;
         int again = 1;
         Scanner nhap = new Scanner(System.in);
-        DSHK dshk = new DSHK();
-        DSNV dsnv = new DSNV();
         quanly_ve danhsachve = new quanly_ve();
         danhsachve.docfile();
         quanly_hoadon quanly_hoadon = new quanly_hoadon();
@@ -35,69 +33,13 @@ public class program {
             switch (chon) {
                 case 1:
                     System.out.println("Quản lý Hành khách:");
-                    int chon1;
-
-                    do{
-                        System.out.println(">Menu-------------------------<");
-                        System.out.println("1.Khoi tao mot danh sach moi.");
-                        System.out.println("2.Xuat danh sach hanh khach.");
-                        System.out.println("3.Them hanh khach vao danh sach.");
-                        System.out.println("4.Xoa hanh khach khoi danh sach theo ma.");
-                        System.out.println("0.Tro lai trang truoc.");
-                        System.out.println("Hay nhap lua chon.");
-                        chon1 = inp.nextInt();
-                        switch(chon1){
-                            case 1:
-                                dshk.nhap();
-                                break;
-                            case 2:
-                                dshk.xuat();
-                                break;
-                            case 3:
-                                dshk.them();
-                                break;
-                            case 4:
-                                dshk.xoa();
-                                break;
-                            case 0: break;
-                            default:
-                                System.out.println("Lua cho khong hop le\n");
-                                break;
-                        }
-                    }while(chon1 != 0);
+                    QuanLyHK qlhk = new QuanLyHK();
+                    qlhk.menu();
                     break;
                 case 2:
                     System.out.println("Quản lý nhân viên:");
-                    int chon2;
-
-                    do{
-                        System.out.println(">Menu-------------------------<");
-                        System.out.println("1.Khoi tao mot danh sach moi.");
-                        System.out.println("2.Xuat danh sach nhan vien.");
-                        System.out.println("3.Them nhan vien vao danh sach.");
-                        System.out.println("4.Xoa nhan vien khoi danh sach theo ma.");
-                        System.out.println("0.Tro lai trang truoc.");
-                        System.out.println("Hay nhap lua chon.");
-                        chon2 = inp.nextInt();
-                        switch(chon2){
-                            case 1:
-                                dsnv.nhap();
-                                break;
-                            case 2:
-                                dsnv.xuat();
-                                break;
-                            case 3:
-                                dsnv.them();
-                                break;
-                            case 4:
-                                dsnv.xoa();
-                                break;
-                            case 0: break;
-                            default:
-                                System.out.println("Lua cho khong hop le\n");
-                                break;
-                        }
-                    }while(chon2 != 0);
+                    QuanLyNV qlnv = new QuanLyNV();
+                    qlnv.menu();
                     break;
                 case 4:            
                     System.out.println("Quản lý Chuyến bay");

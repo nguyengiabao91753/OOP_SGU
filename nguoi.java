@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 abstract class nguoi {
     protected String hoten, gioitinh, diachi, sdt;
-
+    Scanner sc = new Scanner(System.in);
 
 
     public nguoi(){
@@ -17,14 +17,13 @@ abstract class nguoi {
 
     
     public void nhap(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Nhap ho ten: ");
+        System.out.print("\nNhap ho ten: ");
         hoten = sc.nextLine();
-        System.out.println("Nhap gioi tinh: ");
+        System.out.print("\nNhap gioi tinh: ");
         gioitinh = sc.nextLine();
-        System.out.println("Nhap dia chi: ");
+        System.out.print("\nNhap dia chi: ");
         diachi = sc.nextLine();
-        System.out.println("Nhap so dien thoai: ");
+        System.out.print("\nNhap so dien thoai: ");
         sdt = sc.nextLine();
     }
     public abstract void xuat();
