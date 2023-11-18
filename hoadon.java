@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class hoadon {
+    private String maHD;
     private quanly_ve quanly_ve;
     private String ngaytao;
-
+    Scanner nhap = new Scanner(System.in);
     public hoadon() {
         quanly_ve = new quanly_ve();
         ngaytao = "";
+        maHD="";
     }
 
     public quanly_ve getQuanly_ve() {
@@ -28,6 +30,11 @@ public class hoadon {
         this.ngaytao = ngaytao;
     }
 
+    public void nhapma(){
+        System.out.println("Nhập mã hóa đơn: ");
+        maHD = nhap.nextLine();
+    }
+
     public void themhoadon(ve ve) {
             if (ve.getTrangthai().equals("da thanh toan")) {
                 quanly_ve.them(ve);
@@ -41,16 +48,19 @@ public class hoadon {
 
 class quanly_hoadon implements crud {
     Map<String, hoadon> quanly_hoadon = new HashMap<>();
-
+    Scanner nhap = new Scanner(System.in);
     public Map<String, hoadon> getQuanly_hoadon() {
         return quanly_hoadon;
     }
     public void setQuanly_hoadon(Map<String, hoadon> quanly_hoadon) {
         this.quanly_hoadon = quanly_hoadon;
     }
+    public void them(){};
+
     public void them(String name, ve ve) {
         if (!quanly_hoadon.containsKey(name)) {
             hoadon hoadonmoi = new hoadon();
+            hoadonmoi.nhapma();
             hoadonmoi.themhoadon(ve);
             quanly_hoadon.put(name, hoadonmoi);
         }else{
@@ -59,25 +69,32 @@ class quanly_hoadon implements crud {
         }
     }
 
-    public void sua(String name, String maso,ve ve){
+    public void sua(){
+        System.out.println("Nhập tên khách hàng: ");
+        String name = nhap.nextLine();
         if(quanly_hoadon.containsKey(name)){
             hoadon suahoadon = quanly_hoadon.get(name);
-            suahoadon.getQuanly_ve().sua(maso, ve);
+            suahoadon.getQuanly_ve().sua();
         }
     }
 
-    public void xoa(String name, String maso){
+    public void xoa(){
+        System.out.println("Nhập tên khách hàng: ");
+        String name = nhap.nextLine();
         if(quanly_hoadon.containsKey(name)){
             hoadon xoahoadon = quanly_hoadon.get(name);
-            xoahoadon.getQuanly_ve().xoa(maso);
+            xoahoadon.getQuanly_ve().xoa();
         }
     }
 
-    public void tim(String name){
+    public void tim(){
+        System.out.println("Nhập tên khách hàng: ");
+        String name = nhap.nextLine();
         if(quanly_hoadon.containsKey(name)){
             hoadon hoadon = quanly_hoadon.get(name);
             System.out.println("Hóa đơn của khách hàng: "+name);
             hoadon.getQuanly_ve().xuat();
+            System.out.println("Ngày tạo: "+ hoadon.getNgaytao());
         }
     }
 
@@ -85,11 +102,13 @@ class quanly_hoadon implements crud {
        
         for (String name : quanly_hoadon.keySet()) {
             hoadon hoadon = quanly_hoadon.get(name);
+             System.out.println("Hóa đơn của khách hàng: "+name);
             hoadon.getQuanly_ve().xuat();
+            System.out.println("Ngày tạo: "+ hoadon.getNgaytao());
         }
     }
 
-    public void laydata(){
+    public void ghifile(){
 
     }
 }

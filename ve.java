@@ -6,8 +6,8 @@ public class ve {
     private String ma_ve;
     private int gia;
     private String trangthai;
-    hanhkhach hanhkhach;
-    chuyenbay chuyenbay;
+    private hanhkhach hanhkhach;
+    private chuyenbay chuyenbay;
 
     public ve() {
         ma_ve = "";
@@ -72,7 +72,9 @@ public class ve {
         System.out.println("Nhập giá vé:");
         gia = nhap.nextInt();
         nhap.nextLine();
+        System.out.println("Nhập mã hành khách: ");
         hanhkhach.nhap();
+        System.out.println("Nhập mã chuyến bay: ");
         chuyenbay.nhap();
         System.out.println("Nhập trạng thái thanh toán (chưa thanh toán/đã thanh toán):");
         trangthai = nhap.nextLine();
@@ -91,17 +93,30 @@ public class ve {
     }
 }
 
-class quanly_ve {
+class quanly_ve implements crud {
     private List<ve> danhsachve = new ArrayList<>();
+    Scanner nhap = new Scanner(System.in);
 
     // private ve[] danhsachve1 = new ve[];
-    public void them(ve ve) {
+    public void them() {
+        ve ve = new ve();
+        ve.nhap();
         danhsachve.add(ve);
     }
 
-    public void sua(String ma_ve, ve vemoi) {
+    public void them(ve ve){
+        danhsachve.add(ve);
+    }
+
+    public void sua() {
+        ve vemoi = new ve();
+        String ma_sua;
+        System.out.println("Nhập mã cần chỉnh sửa");
+        ma_sua = nhap.nextLine();
+        System.out.println("Nhập vé mới để sửa");
+        vemoi.nhap();
         for (ve ve : danhsachve) {
-            if (ve.getMa_ve().equals(ma_ve)) {
+            if (ve.getMa_ve().equals(ma_sua)) {
                 danhsachve.remove(ve);
                 danhsachve.add(vemoi);
                 break;
@@ -109,9 +124,12 @@ class quanly_ve {
         }
     }
 
-    public void xoa(String ma_ve) {
+    public void xoa() {
+        String ma_xoa;
+        System.out.println("Nhap mã vé muốn xóa");
+        ma_xoa = nhap.nextLine();
         for (ve ve : danhsachve) {
-            if (ve.getMa_ve().equals(ma_ve)) {
+            if (ve.getMa_ve().equals(ma_xoa)) {
                 danhsachve.remove(ve);
                 break;
             }
@@ -122,9 +140,12 @@ class quanly_ve {
         return danhsachve;
     }
 
-    public void tim(String ma_ve) {
+    public void tim() {
+        String ma_tim;
+        System.out.println("Nhập mã vé cần tìm");
+        ma_tim = nhap.nextLine();
         for (ve ve : danhsachve) {
-            if (ve.getMa_ve().equals(ma_ve)) {
+            if (ve.getMa_ve().equals(ma_tim)) {
                 ve.xuat();
                 break;
             }
@@ -138,15 +159,13 @@ class quanly_ve {
         }
     }
 
-    public void ghifile(ve ve) throws Exception {
+    public void ghifile() throws Exception {
         try {
-            File file = new File("ve.txt");
-
-            FileWriter fw = new FileWriter(file, true);
-            
-            fw.write("\n"+ve.getMa_ve() + "," + ve.getGia() + "," + ve.getHanhkhach().getmaHK() + ","
-                    + ve.getChuyenbay().getmachuyenbay() + "," + ve.getTrangthai());
-
+            FileWriter fw = new FileWriter("ve.txt");
+            for (ve ve : danhsachve) {
+            fw.write(ve.getMa_ve() + "," + ve.getGia() + "," + ve.getHanhkhach().getmaHK() + ","
+                    + ve.getChuyenbay().getmachuyenbay() + "," + ve.getTrangthai() + "\n");
+            }
             fw.close();
             System.out.println("ghi file thanh cong");
         } catch (IOException ioe) {
@@ -155,21 +174,41 @@ class quanly_ve {
         }
     }
 
-    public void docfile() throws Exception{
+    public void docfile() throws Exception {
         File file = new File("ve.txt");
         BufferedReader fr = new BufferedReader(new FileReader(file));
-        try{
+        try {
             String line = fr.readLine();
-            while (line != null){
+            while (line != null) {
                 String[] arr = line.split(",");
-                for(int i=0;i<arr.length;i++){
-                    System.out.println(arr[i]);
+                ve ve = new ve();
+                for (int i = 0; i < arr.length; i++) {
+                    
+                    switch (i) {
+                        case 0:
+                            ve.setMa_ve(arr[0]);
+                            break;
+                        case 1:
+                            int gia = Integer.parseInt(arr[1]);
+                            ve.setGia(gia);
+                            break;
+                        case 4:
+                            ve.setTrangthai(arr[4]);
+                            break;
+                        default:
+                            break;
+                    }
+ 
                 }
+                danhsachve.add(ve);
+
                 line = fr.readLine();
+  
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
+
     }
 }
 
@@ -177,6 +216,8 @@ class hienthiquanlyve {
     public static void main(String[] args) throws Exception {
         quanly_ve quanly_ve = new quanly_ve();
         quanly_ve.docfile();
+
+        quanly_ve.xuat();
         // ve ve = new ve();
         // ve.nhap();
         // quanly_ve.them(ve);

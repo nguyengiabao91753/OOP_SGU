@@ -7,7 +7,6 @@ public class chuyenbay {
     private String diemxuatphat;
     private String diemden;
     private int soghe;
-    private int giave;
     public chuyenbay(){
         machuyenbay=" ";
         thoigiankhoihanh=" ";
@@ -21,7 +20,6 @@ public class chuyenbay {
         diemxuatphat=tmp.diemxuatphat;
         diemden=tmp.diemden;
         soghe=tmp.soghe;
-        giave=tmp.giave;
     }
     public void nhap(){
         Scanner input=new Scanner(System.in);
@@ -37,7 +35,7 @@ public class chuyenbay {
         soghe=input.nextInt();
     }
     public void xuat(){
-        System.out.printf("Ma chuyen bay: %s || Thoi gian: %s || Diem xuat phat: %s || Diem den: %s || So ghe: %d || Gia ve: %d\n",machuyenbay,thoigiankhoihanh,diemxuatphat,diemden,soghe,giave);
+        System.out.printf("Ma chuyen bay: %s || Thoi gian: %s || Diem xuat phat: %s || Diem den: %s || So ghe: %d\n",machuyenbay,thoigiankhoihanh,diemxuatphat,diemden,soghe);
     }
     public String getmachuyenbay(){
         return machuyenbay;
