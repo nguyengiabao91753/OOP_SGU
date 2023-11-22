@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import javafx.stage.Window;
+// import javafx.stage.Window;
 
 public class DSCB {
     int sochuyenbay;
