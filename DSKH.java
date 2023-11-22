@@ -1,32 +1,32 @@
 import java.util.*;
-class hanhkhach extends nguoi {
-    private String maHK;
+class khachhang extends nguoi {
+    private String maKH;
     Scanner sc = new Scanner(System.in);
 
 
     
-    public hanhkhach(){
-        maHK = "";
+    public khachhang(){
+        maKH = "";
         hoten = "";
         gioitinh = "";
         diachi = "";
         sdt = "";
     }
-    public hanhkhach(String maHK, String hoten, String gioitinh, String diachi, String sdt){
+    public khachhang(String maKH, String hoten, String gioitinh, String diachi, String sdt){
         super(hoten,gioitinh,diachi,sdt);
-        this.maHK = maHK;
+        this.maKH = maKH;
     }
 
 
 
     public void nhap(){
-        System.out.print("Nhap ma hanh khach: ");
-        maHK = sc.nextLine();
+        System.out.print("Nhap ma khach hang: ");
+        maKH = sc.nextLine();
         super.nhap();
     }
     @Override public void xuat(){
-        System.out.println("Ma hanh khach: " + maHK);
-        System.out.println("Ho ten hanh khach: " + hoten);
+        System.out.println("Ma khach hang: " + maKH);
+        System.out.println("Ho ten khach hang: " + hoten);
         System.out.println("Gioi tinh: " + gioitinh);
         System.out.println("Dia chi: " + diachi);
         System.out.println("So dien thoai: " + sdt);
@@ -34,8 +34,8 @@ class hanhkhach extends nguoi {
 
 
 
-    public String getmaHK(){
-        return maHK;
+    public String getmaKH(){
+        return maKH;
     }
 
 
@@ -77,52 +77,52 @@ class hanhkhach extends nguoi {
 
 
 
-class DSHanhKhach {
-    hanhkhach[] dshk;
+class DSKhachHang {
+    khachhang[] dskh;
     int n;
     Scanner sc = new Scanner(System.in);
 
 
 
-    public DSHanhKhach(){
-        dshk = new hanhkhach[0];
+    public DSKhachHang(){
+        dskh = new khachhang[0];
         n = 0;
     }
-    public DSHanhKhach(hanhkhach[] ds, int nn){
-        dshk = Arrays.copyOf(ds,nn);
+    public DSKhachHang(khachhang[] ds, int nn){
+        dskh = Arrays.copyOf(ds,nn);
         n = nn;
     }
 
 
 
     public void nhap(){
-        System.out.println("Nhap so luong hanh khach: ");
+        System.out.println("Nhap so luong khach hang: ");
         n = sc.nextInt(); sc.nextLine();
-        dshk = new hanhkhach[n];
+        dskh = new khachhang[n];
         for(int i=0; i<n; i++){
-            System.out.println("\nNhap thong tin hanh khach thu " + (i+1) + ": ");
-            dshk[i] = new hanhkhach();
-            dshk[i].nhap();
+            System.out.println("\nNhap thong tin khach hang thu " + (i+1) + ": ");
+            dskh[i] = new khachhang();
+            dskh[i].nhap();
         }
     }
     public void xuat(){
         for(int i=0; i<n; i++){
-            System.out.println("\nThong tin hanh khach thu " + (i+1) + ":");
-            dshk[i].xuat();
+            System.out.println("\nThong tin khach hang thu " + (i+1) + ":");
+            dskh[i].xuat();
         }
     }
 
 
 
     public void timkiem(){
-        System.out.println("\nNhap ma hanh khach can tim: ");
+        System.out.println("\nNhap ma khach hang can tim: ");
         String tmp = sc.nextLine();
         timkiem(tmp);
     }
     public void timkiem(String ma){
         for(int i = 0; i < n; i++)
-            if( dshk[i].getmaHK().equals(ma) ){
-                dshk[i].xuat();
+            if( dskh[i].getmaKH().equals(ma) ){
+                dskh[i].xuat();
                 break;
             }
     }
@@ -130,27 +130,27 @@ class DSHanhKhach {
 
 
     public void them(){
-        dshk = Arrays.copyOf(dshk,n+1);
-        dshk[n] = new hanhkhach();
-        System.out.println("\nNhap thong tin hanh khach duoc them: ");
-        dshk[n].nhap();
+        dskh = Arrays.copyOf(dskh,n+1);
+        dskh[n] = new khachhang();
+        System.out.println("\nNhap thong tin khach hang duoc them: ");
+        dskh[n].nhap();
         n++;
     }
 
 
 
     public void xoa(){
-        System.out.println("\nNhap ma hanh khach can xoa: ");
+        System.out.println("\nNhap ma khach hang can xoa: ");
         String tmp = sc.nextLine();
         xoa(tmp);
     }
     public void xoa(String ma){
         for(int i = 0; i < n; i++){
-            if( dshk[i].getmaHK().equals(ma) ){
+            if( dskh[i].getmaKH().equals(ma) ){
                 for(int j=i; j<n-1; j++){
-                    dshk[j] = dshk[j+1];
+                    dskh[j] = dskh[j+1];
                 }
-                dshk = Arrays.copyOf(dshk,n-1);
+                dskh = Arrays.copyOf(dskh,n-1);
                 n--;
                 break;
             }
@@ -160,13 +160,13 @@ class DSHanhKhach {
 
 
     public void sua(){
-        System.out.println("\nNhap ma hanh khach can sua: ");
+        System.out.println("\nNhap ma khach hang can sua: ");
         String tmp = sc.nextLine();
         sua(tmp);
     }
     public void sua(String ma){
         for(int i = 0; i < n; i++)
-            if( dshk[i].getmaHK().equals(ma) ){
+            if( dskh[i].getmaKH().equals(ma) ){
                 int chon;
                 do{
                     System.out.println("\n>-----------------------------<");
@@ -182,22 +182,22 @@ class DSHanhKhach {
                         case 1:
                             System.out.print("\nNhap ho ten moi: ");
                             String tmp1 = sc.nextLine();
-                            dshk[i].sethoten(tmp1);
+                            dskh[i].sethoten(tmp1);
                             break;
                         case 2:
                             System.out.print("\nNhap gioi tinh moi: ");
                             String tmp2 = sc.nextLine();
-                            dshk[i].setgioitinh(tmp2);
+                            dskh[i].setgioitinh(tmp2);
                             break;
                         case 3:
                             System.out.print("\nNhap dia chi moi: ");
                             String tmp3 = sc.nextLine();
-                            dshk[i].setdiachi(tmp3);
+                            dskh[i].setdiachi(tmp3);
                             break;
                         case 4:
                             System.out.print("\nNhap so dien thoai moi: ");
                             String tmp4 = sc.nextLine();
-                            dshk[i].setsdt(tmp4);
+                            dskh[i].setsdt(tmp4);
                             break;
                         case 0:
                             break;
@@ -213,8 +213,8 @@ class DSHanhKhach {
     }
 }
 
-class QuanLyHK {
-    DSHanhKhach ds = new DSHanhKhach();
+class QuanLyKH {
+    DSKhachHang ds = new DSKhachHang();
     Scanner sc = new Scanner(System.in);
 
 
@@ -224,11 +224,11 @@ class QuanLyHK {
         int chon;
         do{
             System.out.println("\n>Menu-------------------------<");
-            System.out.println("1-Them hanh khach");
-            System.out.println("2-Sua hanh khach");
-            System.out.println("3-Xoa hanh khach");
-            System.out.println("4-Tim kiem hanh khach");
-            System.out.println("5-Xuat danh sach hanh khach");
+            System.out.println("1-Them khach hang");
+            System.out.println("2-Sua khach hang");
+            System.out.println("3-Xoa khach hang");
+            System.out.println("4-Tim kiem khach hang");
+            System.out.println("5-Xuat danh sach khach hang");
             System.out.println("0-Thoat");
             System.out.print("Nhap lua chon: ");
             chon = sc.nextInt(); sc.nextLine();
@@ -261,7 +261,7 @@ class QuanLyHK {
 
 class DSHK {
     public static void main(String[] args){
-        QuanLyHK ql1 = new QuanLyHK();
+        QuanLyKH ql1 = new QuanLyKH();
         ql1.menu();
     }
 }
