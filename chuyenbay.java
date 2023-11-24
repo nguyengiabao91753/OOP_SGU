@@ -23,26 +23,54 @@ public class chuyenbay {
     }
     public void nhap(){
         Scanner input=new Scanner(System.in);
-        System.out.println("Nhap ma chuyen bay: ");
+        System.out.println("Nhập mã chuyến bay: ");
         machuyenbay=input.nextLine();
-        System.out.println("Thoi gian khoi hanh: ");
+        System.out.println("Nhập thời gian khởi hành: ");
         thoigiankhoihanh=input.nextLine();
-        System.out.println("Nhap diem xuat phat bay: ");
+        System.out.println("Nhập điểm xuất phát bay: ");
         diemxuatphat=input.nextLine();
-        System.out.println("Nhap diem den: ");
+        System.out.println("Nhập điểm đến: ");
         diemden=input.nextLine();
-        System.out.println("Nhap so luong ghe: ");
+        System.out.println("Nhập số lượng ghế của chuyến bay: ");
         soghe=input.nextInt();
+        
     }
     public void xuat(){
-        System.out.printf("Ma chuyen bay: %s || Thoi gian: %s || Diem xuat phat: %s || Diem den: %s || So ghe: %d\n",machuyenbay,thoigiankhoihanh,diemxuatphat,diemden,soghe);
+        System.out.printf("Mã chuyến bay: %s || Thời gian: %s || Điểm xuất phát: %s || Điểm đến: %s || Tổng số ghế: %d ||\n",machuyenbay,thoigiankhoihanh,diemxuatphat,diemden,soghe);
     }
-    public String getmachuyenbay(){
+    public String getMachuyenbay() {
         return machuyenbay;
     }
     public static void main(String[] argv){
         chuyenbay m1=new chuyenbay();
         m1.nhap();
         m1.xuat();
+    }
+    public String getThoigiankhoihanh() {
+        return thoigiankhoihanh;
+    }
+    public String getDiemxuatphat() {
+        return diemxuatphat;
+    }
+    public String getDiemden() {
+        return diemden;
+    }
+    public int getSoghe() {
+        return soghe;
+    }
+    public void setMachuyenbay(String machuyenbay) {
+        this.machuyenbay = machuyenbay;
+    }
+    public void setThoigiankhoihanh(String thoigiankhoihanh) {
+        this.thoigiankhoihanh = thoigiankhoihanh;
+    }
+    public void setDiemxuatphat(String diemxuatphat) {
+        this.diemxuatphat = diemxuatphat;
+    }
+    public void setDiemden(String diemden) {
+        this.diemden = diemden;
+    }
+    public void setSoghe(int soghe) {
+        this.soghe = soghe;
     }
 }

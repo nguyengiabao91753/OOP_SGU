@@ -43,7 +43,7 @@ public class DSCB {
     public void xoa(String ma){
         int flag=0;
         for(int i=0;i<sochuyenbay;i++){
-            if(danhsachchuyenbay[i].getmachuyenbay().equals(ma)){
+            if(danhsachchuyenbay[i].getMachuyenbay().equals(ma)){
                 System.out.println("Thuc hien xoa chuyen bay:");
                 danhsachchuyenbay[i].xuat();
                 for(int j=i;j<sochuyenbay;j++){
@@ -56,26 +56,26 @@ public class DSCB {
             
         }
         if(flag==0){
-            System.out.println("Khong tim thay ma chuyen bay can xoa, vui long kiem tra lai!");
+            System.out.println("Không tìm thấy mã chuyến bay cần xóa vui lòng kiểm tra lại!");
         }
     }
     public void quanlyDSCB(){
         int flag;
         while(true){
             Scanner input=new Scanner(System.in);
-            System.out.println(">Menu-------------------------<");
-            System.out.println("1.Khoi tao mot danh sach moi.");
-            System.out.println("2.Xuat danh sach chuyen bay");
-            System.out.println("3.Them chuyen bay vao danh sach");
-            System.out.println("4.Xoa phan tu cuoi cung danh sach.");
-            System.out.println("5.Xoa chuyen bay theo ma so chuyen.");
-            System.out.println("6.Luu du lieu.");
-            System.out.println("7.Doc du lieu da luu.");
-            System.out.println("0.Quay lai.");
-            System.out.println("Hay nhap lua chon.");
+            System.out.println("-------->Menu quản lý chuyến bay--------<");
+            System.out.println("    1.Khởi tạo một danh sách chuyến bay.");
+            System.out.println("    2.Xuất danh sách chuyến bay ra màn hình.");
+            System.out.println("    3.Thêm chuyến bay vào danh sách.");
+            System.out.println("    4.Xóa phần tử cuối cùng của danh sách.");
+            System.out.println("    5.Xóa chuyến bay theo mã số chuyến.");
+            System.out.println("    6.Đọc dữ liệu chuyến bay từ File ra mảng.");
+            System.out.println("    7.Lưu dữ liệu.");
+            System.out.println("    0.Quay lại trang chính.");
+            System.out.println("Hãy nhập lựa chọn của bạn!");
             flag=input.nextInt();
             if(flag>7 || flag<0){
-                System.out.println("Lua chon khong hop le, nhap lai!");
+                System.out.println("Lựa chọn của bạn không hợp lệ,vui lòng nhập lại!");
                 continue;
             }
             if(flag==0){
@@ -83,7 +83,7 @@ public class DSCB {
             }
             switch(flag){
                 case 1:
-                    System.out.println("Co co chac muon khoi tao Danh Sach khong, danh sach se lam moi hoan toan. 'co' hoac phim bat ky.");
+                    System.out.println("Bạn có chắc khởi tạo, danh sách sẽ được khởi tạo từ đầu. Ấn 'co' để tiếp tục hoặc phím bất kỳ để thoát.");
                     input.nextLine();
                     String flag1=input.nextLine();
                     if(flag1.equals("co")){
@@ -93,7 +93,7 @@ public class DSCB {
                     }
                     break;
                 case 2:
-                    System.out.println("Xuat danh sach chuyen bay.");
+                    System.out.println("Xuất danh sách chuyến bay.");
                     xuat();
                     break;
                 case 3:
@@ -103,53 +103,49 @@ public class DSCB {
                     xoa();
                     break;
                 case 5:
-                    System.out.println("Nhap ma so chuyen bay can xoa: ");
+                    System.out.println("Nhập mã số chuyến bay cần xóa: ");
                     input.nextLine();
                     String cmp=input.nextLine();
                     xoa(cmp);
                     break;
                 case 6:
+                    
                     try {
-                        File fileo=new File("./dataDSCB.txt");
-                        OutputStream os=new FileOutputStream(fileo); 
-                        ObjectOutputStream oos=new ObjectOutputStream(os);
-                        oos.writeObject(sochuyenbay);
-                        for(int i=0;i<sochuyenbay;i++){
-                            oos.writeObject(danhsachchuyenbay[i]);
+                        BufferedReader sc= new BufferedReader(new FileReader("dataDSCB.txt"));
+                        String line=sc.readLine();
+                        sochuyenbay=0;
+                        while (line!=null) {
+                            String[] arr=line.split(",");
+                            danhsachchuyenbay[sochuyenbay] =new chuyenbay();
+                            danhsachchuyenbay[sochuyenbay].setMachuyenbay(arr[0]);
+                            danhsachchuyenbay[sochuyenbay].setThoigiankhoihanh(arr[1]);
+                            danhsachchuyenbay[sochuyenbay].setDiemxuatphat(arr[2]);
+                            danhsachchuyenbay[sochuyenbay].setDiemden(arr[3]);
+                            danhsachchuyenbay[sochuyenbay].setSoghe(Integer.parseInt(arr[4]));
+                            sochuyenbay++;
+                            line=sc.readLine();
                         }
-                        oos.flush();
-                        oos.close();
+                        sc.close();
                     } catch (Exception e) {
-                        // TODO: handle exception
+                        e.printStackTrace();
                     }
-                    System.out.println("Du lieu da duoc luu vao file!");
                     break;
                 case 7:
                     try {
-                        File filei= new File("./dataDSCB.txt");
-                        InputStream is=new FileInputStream(filei);
-                        ObjectInputStream ois=new ObjectInputStream(is);
-                        // chuyenbay tmp=new chuyenbay();
-                        Object oj=new Object();
-                        sochuyenbay=(int)ois.readObject();
-                        for(int i=0;i<sochuyenbay;i++){
-                            // tmp=(chuyenbay)ois.readObject();
-                            danhsachchuyenbay[i]=new chuyenbay();
-                            oj=ois.readObject();
-                            danhsachchuyenbay[i]=(chuyenbay) oj;
+                        FileWriter fw=new FileWriter("dataDSCB.txt");
+                        for (int i=0;i<sochuyenbay;i++) {
+                            fw.write(danhsachchuyenbay[i].getMachuyenbay()+","+danhsachchuyenbay[i].getThoigiankhoihanh()+","+danhsachchuyenbay[i].getDiemxuatphat()+","+danhsachchuyenbay[i].getDiemden()+","+danhsachchuyenbay[i].getSoghe()+"\n");
                         }
-                        ois.close();
-                        // while(true){
-                        //     danhsachchuyenbay[i]=new chuyenbay();
-                        //     tmp=(chuyenbay)ois.readObject();
-                        //     danhsachchuyenbay[i]=new chuyenbay(tmp);
-                        // }
-                    } catch (Exception e) {
+                        // fw.write("chào mừng đến với thế giới thần tiên.");
+
+                        fw.close();
+                        }
+                        
+                    catch (Exception ex) {
                         // TODO: handle exception
+                        System.out.println(ex);
                     }
                     // System.out.println("Du lieu chuyen bay da duoc lay thanh cong!");
-                    System.out.println(""+sochuyenbay);
-                    danhsachchuyenbay[0].xuat();
                     break;
             }
         }
