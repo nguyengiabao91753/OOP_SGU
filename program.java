@@ -96,7 +96,7 @@ public class program {
                     again=1;
                     for (ve ve : danhsachve.getDanhsachve()) {
                         if(ve.getTrangthai().equals("da thanh toan")){
-                            quanly_hoadon.them(ve.getHanhkhach().gethoten(), ve);
+                            quanly_hoadon.them(ve);
                         }
                     }
                     while (again == 1) {
@@ -147,7 +147,7 @@ public class program {
             }
         } while (chay == 1);
 
-
+        danhsachve.ghifile();
         nhap.close();
     }
 

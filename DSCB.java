@@ -15,6 +15,7 @@ public class DSCB {
         this.sochuyenbay=sochuyenbay;
         this.danhsachchuyenbay=danhsachchuyenbay;
     }
+    
     public void nhap(){
         Scanner input=new Scanner(System.in);
         System.out.println("Nhập số lượng chuyến bay:");

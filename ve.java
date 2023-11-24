@@ -73,9 +73,11 @@ public class ve {
         gia = nhap.nextInt();
         nhap.nextLine();
         System.out.println("Nhập mã hành khách: ");
-        hanhkhach.nhap();
+        String makh = nhap.nextLine();
+
+        // hanhkhach.nhap();
         System.out.println("Nhập mã chuyến bay: ");
-        chuyenbay.nhap();
+        // chuyenbay.nhap();
         System.out.println("Nhập trạng thái thanh toán (chưa thanh toán/đã thanh toán):");
         trangthai = nhap.nextLine();
 
@@ -94,14 +96,29 @@ public class ve {
 }
 
 class quanly_ve implements crud {
-    private List<ve> danhsachve = new ArrayList<>();
+    private List<ve> danhsachve;
     Scanner nhap = new Scanner(System.in);
 
-    // private ve[] danhsachve1 = new ve[];
+
+    public quanly_ve(){
+        danhsachve = new ArrayList<>();
+    }
+    public quanly_ve(List<ve> danhsachve){
+        this.danhsachve = danhsachve;
+    }
+
     public void them() {
-        ve ve = new ve();
-        ve.nhap();
-        danhsachve.add(ve);
+        ve vemoi = new ve();
+        vemoi.nhap();
+        String ma = vemoi.getMa_ve();
+        for (ve ve : danhsachve) {
+            while(ve.getMa_ve().equals(ma)){
+                System.out.println("Mã vé đã tồn tại! Vui lòng nhập lại mã vé");
+                ma = nhap.nextLine();
+                vemoi.setMa_ve(ma);
+            }
+        }
+        danhsachve.add(vemoi);
     }
 
     public void them(ve ve){
@@ -215,9 +232,16 @@ class quanly_ve implements crud {
 class hienthiquanlyve {
     public static void main(String[] args) throws Exception {
         quanly_ve quanly_ve = new quanly_ve();
+        quanly_hoadon quanly_hoadon = new quanly_hoadon();
         quanly_ve.docfile();
 
-        quanly_ve.xuat();
+        // for (ve ve : quanly_ve.getDanhsachve()) {
+        //     if(ve.getTrangthai().equals("da thanh toan")){
+        //         quanly_hoadon.them(ve);
+        //     }
+        // }
+        quanly_hoadon.docfile();
+        quanly_hoadon.xuat();
         // ve ve = new ve();
         // ve.nhap();
         // quanly_ve.them(ve);
