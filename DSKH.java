@@ -218,7 +218,6 @@ class QuanLyKH {
     Scanner sc = new Scanner(System.in);
 
 
-
     public void menu(){
         ds.nhap();
         int chon;

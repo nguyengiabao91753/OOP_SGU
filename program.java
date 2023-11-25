@@ -2,15 +2,17 @@ import java.util.Scanner;
 
 public class program {
     static Scanner inp = new Scanner(System.in);
+
     public static void main(String[] args) throws Exception {
         int chay = 1;
         int luachon;
         int again = 1;
         Scanner nhap = new Scanner(System.in);
         quanly_ve danhsachve = new quanly_ve();
+        DSCB tmp = new DSCB();
+        tmp.docfile();
         danhsachve.docfile();
-        quanly_hoadon quanly_hoadon = new quanly_hoadon();
-
+        quanly_hoadon quanlyhoadon = new quanly_hoadon();
 
         do {
             System.out.println("Chủ đề: Quản lý bán vé máy bay ");
@@ -32,18 +34,18 @@ public class program {
             }
             switch (chon) {
                 case 1:
-                    System.out.println("Quản lý Hành khách:");
-                    QuanLyHK qlhk = new QuanLyHK();
-                    qlhk.menu();
+                    System.out.println("Quản lý khách hàng:");
+                    QuanLyKH qlkh = new QuanLyKH();
+                    qlkh.menu();
                     break;
                 case 2:
                     System.out.println("Quản lý nhân viên:");
                     QuanLyNV qlnv = new QuanLyNV();
                     qlnv.menu();
                     break;
-                case 4:            
+                case 4:
                     System.out.println("Quản lý Chuyến bay");
-                    DSCB tmp=new DSCB();
+
                     tmp.quanlyDSCB();
                     break;
                 case 5:
@@ -63,14 +65,19 @@ public class program {
                         if (luachon >= 1 && luachon <= 6) {
                             switch (luachon) {
                                 case 1:
-                                    
+
                                     danhsachve.them();
+                                    for (ve ve : danhsachve.getDanhsachve()) {
+                                        if (ve.getTrangthai().equals("da thanh toan")) {
+                                            quanlyhoadon.them(ve);
+                                        }
+                                    }
                                     break;
                                 case 2:
                                     danhsachve.sua();
                                     break;
                                 case 3:
-                                   
+
                                     danhsachve.xoa();
                                     break;
                                 case 4:
@@ -93,12 +100,8 @@ public class program {
                     }
                     break;
                 case 8:
-                    again=1;
-                    for (ve ve : danhsachve.getDanhsachve()) {
-                        if(ve.getTrangthai().equals("da thanh toan")){
-                            quanly_hoadon.them(ve);
-                        }
-                    }
+                    again = 1;
+
                     while (again == 1) {
                         System.out.println("    Quản lý hóa đơn");
                         System.out.println(">---------------------------<");
@@ -106,7 +109,8 @@ public class program {
                         System.out.println("    2. Xóa hóa đơn");
                         System.out.println("    3. Tìm hóa đơn theo tên khách hàng");
                         System.out.println("    4. Xuất toàn bộ hóa đơn");
-                        System.out.println("    5. Thoát");
+                        System.out.println("    5. Thống kê doanh thu");
+                        System.out.println("    6. Thoát");
                         System.out.println(">---------------------------<");
 
                         System.out.println("Nhập lựa chọn:");
@@ -114,19 +118,25 @@ public class program {
                         if (luachon >= 1 && luachon <= 5) {
                             switch (luachon) {
                                 case 1:
-                                   
-                                    quanly_hoadon.sua();
+
+                                    quanlyhoadon.sua();
                                     break;
                                 case 2:
-                                   quanly_hoadon.xoa();
+                                    quanlyhoadon.xoa();
                                     break;
                                 case 3:
-                                    quanly_hoadon.tim();
+                                    quanlyhoadon.tim();
                                     break;
                                 case 4:
-                                    quanly_hoadon.xuat();
+                                    quanlyhoadon.xuat();
                                     break;
                                 case 5:
+                                try {
+        
+                                    quanly_hoadon.thongke();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                                     break;
                                 default:
                                     break;
@@ -147,9 +157,9 @@ public class program {
             }
         } while (chay == 1);
 
+        tmp.ghifile();
         danhsachve.ghifile();
         nhap.close();
     }
-
 
 }
