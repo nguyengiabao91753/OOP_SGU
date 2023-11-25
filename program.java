@@ -24,7 +24,8 @@ public class program {
             System.out.println("    6. Quản lý Chỗ ngồi");
             System.out.println("    7. Quản lý Hãng hàng không");
             System.out.println("    8. Quản lý Hóa đơn");
-            System.out.println("    9. Thoát");
+            System.out.println("    9. Thống kê doanh thu");
+            System.out.println("    10. Thoát");
             System.out.println(">---------------------------------------<");
             System.out.println("Nhập lựa chọn");
             int chon = inp.nextInt();
@@ -109,8 +110,7 @@ public class program {
                         System.out.println("    2. Xóa hóa đơn");
                         System.out.println("    3. Tìm hóa đơn theo tên khách hàng");
                         System.out.println("    4. Xuất toàn bộ hóa đơn");
-                        System.out.println("    5. Thống kê doanh thu");
-                        System.out.println("    6. Thoát");
+                        System.out.println("    5. Thoát");
                         System.out.println(">---------------------------<");
 
                         System.out.println("Nhập lựa chọn:");
@@ -130,14 +130,6 @@ public class program {
                                 case 4:
                                     quanlyhoadon.xuat();
                                     break;
-                                case 5:
-                                try {
-        
-                                    quanly_hoadon.thongke();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                    break;
                                 default:
                                     break;
                             }
@@ -147,6 +139,14 @@ public class program {
 
                         System.out.println("Bạn có muốn chọn lại?  1: Có / 2: Không");
                         again = nhap.nextInt();
+                    }
+                    break;
+                case 9:
+                    try {
+                        quanly_hoadon.thongke();
+                        System.out.println("\n");
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                     break;
                 case 10:

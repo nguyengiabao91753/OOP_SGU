@@ -91,7 +91,7 @@ class nhanVien extends nguoi {
 
 
 
-class DSNhanVien implements IThem,IXoa,ISua,ITimKiem {
+class DSNhanVien{
     nhanVien[] dsnv;
     int n;
     Scanner sc = new Scanner(System.in);
@@ -107,6 +107,9 @@ class DSNhanVien implements IThem,IXoa,ISua,ITimKiem {
         n = nn;
     }
 
+    public nhanVien[] getDsnv() {
+        return dsnv;
+    }
 
 
     public void nhap(){
@@ -295,7 +298,6 @@ class QuanLyNV {
 
 
     public void menu(){
-        ds.nhap();
         int chon;
         do{
             System.out.println("\n>Menu-------------------------<");

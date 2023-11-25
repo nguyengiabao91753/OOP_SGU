@@ -3,7 +3,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -91,10 +90,22 @@ class quanly_hoadon implements crud {
     public void them() {
     };
 
-    public void them(ve ve) {
+    static int checkmanv(List<hoadon> quanly_hoadon, hoadon hoadon) throws Exception {
+        String manv = hoadon.getMaNV();
+        DSNhanVien dsnv = new DSNhanVien();
+        for (nhanVien nhanVien : dsnv.getDsnv()) {
+            if (manv.equals(nhanVien.getMaNV())) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    public void them(ve ve) throws Exception {
         hoadon hoadon = new hoadon();
         hoadon.setVe(ve);
         hoadon.themhoadon();
+        // check mã hóa đơn
         String ma = hoadon.getMaHD();
         for (hoadon duyet : quanly_hoadon) {
             while (duyet.getMaHD().equals(ma)) {
@@ -103,41 +114,90 @@ class quanly_hoadon implements crud {
                 hoadon.setMaHD(ma);
             }
         }
+        // check mã nhân viên
+        while (checkmanv(quanly_hoadon, hoadon) == 0) {
+            System.out.println("Mã nhân viên không tồn tại! Vui lòng nhập lại mã nhân viên: ");
+            ma = nhap.nextLine();
+            hoadon.setMaNV(ma);
+        }
+
         quanly_hoadon.add(hoadon);
 
     }
 
-    public void sua() {
+    public void sua() throws Exception {
         System.out.println("Nhập mã hóa đơn: ");
         String ma = nhap.nextLine();
         hoadon hoadonmoi = new hoadon();
+        int co=0;
         for (hoadon hoadon : quanly_hoadon) {
             if (hoadon.getMaHD().equals(ma)) {
+        
                 hoadonmoi.setVe(hoadon.getVe());
                 hoadonmoi.themhoadon();
+                hoadonmoi.setVe(hoadon.getVe());
+                hoadonmoi.setNgaytao(hoadon.getNgaytao());
+
+                // check mã hóa đơn
+                String mamoi = hoadonmoi.getMaHD();
+                for (hoadon duyet : quanly_hoadon) {
+                    while (duyet.getMaHD().equals(mamoi)) {
+                        System.out.println("Mã hóa đơn đã tồn tại! Vui lòng nhập lại ");
+                        mamoi = nhap.nextLine();
+                        hoadonmoi.setMaHD(mamoi);
+                    }
+                }
+                // check mã nhân viên
+                while (checkmanv(quanly_hoadon, hoadonmoi) == 0) {
+                    System.out.println("Mã nhân viên không tồn tại! Vui lòng nhập lại mã nhân viên: ");
+                    mamoi = nhap.nextLine();
+                    hoadonmoi.setMaNV(mamoi);
+                }
+
                 quanly_hoadon.remove(hoadon);
                 quanly_hoadon.add(hoadonmoi);
+                co=1;
+                break;
             }
+
         }
+        if(co==0){
+            System.out.println("Mã hóa đơn không tồn tại! ");
+        }
+        
     }
 
     public void xoa() {
         System.out.println("Nhập mã hóa đơn: ");
         String ma = nhap.nextLine();
+        int co=0;
         for (hoadon hoadon : quanly_hoadon) {
             if (hoadon.getMaHD().equals(ma)) {
                 quanly_hoadon.remove(hoadon);
+                co=1;
+                break;
             }
+        }
+
+        if(co==0){
+            System.out.println("Mã hóa đơn không tồn tại! ");
         }
     }
 
     public void tim() {
         System.out.println("Nhập mã hóa đơn: ");
         String ma = nhap.nextLine();
+        int co=0;
         for (hoadon hoadon : quanly_hoadon) {
             if (hoadon.getMaHD().equals(ma)) {
                 hoadon.xuat();
+                co=1;
+                break;
             }
+        }
+
+        if(co==0){
+            System.out.println("Mã hóa đơn không tồn tại! ");
         }
     }
 
@@ -232,15 +292,15 @@ class quanly_hoadon implements crud {
         }
         // sắp xếp mảng tăng dần
         for (int x = 0; x < 1000 - 1; x++) {
-            
-                for (int z = x + 1; z < 1000; z++) {
-                    if (a[z] < a[x] && a[z] !=0 && a[x] != 0) {
-                        int tmp = a[x];
-                        a[x] = a[z];
-                        a[z] = tmp;
-                    }
+
+            for (int z = x + 1; z < 1000; z++) {
+                if (a[z] < a[x] && a[z] != 0 && a[x] != 0) {
+                    int tmp = a[x];
+                    a[x] = a[z];
+                    a[z] = tmp;
                 }
-            
+            }
+
         }
         // Thống kê
         for (int j = 0; j < i; j++) {

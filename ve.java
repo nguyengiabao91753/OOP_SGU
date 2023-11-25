@@ -99,46 +99,89 @@ class quanly_ve implements crud {
     private List<ve> danhsachve;
     Scanner nhap = new Scanner(System.in);
 
-
-    public quanly_ve(){
+    public quanly_ve() {
         danhsachve = new ArrayList<>();
     }
-    public quanly_ve(List<ve> danhsachve){
+
+    public quanly_ve(List<ve> danhsachve) {
         this.danhsachve = danhsachve;
     }
 
-    public void them() {
+    static int checkmachuyenbay(List<ve> danhsachve, ve vemoi) throws Exception {
+        String macb = vemoi.getChuyenbay().getMachuyenbay();
+        DSCB dscb = new DSCB();
+        dscb.docfile();
+        for (chuyenbay chuyenbay : dscb.getDanhsachchuyenbay()) {
+            if (macb.equals(chuyenbay.getMachuyenbay())) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    public void them() throws Exception {
         ve vemoi = new ve();
         vemoi.nhap();
+        // check mã vé
         String ma = vemoi.getMa_ve();
         for (ve ve : danhsachve) {
-            while(ve.getMa_ve().equals(ma)){
+            while (ve.getMa_ve().equals(ma)) {
                 System.out.println("Mã vé đã tồn tại! Vui lòng nhập lại mã vé");
                 ma = nhap.nextLine();
                 vemoi.setMa_ve(ma);
             }
         }
-        String mahk = vemoi.getkhachHang().getMaKH();
+
+        // check chuyến bay
+        while (checkmachuyenbay(danhsachve, vemoi) == 0) {
+            System.out.println("Mã chuyến bay không tồn tại! Vui lòng nhập lại mã chuyến bay: ");
+            ma = nhap.nextLine();
+            vemoi.getChuyenbay().setMachuyenbay(ma);
+        }
+
         danhsachve.add(vemoi);
     }
 
-    public void them(ve ve){
+    public void them(ve ve) {
         danhsachve.add(ve);
     }
 
-    public void sua() {
+    public void sua() throws Exception {
         ve vemoi = new ve();
         String ma_sua;
         System.out.println("Nhập mã cần chỉnh sửa");
         ma_sua = nhap.nextLine();
-        System.out.println("Nhập vé mới để sửa");
-        vemoi.nhap();
+        int co=0;
         for (ve ve : danhsachve) {
             if (ve.getMa_ve().equals(ma_sua)) {
+                System.out.println("Nhập vé mới để sửa");
+                vemoi.nhap();
+
+                // check mã vé
+                String ma = vemoi.getMa_ve();
+                for (ve kiemve : danhsachve) {
+                    while (kiemve.getMa_ve().equals(ma)) {
+                        System.out.println("Mã vé đã tồn tại! Vui lòng nhập lại mã vé");
+                        ma = nhap.nextLine();
+                        vemoi.setMa_ve(ma);
+                    }
+                }
+
+                // check chuyến bay
+                while (checkmachuyenbay(danhsachve, vemoi) == 0) {
+                    System.out.println("Mã chuyến bay không tồn tại! Vui lòng nhập lại mã chuyến bay: ");
+                    ma = nhap.nextLine();
+                    vemoi.getChuyenbay().setMachuyenbay(ma);
+                }
+
                 danhsachve.remove(ve);
                 danhsachve.add(vemoi);
+                co=1;
                 break;
             }
+        }
+        if (co==0) {
+            System.out.println("Mã vé không tồn tại! ");
         }
     }
 
@@ -146,11 +189,16 @@ class quanly_ve implements crud {
         String ma_xoa;
         System.out.println("Nhap mã vé muốn xóa");
         ma_xoa = nhap.nextLine();
+        int co=0;
         for (ve ve : danhsachve) {
             if (ve.getMa_ve().equals(ma_xoa)) {
                 danhsachve.remove(ve);
+                co=1;
                 break;
             }
+        }
+        if(co==0){
+            System.out.println("Mã vé không tồn tại! ");
         }
     }
 
@@ -162,11 +210,16 @@ class quanly_ve implements crud {
         String ma_tim;
         System.out.println("Nhập mã vé cần tìm");
         ma_tim = nhap.nextLine();
+        int co=0;
         for (ve ve : danhsachve) {
             if (ve.getMa_ve().equals(ma_tim)) {
                 ve.xuat();
+                co=1;
                 break;
             }
+        }
+        if(co==0){
+            System.out.println("Mã vé không  tồn tại! ");
         }
     }
 
@@ -181,8 +234,8 @@ class quanly_ve implements crud {
         try {
             FileWriter fw = new FileWriter("ve.txt");
             for (ve ve : danhsachve) {
-            fw.write(ve.getMa_ve() + "," + ve.getGia() + "," + ve.getkhachHang().getMaKH() + ","
-                    + ve.getChuyenbay().getMachuyenbay() + "," + ve.getTrangthai() + "\n");
+                fw.write(ve.getMa_ve() + "," + ve.getGia() + "," + ve.getkhachHang().getMaKH() + ","
+                        + ve.getChuyenbay().getMachuyenbay() + "," + ve.getTrangthai() + "\n");
             }
             fw.close();
             System.out.println("ghi file thanh cong");
@@ -201,7 +254,7 @@ class quanly_ve implements crud {
                 String[] arr = line.split(",");
                 ve ve = new ve();
                 for (int i = 0; i < arr.length; i++) {
-                    
+
                     switch (i) {
                         case 0:
                             ve.setMa_ve(arr[0]);
@@ -216,12 +269,12 @@ class quanly_ve implements crud {
                         default:
                             break;
                     }
- 
+
                 }
                 danhsachve.add(ve);
 
                 line = fr.readLine();
-  
+
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -237,9 +290,9 @@ class hienthiquanlyve {
         quanly_ve.docfile();
 
         // for (ve ve : quanly_ve.getDanhsachve()) {
-        //     if(ve.getTrangthai().equals("da thanh toan")){
-        //         quanly_hoadon.them(ve);
-        //     }
+        // if(ve.getTrangthai().equals("da thanh toan")){
+        // quanly_hoadon.them(ve);
+        // }
         // }
         quanly_hoadon.docfile();
         quanly_hoadon.xuat();

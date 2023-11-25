@@ -17,6 +17,13 @@ public class DSCB {
         this.sochuyenbay = sochuyenbay;
         this.danhsachchuyenbay = danhsachchuyenbay;
     }
+    
+    public chuyenbay[] getDanhsachchuyenbay() {
+        return danhsachchuyenbay;
+    }
+    public void setDanhsachchuyenbay(chuyenbay[] danhsachchuyenbay) {
+        this.danhsachchuyenbay = danhsachchuyenbay;
+    }
 
     public void nhap() {
         Scanner input = new Scanner(System.in);
