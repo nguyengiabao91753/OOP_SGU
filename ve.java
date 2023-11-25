@@ -6,22 +6,22 @@ public class ve {
     private String ma_ve;
     private int gia;
     private String trangthai;
-    private khachhang khachhang;
+    private khachHang khachHang;
     private chuyenbay chuyenbay;
 
     public ve() {
         ma_ve = "";
         gia = 0;
         trangthai = "";
-        khachhang = new khachhang();
+        khachHang = new khachHang();
         chuyenbay = new chuyenbay();
     }
 
-    public ve(String ma_ve, int gia, String trangthai, khachhang khachhang, chuyenbay chuyenbay) {
+    public ve(String ma_ve, int gia, String trangthai, khachHang khachHang, chuyenbay chuyenbay) {
         this.ma_ve = ma_ve;
         this.gia = gia;
         this.trangthai = trangthai;
-        this.khachhang = khachhang;
+        this.khachHang = khachHang;
         this.chuyenbay = chuyenbay;
     }
 
@@ -49,12 +49,12 @@ public class ve {
         this.trangthai = trangthai;
     }
 
-    public khachhang getkhachhang() {
-        return khachhang;
+    public khachHang getkhachHang() {
+        return khachHang;
     }
 
-    public void setkhachhang(khachhang khachhang) {
-        this.khachhang = khachhang;
+    public void setkhachHang(khachHang khachHang) {
+        this.khachHang = khachHang;
     }
 
     public chuyenbay getChuyenbay() {
@@ -75,7 +75,7 @@ public class ve {
         System.out.println("Nhập mã hành khách: ");
         String makh = nhap.nextLine();
 
-        // khachhang.nhap();
+        // khachHang.nhap();
         System.out.println("Nhập mã chuyến bay: ");
         // chuyenbay.nhap();
         System.out.println("Nhập trạng thái thanh toán (chưa thanh toán/đã thanh toán):");
@@ -87,7 +87,7 @@ public class ve {
         System.out.println(">---------------------------<");
         System.out.println("    Mã vé: " + ma_ve);
         System.out.println("    Hành khách: ");
-        getkhachhang().xuat();
+        getkhachHang().xuat();
         System.out.println("\n    Chuyến bay: ");
         getChuyenbay().xuat();
         System.out.println("\n    Gía: " + gia);
@@ -118,7 +118,7 @@ class quanly_ve implements crud {
                 vemoi.setMa_ve(ma);
             }
         }
-        String mahk = vemoi.getkhachhang().getmaKH();
+        String mahk = vemoi.getkhachHang().getMaKH();
         danhsachve.add(vemoi);
     }
 
@@ -181,7 +181,7 @@ class quanly_ve implements crud {
         try {
             FileWriter fw = new FileWriter("ve.txt");
             for (ve ve : danhsachve) {
-            fw.write(ve.getMa_ve() + "," + ve.getGia() + "," + ve.getkhachhang().getmaKH() + ","
+            fw.write(ve.getMa_ve() + "," + ve.getGia() + "," + ve.getkhachHang().getMaKH() + ","
                     + ve.getChuyenbay().getMachuyenbay() + "," + ve.getTrangthai() + "\n");
             }
             fw.close();

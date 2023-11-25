@@ -1,19 +1,16 @@
 import java.util.*;
-class khachhang extends nguoi {
+import java.io.File;
+import java.io.FileNotFoundException;
+class khachHang extends nguoi {
     private String maKH;
-    Scanner sc = new Scanner(System.in);
 
 
     
-    public khachhang(){
+    public khachHang(){
         maKH = "";
-        hoten = "";
-        gioitinh = "";
-        diachi = "";
-        sdt = "";
     }
-    public khachhang(String maKH, String hoten, String gioitinh, String diachi, String sdt){
-        super(hoten,gioitinh,diachi,sdt);
+    public khachHang(String maKH, String hoTen, String gioiTinh, String diaChi, String sdt){
+        super(hoTen,gioiTinh,diaChi,sdt);
         this.maKH = maKH;
     }
 
@@ -24,53 +21,57 @@ class khachhang extends nguoi {
         maKH = sc.nextLine();
         super.nhap();
     }
+
     @Override public void xuat(){
         System.out.println("Ma khach hang: " + maKH);
-        System.out.println("Ho ten khach hang: " + hoten);
-        System.out.println("Gioi tinh: " + gioitinh);
-        System.out.println("Dia chi: " + diachi);
+        System.out.println("Ho ten khach hang: " + hoTen);
+        System.out.println("Gioi tinh: " + gioiTinh);
+        System.out.println("Dia chi: " + diaChi);
         System.out.println("So dien thoai: " + sdt);
     }
 
 
 
-    public String getmaKH(){
+    public String getMaKH(){
         return maKH;
     }
-
-
-
-    public String gethoten(){
-        return hoten;
-    }
-    public void sethoten(String hoten){
-        this.hoten = hoten;
+    public void setMaKH(String maKH){
+        this.maKH = maKH;
     }
 
 
 
-    public String getgioitinh(){
-        return gioitinh;
+    public String getHoTen(){
+        return hoTen;
     }
-    public void setgioitinh(String gioitinh){
-        this.gioitinh = gioitinh;
-    }
-
-
-
-    public String getdiachi(){
-        return diachi;
-    }
-    public void setdiachi(String diachi){
-        this.diachi = diachi;
+    public void setHoTen(String hoTen){
+        this.hoTen = hoTen;
     }
 
 
 
-    public String getsdt(){
+    public String getGioiTinh(){
+        return gioiTinh;
+    }
+    public void setGioiTinh(String gioiTinh){
+        this.gioiTinh = gioiTinh;
+    }
+
+
+
+    public String getDiaChi(){
+        return diaChi;
+    }
+    public void setDiaChi(String diaChi){
+        this.diaChi = diaChi;
+    }
+
+
+
+    public String getSdt(){
         return sdt;
     }
-    public void setsdt(String sdt){
+    public void setSdt(String sdt){
         this.sdt=sdt;
     }
 }
@@ -78,17 +79,17 @@ class khachhang extends nguoi {
 
 
 class DSKhachHang {
-    khachhang[] dskh;
+    khachHang[] dskh;
     int n;
     Scanner sc = new Scanner(System.in);
 
 
 
     public DSKhachHang(){
-        dskh = new khachhang[0];
+        dskh = new khachHang[0];
         n = 0;
     }
-    public DSKhachHang(khachhang[] ds, int nn){
+    public DSKhachHang(khachHang[] ds, int nn){
         dskh = Arrays.copyOf(ds,nn);
         n = nn;
     }
@@ -96,32 +97,61 @@ class DSKhachHang {
 
 
     public void nhap(){
+        /* 
         System.out.println("Nhap so luong khach hang: ");
         n = sc.nextInt(); sc.nextLine();
-        dskh = new khachhang[n];
+        dskh = new khachHang[n];
         for(int i=0; i<n; i++){
             System.out.println("\nNhap thong tin khach hang thu " + (i+1) + ": ");
-            dskh[i] = new khachhang();
+            dskh[i] = new khachHang();
             dskh[i].nhap();
         }
+        */
+        try{
+            File fin = new File("dataDSKH.txt");
+        
+            Scanner myReader = new Scanner(fin);
+
+            while(myReader.hasNextLine()){
+                dskh = Arrays.copyOf(dskh,n+1);
+                dskh[n] = new khachHang();
+
+                String data = myReader.nextLine();
+                String[] words = data.split(",");
+
+                dskh[n].setMaKH(words[0]);
+                dskh[n].setHoTen(words[1]);
+                dskh[n].setGioiTinh(words[2]);
+                dskh[n].setDiaChi(words[3]);
+                dskh[n].setSdt(words[4]);
+
+                n++;
+            }
+            myReader.close();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        
     }
     public void xuat(){
         for(int i=0; i<n; i++){
-            System.out.println("\nThong tin khach hang thu " + (i+1) + ":");
+            System.out.println("\n\nThong tin khach hang thu " + (i+1) + ":");
             dskh[i].xuat();
         }
     }
 
 
 
-    public void timkiem(){
-        System.out.println("\nNhap ma khach hang can tim: ");
+    public void timKiem(){
+        System.out.println("\n\nNhap ma khach hang can tim: ");
         String tmp = sc.nextLine();
-        timkiem(tmp);
+        timKiem(tmp);
     }
-    public void timkiem(String ma){
+    public void timKiem(String ma){
         for(int i = 0; i < n; i++)
-            if( dskh[i].getmaKH().equals(ma) ){
+            if( dskh[i].getMaKH().equals(ma) ){
                 dskh[i].xuat();
                 break;
             }
@@ -131,8 +161,8 @@ class DSKhachHang {
 
     public void them(){
         dskh = Arrays.copyOf(dskh,n+1);
-        dskh[n] = new khachhang();
-        System.out.println("\nNhap thong tin khach hang duoc them: ");
+        dskh[n] = new khachHang();
+        System.out.println("\n\nNhap thong tin khach hang duoc them: ");
         dskh[n].nhap();
         n++;
     }
@@ -140,13 +170,13 @@ class DSKhachHang {
 
 
     public void xoa(){
-        System.out.println("\nNhap ma khach hang can xoa: ");
+        System.out.println("\n\nNhap ma khach hang can xoa: ");
         String tmp = sc.nextLine();
         xoa(tmp);
     }
     public void xoa(String ma){
         for(int i = 0; i < n; i++){
-            if( dskh[i].getmaKH().equals(ma) ){
+            if( dskh[i].getMaKH().equals(ma) ){
                 for(int j=i; j<n-1; j++){
                     dskh[j] = dskh[j+1];
                 }
@@ -160,13 +190,13 @@ class DSKhachHang {
 
 
     public void sua(){
-        System.out.println("\nNhap ma khach hang can sua: ");
+        System.out.println("\n\nNhap ma khach hang can sua: ");
         String tmp = sc.nextLine();
         sua(tmp);
     }
     public void sua(String ma){
         for(int i = 0; i < n; i++)
-            if( dskh[i].getmaKH().equals(ma) ){
+            if( dskh[i].getMaKH().equals(ma) ){
                 int chon;
                 do{
                     System.out.println("\n>-----------------------------<");
@@ -180,29 +210,29 @@ class DSKhachHang {
                     chon = sc.nextInt(); sc.nextLine();
                     switch(chon){
                         case 1:
-                            System.out.print("\nNhap ho ten moi: ");
+                            System.out.print("\n\nNhap ho ten moi: ");
                             String tmp1 = sc.nextLine();
-                            dskh[i].sethoten(tmp1);
+                            dskh[i].setHoTen(tmp1);
                             break;
                         case 2:
-                            System.out.print("\nNhap gioi tinh moi: ");
+                            System.out.print("\n\nNhap gioi tinh moi: ");
                             String tmp2 = sc.nextLine();
-                            dskh[i].setgioitinh(tmp2);
+                            dskh[i].setGioiTinh(tmp2);
                             break;
                         case 3:
-                            System.out.print("\nNhap dia chi moi: ");
+                            System.out.print("\n\nNhap dia chi moi: ");
                             String tmp3 = sc.nextLine();
-                            dskh[i].setdiachi(tmp3);
+                            dskh[i].setDiaChi(tmp3);
                             break;
                         case 4:
-                            System.out.print("\nNhap so dien thoai moi: ");
+                            System.out.print("\n\nNhap so dien thoai moi: ");
                             String tmp4 = sc.nextLine();
-                            dskh[i].setsdt(tmp4);
+                            dskh[i].setSdt(tmp4);
                             break;
                         case 0:
                             break;
                         default:{
-                            System.out.println("\nLua chon khong hop le\n");
+                            System.out.println("\n\nLua chon khong hop le\n");
                             break;
                         }
                     }
@@ -242,7 +272,7 @@ class QuanLyKH {
                     ds.xoa();
                     break;
                 case 4:
-                    ds.timkiem();
+                    ds.timKiem();
                     break;
                 case 5:
                     ds.xuat();
@@ -258,8 +288,8 @@ class QuanLyKH {
     }
 }
 
-class DSHK {
-    public static void main(String[] args){
+class DSKH {
+    public static void main(String[] args) throws FileNotFoundException {
         QuanLyKH ql1 = new QuanLyKH();
         ql1.menu();
     }

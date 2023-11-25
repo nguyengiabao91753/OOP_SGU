@@ -16,7 +16,7 @@ public class program {
 
         do {
             System.out.println("Chủ đề: Quản lý bán vé máy bay ");
-            System.out.println("    1. Quản lý Hành khách");
+            System.out.println("    1. Quản lý khách hàng");
             System.out.println("    2. Quản lý nhân viên");
             System.out.println("    3. Quản lý Tài khoản");
             System.out.println("    4. Quản lý Chuyến bay");

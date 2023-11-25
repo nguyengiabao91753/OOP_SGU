@@ -1,0 +1,6 @@
+KH01,Tang Thanh Thuan,Nam,Ho Chi Minh,0000000001
+KH02,Nguyen Le Bao Chau,Nam,Binh Đinh,0000000002
+KH03,Ngan Que Linh,Nu,Ha Noi,0000000003
+KH04,Le Ngoc Thien Thanh,Nu,Nha Trang,0000000004
+KH05,Ngo Nguyen Thanh Đat,Nam,Thanh Hoa,0000000005
+KH06,Nguyen Hong Mai Anh,Nu,Binh Duong,0000000006

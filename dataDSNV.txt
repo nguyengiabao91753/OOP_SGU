@@ -1,0 +1,6 @@
+NV01,Tran Xuan Hung,Nam,Phu Yen,0000000011,3000000
+NV02,Tran Van Hoa,Nam,Tay Ninh,0000000012,5000000
+NV03,Pham Thi Thuong,Nu,Ninh Thuan,0000000013,7000000
+NV04,Nguyen Thi Diem My,Nu,Da Lat,0000000014,5000000
+NV05,Nguyen Đuc Duong,Nam,Quy Nhon,0000000015,3000000
+NV06,Ha Thi Thanh Thao,Nu,Quy Nhon,0000000016,7000000
