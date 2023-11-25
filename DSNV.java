@@ -108,6 +108,9 @@ class DSNhanVien {
         n = nn;
     }
 
+    public nhanVien[] getDsnv() {
+        return dsnv;
+    }
 
 
     public void nhap(){

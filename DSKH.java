@@ -94,6 +94,12 @@ class DSKhachHang {
         n = nn;
     }
 
+    public khachHang[] getDskh() {
+        return dskh;
+    }
+    public void setDskh(khachHang[] dskh) {
+        this.dskh = dskh;
+    }
 
 
     public void nhap(){
