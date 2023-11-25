@@ -1,6 +1,5 @@
 import java.util.*;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 class nhanVien extends nguoi {
     private String maNV;
     private int luong;
@@ -92,7 +91,7 @@ class nhanVien extends nguoi {
 
 
 
-class DSNhanVien {
+class DSNhanVien implements IThem,IXoa,ISua,ITimKiem {
     nhanVien[] dsnv;
     int n;
     Scanner sc = new Scanner(System.in);
@@ -111,7 +110,6 @@ class DSNhanVien {
 
 
     public void nhap(){
-        /*
         System.out.print("Nhap so luong nhan vien: ");
         n = sc.nextInt(); sc.nextLine();
         dsnv = new nhanVien[n];
@@ -120,7 +118,11 @@ class DSNhanVien {
             dsnv[i] = new nhanVien();
             dsnv[i].nhap();
         }
-        */
+    }
+
+
+
+    public void docFile(){
         try{
             File fin = new File("dataDSNguoi.txt");
         
@@ -144,13 +146,34 @@ class DSNhanVien {
                     n++;
                 }
             }
+            myReader.close();
         }
         catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-
     }
+
+
+
+    public void ghiFile(){
+        try{
+            FileWriter myWriter = new FileWriter("dataDSNguoi.txt",true);
+            for(nhanVien nv : dsnv){
+                myWriter.write("1," + nv.getMaNV() + "," + nv.getHoTen() + "," + nv.getGioiTinh() + "," + nv.getDiaChi() + ","
+                              + nv.getSdt() + "," + nv.getLuong() + "\n");
+            }
+            myWriter.close();
+            System.out.println("\n\nGhi File thanh cong");
+        }
+        catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+
+
     public void xuat(){
         for(int i=0; i<n; i++){
             System.out.println("\n\nThong tin nhan vien thu " + (i+1) + ":");
@@ -276,35 +299,46 @@ class QuanLyNV {
         int chon;
         do{
             System.out.println("\n>Menu-------------------------<");
-            System.out.println("1-Them nhan vien");
-            System.out.println("2-Sua nhan vien");
-            System.out.println("3-Xoa nhan vien");
-            System.out.println("4-Tim kiem nhan vien");
-            System.out.println("5-Xuat danh sach nhan vien");
-            System.out.println("0-Thoat");
+            System.out.println("1 - Tao danh sach nhan vien moi");
+            System.out.println("2 - Them nhan vien");
+            System.out.println("3 - Sua nhan vien");
+            System.out.println("4 - Xoa nhan vien");
+            System.out.println("5 - Tim kiem nhan vien");
+            System.out.println("6 - Xuat danh sach nhan vien");
+            System.out.println("7 - Tai len danh sach tu File");
+            System.out.println("8 - Ghi du lieu vao File");
+            System.out.println("0 - Thoat");
             System.out.print("Nhap lua chon: ");
             chon = sc.nextInt(); sc.nextLine();
             switch(chon){
                 case 1:
-                    ds.them();
+                    ds.nhap();
                     break;
                 case 2:
-                    ds.sua();
+                    ds.them();
                     break;
                 case 3:
-                    ds.xoa();
+                    ds.sua();
                     break;
                 case 4:
-                    ds.timKiem();
+                    ds.xoa();
                     break;
                 case 5:
+                    ds.timKiem();
+                    break;
+                case 6:
                     ds.xuat();
+                    break;
+                case 7:
+                    ds.docFile();
+                    break;
+                case 8:
+                    ds.ghiFile();
                     break;
                 case 0:
                     break;
                 default:
                     System.out.println("\n\nLua cho khong hop le\n");
-                    break;
             }
             System.out.println("\n>-----------------------------<");
         }while(chon != 0);
