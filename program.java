@@ -14,7 +14,7 @@ public class program {
 
         do {
             System.out.println("Chủ đề: Quản lý bán vé máy bay ");
-            System.out.println("    1. Quản lý Hành khách");
+            System.out.println("    1. Quản lý khách hàng");
             System.out.println("    2. Quản lý nhân viên");
             System.out.println("    3. Quản lý Tài khoản");
             System.out.println("    4. Quản lý Chuyến bay");
@@ -32,9 +32,9 @@ public class program {
             }
             switch (chon) {
                 case 1:
-                    System.out.println("Quản lý Hành khách:");
-                    QuanLyHK qlhk = new QuanLyHK();
-                    qlhk.menu();
+                    System.out.println("Quản lý khách hàng:");
+                    QuanLyKH qlkh = new QuanLyKH();
+                    qlkh.menu();
                     break;
                 case 2:
                     System.out.println("Quản lý nhân viên:");
@@ -96,7 +96,7 @@ public class program {
                     again=1;
                     for (ve ve : danhsachve.getDanhsachve()) {
                         if(ve.getTrangthai().equals("da thanh toan")){
-                            quanly_hoadon.them(ve.getHanhkhach().gethoten(), ve);
+                            quanly_hoadon.them(ve.getHanhkhach().getHoTen(), ve);
                         }
                     }
                     while (again == 1) {

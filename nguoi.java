@@ -1,30 +1,35 @@
 import java.util.Scanner;
 
 abstract class nguoi {
-    protected String hoten, gioitinh, diachi, sdt;
-    Scanner sc = new Scanner(System.in);
+    protected String hoTen, gioiTinh, diaChi, sdt;
+    static Scanner sc = new Scanner(System.in);
 
 
     public nguoi(){
+        hoTen = "";
+        gioiTinh = "";
+        diaChi = "";
+        sdt = "";
     }
-    public nguoi(String hoten, String gioitinh, String diachi, String sdt){
-        this.hoten = hoten;
-        this.gioitinh = gioitinh;
-        this.diachi = diachi;
+    public nguoi(String hoTen, String gioiTinh, String diaChi, String sdt){
+        this.hoTen = hoTen;
+        this.gioiTinh = gioiTinh;
+        this.diaChi = diaChi;
         this.sdt = sdt;
     }
 
 
-    
+  
     public void nhap(){
         System.out.print("\nNhap ho ten: ");
-        hoten = sc.nextLine();
+        hoTen = sc.nextLine();
         System.out.print("\nNhap gioi tinh: ");
-        gioitinh = sc.nextLine();
+        gioiTinh = sc.nextLine();
         System.out.print("\nNhap dia chi: ");
-        diachi = sc.nextLine();
+        diaChi = sc.nextLine();
         System.out.print("\nNhap so dien thoai: ");
         sdt = sc.nextLine();
     }
+
     public abstract void xuat();
 }

@@ -1,20 +1,17 @@
 import java.util.*;
-class nhanvien extends nguoi {
+import java.io.File;
+import java.io.FileNotFoundException;
+class nhanVien extends nguoi {
     private String maNV;
     private int luong;
-    Scanner sc = new Scanner(System.in);
 
 
-    public nhanvien(){
+    public nhanVien(){
         maNV = "";
         luong = 0;
-        hoten = "";
-        gioitinh = "";
-        diachi = "";
-        sdt = "";
     }
-    public nhanvien(String maNV, String hoten, String gioitinh, String diachi, String sdt, int luong){
-        super(hoten,gioitinh,diachi,sdt);
+    public nhanVien(String maNV, String hoTen, String gioiTinh, String diaChi, String sdt, int luong){
+        super(hoTen,gioiTinh,diaChi,sdt);
         this.maNV = maNV;
         this.luong = luong;
     }
@@ -28,63 +25,67 @@ class nhanvien extends nguoi {
         System.out.print("Nhap muc luong: ");
         luong = sc.nextInt(); sc.nextLine();
     }
+
     @Override public void xuat(){
         System.out.println("Ma nhan vien: " + maNV);
-        System.out.println("Ho ten nhan vien: " + hoten);
-        System.out.println("Gioi tinh: " + gioitinh);
-        System.out.println("Dia chi: " + diachi);
+        System.out.println("Ho ten nhan vien: " + hoTen);
+        System.out.println("Gioi tinh: " + gioiTinh);
+        System.out.println("Dia chi: " + diaChi);
         System.out.println("So dien thoai: " + sdt);
         System.out.println("Luong: " + luong);
     }
 
 
 
-    public String getmaNV(){
+    public String getMaNV(){
         return maNV;
     }
+    public void setMaNV(String maNV){
+        this.maNV = maNV;
+    }
 
 
 
-    public int getluong(){
+    public int getLuong(){
         return luong;
     }
-    public void setluong(int luong){
+    public void setLuong(int luong){
         this.luong = luong;
     }
 
 
 
-    public String gethoten(){
-        return hoten;
+    public String getHoTen(){
+        return hoTen;
     }
-    public void sethoten(String hoten){
-        this.hoten = hoten;
-    }
-
-
-
-    public String getgioitinh(){
-        return gioitinh;
-    }
-    public void setgioitinh(String gioitinh){
-        this.gioitinh = gioitinh;
+    public void setHoTen(String hoTen){
+        this.hoTen = hoTen;
     }
 
 
 
-    public String getdiachi(){
-        return diachi;
+    public String getGioiTinh(){
+        return gioiTinh;
     }
-    public void setdiachi(String diachi){
-        this.diachi = diachi;
+    public void setGioiTinh(String gioiTinh){
+        this.gioiTinh = gioiTinh;
+    }
+
+
+
+    public String getDiaChi(){
+        return diaChi;
+    }
+    public void setDiaChi(String diaChi){
+        this.diaChi = diaChi;
     }
 
 
     
-    public String getsdt(){
+    public String getSdt(){
         return sdt;
     }
-    public void setsdt(String sdt){
+    public void setSdt(String sdt){
         this.sdt=sdt;
     }
 }
@@ -92,17 +93,17 @@ class nhanvien extends nguoi {
 
 
 class DSNhanVien {
-    nhanvien[] dsnv;
+    nhanVien[] dsnv;
     int n;
     Scanner sc = new Scanner(System.in);
 
 
 
     public DSNhanVien(){
-        dsnv = new nhanvien[0];
+        dsnv = new nhanVien[0];
         n = 0;
     }
-    public DSNhanVien(nhanvien[] ds, int nn){
+    public DSNhanVien(nhanVien[] ds, int nn){
         dsnv = Arrays.copyOf(ds,nn);
         n = nn;
     }
@@ -110,18 +111,48 @@ class DSNhanVien {
 
 
     public void nhap(){
+        /*
         System.out.print("Nhap so luong nhan vien: ");
         n = sc.nextInt(); sc.nextLine();
-        dsnv = new nhanvien[n];
+        dsnv = new nhanVien[n];
         for(int i = 0; i < n; i++){
             System.out.println("Nhap thong tin nhan vien thu " + (i+1) + ": ");
-            dsnv[i] = new nhanvien();
+            dsnv[i] = new nhanVien();
             dsnv[i].nhap();
         }
+        */
+        try{
+            File fin = new File("dataDSNV.txt");
+        
+            Scanner myReader = new Scanner(fin);
+
+            while(myReader.hasNextLine()){
+                dsnv = Arrays.copyOf(dsnv,n+1);
+                dsnv[n] = new nhanVien();
+
+                String data = myReader.nextLine();
+                String[] words = data.split(",");
+
+                dsnv[n].setMaNV(words[0]);
+                dsnv[n].setHoTen(words[1]);
+                dsnv[n].setGioiTinh(words[2]);
+                dsnv[n].setDiaChi(words[3]);
+                dsnv[n].setSdt(words[4]);
+                dsnv[n].setLuong(Integer.parseInt(words[5]));
+
+                n++;
+            }
+            myReader.close();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
     }
     public void xuat(){
         for(int i=0; i<n; i++){
-            System.out.println("\nThong tin nhan vien thu " + (i+1) + ":");
+            System.out.println("\n\nThong tin nhan vien thu " + (i+1) + ":");
             dsnv[i].xuat();
         }
     }
@@ -130,22 +161,22 @@ class DSNhanVien {
 
     public void them(){
         dsnv = Arrays.copyOf(dsnv,n+1);
-        dsnv[n] = new nhanvien();
-        System.out.println("Nhap thong tin nhan vien duoc them: ");
+        dsnv[n] = new nhanVien();
+        System.out.println("\n\nNhap thong tin nhan vien duoc them: ");
         dsnv[n].nhap();
         n++;
     }
 
 
 
-    public void timkiem(){
-        System.out.println("\nNhap ma nhan vien can tim: ");
+    public void timKiem(){
+        System.out.println("\n\nNhap ma nhan vien can tim: ");
         String tmp = sc.nextLine();
-        timkiem(tmp);
+        timKiem(tmp);
     }
-    public void timkiem(String ma){
+    public void timKiem(String ma){
         for(int i = 0; i < n; i++)
-            if( dsnv[i].getmaNV().equals(ma) ){
+            if( dsnv[i].getMaNV().equals(ma) ){
                 dsnv[i].xuat();
                 break;
             }
@@ -154,13 +185,13 @@ class DSNhanVien {
 
 
     public void xoa(){
-        System.out.println("Nhap ma nhan vien can xoa: ");
+        System.out.println("\n\nNhap ma nhan vien can xoa: ");
         String tmp = sc.nextLine();
         xoa(tmp);
     }
     public void xoa(String ma){
         for(int i = 0; i < n; i++){
-            if( dsnv[i].getmaNV().equals(ma) ){
+            if( dsnv[i].getMaNV().equals(ma) ){
                 for(int j=i; j<n-1; j++){
                     dsnv[j] = dsnv[j+1];
                 }
@@ -174,13 +205,13 @@ class DSNhanVien {
 
 
     public void sua(){
-        System.out.println("\nNhap ma nhan vien can sua: ");
+        System.out.println("\n\nNhap ma nhan vien can sua: ");
         String tmp = sc.nextLine();
         sua(tmp);
     }
     public void sua(String ma){
         for(int i = 0; i < n; i++)
-            if( dsnv[i].getmaNV().equals(ma) ){
+            if( dsnv[i].getMaNV().equals(ma) ){
                 int chon;
                 do{
                     System.out.println("\n>-----------------------------<");
@@ -195,34 +226,34 @@ class DSNhanVien {
                     chon = sc.nextInt(); sc.nextLine();
                     switch(chon){
                         case 1:
-                            System.out.print("\nNhap ho ten moi: ");
+                            System.out.print("\n\nNhap ho ten moi: ");
                             String tmp1 = sc.nextLine();
-                            dsnv[i].sethoten(tmp1);
+                            dsnv[i].setHoTen(tmp1);
                             break;
                         case 2:
-                            System.out.print("\nNhap gioi tinh moi: ");
+                            System.out.print("\n\nNhap gioi tinh moi: ");
                             String tmp2 = sc.nextLine();
-                            dsnv[i].setgioitinh(tmp2);
+                            dsnv[i].setGioiTinh(tmp2);
                             break;
                         case 3:
-                            System.out.print("\nNhap dia chi moi: ");
+                            System.out.print("\n\nNhap dia chi moi: ");
                             String tmp3 = sc.nextLine();
-                            dsnv[i].setdiachi(tmp3);
+                            dsnv[i].setDiaChi(tmp3);
                             break;
                         case 4:
-                            System.out.print("\nNhap so dien thoai moi: ");
+                            System.out.print("\n\nNhap so dien thoai moi: ");
                             String tmp4 = sc.nextLine();
-                            dsnv[i].setsdt(tmp4);
+                            dsnv[i].setSdt(tmp4);
                             break;
                         case 5:{
-                            System.out.print("\nNhap muc luong moi: ");
+                            System.out.print("\n\nNhap muc luong moi: ");
                             int tmp5 = sc.nextInt(); sc.nextLine();
-                            dsnv[i].setluong(tmp5);
+                            dsnv[i].setLuong(tmp5);
                         }
                         case 0:
                             break;
                         default:{
-                            System.out.println("\nLua chon khong hop le\n");
+                            System.out.println("\n\nLua chon khong hop le\n");
                             break;
                         }
                     }
@@ -263,7 +294,7 @@ class QuanLyNV {
                     ds.xoa();
                     break;
                 case 4:
-                    ds.timkiem();
+                    ds.timKiem();
                     break;
                 case 5:
                     ds.xuat();
@@ -271,7 +302,7 @@ class QuanLyNV {
                 case 0:
                     break;
                 default:
-                    System.out.println("\nLua cho khong hop le\n");
+                    System.out.println("\n\nLua cho khong hop le\n");
                     break;
             }
             System.out.println("\n>-----------------------------<");
@@ -279,7 +310,7 @@ class QuanLyNV {
     }
 }
 
-class DSHK {
+class DSNV {
     public static void main(String[] args){
         QuanLyNV ql1 = new QuanLyNV();
         ql1.menu();

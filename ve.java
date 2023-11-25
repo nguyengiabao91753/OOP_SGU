@@ -6,18 +6,18 @@ public class ve {
     private String ma_ve;
     private int gia;
     private String trangthai;
-    private hanhkhach hanhkhach;
+    private khachHang hanhkhach;
     private chuyenbay chuyenbay;
 
     public ve() {
         ma_ve = "";
         gia = 0;
         trangthai = "";
-        hanhkhach = new hanhkhach();
+        hanhkhach = new khachHang();
         chuyenbay = new chuyenbay();
     }
 
-    public ve(String ma_ve, int gia, String trangthai, hanhkhach hanhkhach, chuyenbay chuyenbay) {
+    public ve(String ma_ve, int gia, String trangthai, khachHang hanhkhach, chuyenbay chuyenbay) {
         this.ma_ve = ma_ve;
         this.gia = gia;
         this.trangthai = trangthai;
@@ -49,11 +49,11 @@ public class ve {
         this.trangthai = trangthai;
     }
 
-    public hanhkhach getHanhkhach() {
+    public khachHang getHanhkhach() {
         return hanhkhach;
     }
 
-    public void setHanhkhach(hanhkhach hanhkhach) {
+    public void setHanhkhach(khachHang hanhkhach) {
         this.hanhkhach = hanhkhach;
     }
 
@@ -163,7 +163,7 @@ class quanly_ve implements crud {
         try {
             FileWriter fw = new FileWriter("ve.txt");
             for (ve ve : danhsachve) {
-            fw.write(ve.getMa_ve() + "," + ve.getGia() + "," + ve.getHanhkhach().getmaHK() + ","
+            fw.write(ve.getMa_ve() + "," + ve.getGia() + "," + ve.getHanhkhach().getMaKH() + ","
                     + ve.getChuyenbay().getmachuyenbay() + "," + ve.getTrangthai() + "\n");
             }
             fw.close();
