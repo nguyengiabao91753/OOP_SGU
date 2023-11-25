@@ -108,26 +108,27 @@ class DSKhachHang {
         }
         */
         try{
-            File fin = new File("dataDSKH.txt");
+            File fin = new File("dataDSNguoi.txt");
         
             Scanner myReader = new Scanner(fin);
 
             while(myReader.hasNextLine()){
-                dskh = Arrays.copyOf(dskh,n+1);
-                dskh[n] = new khachHang();
-
                 String data = myReader.nextLine();
                 String[] words = data.split(",");
 
-                dskh[n].setMaKH(words[0]);
-                dskh[n].setHoTen(words[1]);
-                dskh[n].setGioiTinh(words[2]);
-                dskh[n].setDiaChi(words[3]);
-                dskh[n].setSdt(words[4]);
+                if(Integer.parseInt(words[0]) == 0){
+                    dskh = Arrays.copyOf(dskh,n+1);
+                    dskh[n] = new khachHang();
 
-                n++;
+                    dskh[n].setMaKH(words[1]);
+                    dskh[n].setHoTen(words[2]);
+                    dskh[n].setGioiTinh(words[3]);
+                    dskh[n].setDiaChi(words[4]);
+                    dskh[n].setSdt(words[5]);
+
+                    n++;
+                }
             }
-            myReader.close();
         }
         catch (FileNotFoundException e) {
             System.out.println("An error occurred.");

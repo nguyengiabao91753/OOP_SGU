@@ -122,27 +122,28 @@ class DSNhanVien {
         }
         */
         try{
-            File fin = new File("dataDSNV.txt");
+            File fin = new File("dataDSNguoi.txt");
         
             Scanner myReader = new Scanner(fin);
 
             while(myReader.hasNextLine()){
-                dsnv = Arrays.copyOf(dsnv,n+1);
-                dsnv[n] = new nhanVien();
-
                 String data = myReader.nextLine();
                 String[] words = data.split(",");
 
-                dsnv[n].setMaNV(words[0]);
-                dsnv[n].setHoTen(words[1]);
-                dsnv[n].setGioiTinh(words[2]);
-                dsnv[n].setDiaChi(words[3]);
-                dsnv[n].setSdt(words[4]);
-                dsnv[n].setLuong(Integer.parseInt(words[5]));
+                if(Integer.parseInt(words[0]) == 1){
+                    dsnv = Arrays.copyOf(dsnv,n+1);
+                    dsnv[n] = new nhanVien();
 
-                n++;
+                    dsnv[n].setMaNV(words[1]);
+                    dsnv[n].setHoTen(words[2]);
+                    dsnv[n].setGioiTinh(words[3]);
+                    dsnv[n].setDiaChi(words[4]);
+                    dsnv[n].setSdt(words[5]);
+                    dsnv[n].setLuong(Integer.parseInt(words[6]));
+
+                    n++;
+                }
             }
-            myReader.close();
         }
         catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
