@@ -235,11 +235,11 @@ class quanly_hoadon implements crud {
                     switch (i) {
                         case 0:
                             hoadon.setMaHD(arr[i]);
-
+                            c++;
                             break;
                         case 1:
                             hoadon.setMaNV(arr[i]);
-
+                            c++;
                             break;
                         case 2:
                             quanly_ve quanly_ve = new quanly_ve();
@@ -247,22 +247,24 @@ class quanly_hoadon implements crud {
                             for (ve ve : quanly_ve.getDanhsachve()) {
                                 if (ve.getMa_ve().equals(arr[i])) {
                                     hoadon.setVe(ve);
+                                    c++;
                                 }
                             }
-
+                            
                             break;
                         case 3:
                             hoadon.setNgaytao(arr[i]);
-
+                            c++;
                             break;
                         default:
                             break;
                     }
                 }
-
+                if(c==4){
                 quanly_hoadon.add(hoadon);
-
+                }
                 line = fr.readLine();
+                c=0;
             }
         } catch (Exception ex) {
             ex.printStackTrace();

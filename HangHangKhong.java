@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class HangHangKhong {
+class HangHangKhong {
     private String tenHang;
     private String maHang;
 
@@ -30,6 +30,14 @@ public class HangHangKhong {
     public String getMaHang() {
         return maHang;
     }
+
+    public void setTenHang(String tenHang) {
+        this.tenHang = tenHang;
+    }
+
+    public void setMaHang(String maHang) {
+        this.maHang = maHang;
+    }
 }
 
 class QuanLyHangHangKhong {
@@ -48,6 +56,8 @@ class QuanLyHangHangKhong {
         System.out.println("1. Hiển thị danh sách hãng hàng không");
         System.out.println("2. Thêm hãng hàng không mới");
         System.out.println("3. Xóa hãng hàng không");
+        System.out.println("4. Sửa thông tin hãng hàng không");
+        System.out.println("5. Tìm kiếm hãng hàng không");
         System.out.println("0. Thoát");
     }
 
@@ -82,6 +92,42 @@ class QuanLyHangHangKhong {
         }
     }
 
+    public void sua() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập tên hãng hàng không cần sửa: ");
+        String tenHang = scanner.nextLine();
+        HangHangKhong hangCanSua = timHang(tenHang);
+
+        if (hangCanSua != null) {
+            System.out.println("Nhập thông tin mới cho hãng hàng không:");
+            System.out.print("Nhập tên mới: ");
+            String tenMoi = scanner.nextLine();
+            System.out.print("Nhập mã mới: ");
+            String maMoi = scanner.nextLine();
+            hangCanSua.setTenHang(tenMoi);
+            hangCanSua.setMaHang(maMoi);
+
+            System.out.println("Hãng hàng không đã được cập nhật.");
+        } else {
+            System.out.println("Không tìm thấy hãng hàng không có tên: " + tenHang);
+        }
+    }
+
+    public void timKiem() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập tên hãng hàng không cần tìm kiếm: ");
+        String tenHang = scanner.nextLine();
+
+        HangHangKhong hangKetQua = timHang(tenHang);
+
+        if (hangKetQua != null) {
+            System.out.println("Thông tin của hãng hàng không:");
+            hangKetQua.xuat();
+        } else {
+            System.out.println("Không tìm thấy hãng hàng không có tên: " + tenHang);
+        }
+    }
+
     private HangHangKhong timHang(String ten) {
         for (HangHangKhong hang : danhSachHang) {
             if (hang.getTenHang().equalsIgnoreCase(ten)) {
@@ -98,11 +144,6 @@ class QuanLyHangHangKhong {
         int luaChon;
         do {
             quanLy.hienThiMenu();
-            System.out.println("----- Menu Quản Lý Hãng Hàng Không -----");
-            System.out.println("1. Hiển thị danh sách hãng hàng không");
-            System.out.println("2. Thêm hãng hàng không mới");
-            System.out.println("3. Xóa hãng hàng không");
-            System.out.println("0. Thoát");
             System.out.print("Nhập lựa chọn của bạn: ");
             luaChon = scanner.nextInt();
 
@@ -115,6 +156,12 @@ class QuanLyHangHangKhong {
                     break;
                 case 3:
                     quanLy.xoa();
+                    break;
+                case 4:
+                    quanLy.sua();
+                    break;
+                case 5:
+                    quanLy.timKiem();
                     break;
                 case 0:
                     System.out.println("Thoát khỏi chương trình.");
