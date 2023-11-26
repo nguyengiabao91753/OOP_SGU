@@ -91,7 +91,7 @@ class nhanVien extends nguoi {
 
 
 
-class DSNhanVien implements IThem,IXoa,ISua,ITimKiem {
+class DSNhanVien implements crud {
     nhanVien[] dsnv;
     int n;
     Scanner sc = new Scanner(System.in);
@@ -196,12 +196,12 @@ class DSNhanVien implements IThem,IXoa,ISua,ITimKiem {
 
 
 
-    public void timKiem(){
+    public void tim(){
         System.out.println("\n\nNhap ma nhan vien can tim: ");
         String tmp = sc.nextLine();
-        timKiem(tmp);
+        tim(tmp);
     }
-    public void timKiem(String ma){
+    public void tim(String ma){
         for(int i = 0; i < n; i++)
             if( dsnv[i].getMaNV().equals(ma) ){
                 dsnv[i].xuat();
@@ -326,7 +326,7 @@ class QuanLyNV {
                     ds.xoa();
                     break;
                 case 5:
-                    ds.timKiem();
+                    ds.tim();
                     break;
                 case 6:
                     ds.xuat();
