@@ -77,7 +77,7 @@ class khachHang extends nguoi {
 
 
 
-class DSKhachHang{
+class DSKhachHang implements IThem,IXoa,ISua,ITimKiem {
     khachHang[] dskh;
     int n;
     Scanner sc = new Scanner(System.in);
