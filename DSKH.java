@@ -77,7 +77,7 @@ class khachHang extends nguoi {
 
 
 
-class DSKhachHang implements IThem,IXoa,ISua,ITimKiem {
+class DSKhachHang implements crud {
     khachHang[] dskh;
     int n;
     Scanner sc = new Scanner(System.in);
@@ -177,12 +177,12 @@ class DSKhachHang implements IThem,IXoa,ISua,ITimKiem {
 
 
 
-    public void timKiem(){
+    public void tim(){
         System.out.println("\n\nNhap ma khach hang can tim: ");
         String tmp = sc.nextLine();
-        timKiem(tmp);
+        tim(tmp);
     }
-    public void timKiem(String ma){
+    public void tim(String ma){
         for(int i = 0; i < n; i++)
             if( dskh[i].getMaKH().equals(ma) ){
                 dskh[i].xuat();
@@ -310,7 +310,7 @@ class QuanLyKH {
                     ds.xoa();
                     break;
                 case 5:
-                    ds.timKiem();
+                    ds.tim();
                     break;
                 case 6:
                     ds.xuat();
