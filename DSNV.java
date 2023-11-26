@@ -91,7 +91,7 @@ class nhanVien extends nguoi {
 
 
 
-class DSNhanVien{
+class DSNhanVien implements IThem,IXoa,ISua,ITimKiem {
     nhanVien[] dsnv;
     int n;
     Scanner sc = new Scanner(System.in);
