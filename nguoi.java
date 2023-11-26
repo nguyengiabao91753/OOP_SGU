@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 abstract class nguoi {
     protected String hoTen, gioiTinh, diaChi, sdt;
     static Scanner sc = new Scanner(System.in);

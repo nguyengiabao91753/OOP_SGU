@@ -1,6 +1,5 @@
 import java.util.*;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 class khachHang extends nguoi {
     private String maKH;
 
@@ -78,7 +77,7 @@ class khachHang extends nguoi {
 
 
 
-class DSKhachHang {
+class DSKhachHang{
     khachHang[] dskh;
     int n;
     Scanner sc = new Scanner(System.in);
@@ -103,7 +102,6 @@ class DSKhachHang {
 
 
     public void nhap(){
-        /* 
         System.out.println("Nhap so luong khach hang: ");
         n = sc.nextInt(); sc.nextLine();
         dskh = new khachHang[n];
@@ -112,8 +110,15 @@ class DSKhachHang {
             dskh[i] = new khachHang();
             dskh[i].nhap();
         }
-        */
+    }
+
+
+
+    public void docFile(){
         try{
+            dskh = new khachHang[0];
+            n = 0;
+
             File fin = new File("dataDSNguoi.txt");
         
             Scanner myReader = new Scanner(fin);
@@ -135,13 +140,34 @@ class DSKhachHang {
                     n++;
                 }
             }
+            myReader.close();
         }
         catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        
     }
+
+
+
+    public void ghiFile(){
+        try{
+            FileWriter myWriter = new FileWriter("dataDSNguoi.txt",true);
+            for(khachHang kh : dskh){
+                myWriter.write("0," + kh.getMaKH() + "," + kh.getHoTen() + "," + kh.getGioiTinh() + "," + kh.getDiaChi() + ","
+                              + kh.getSdt() + "\n");
+            }
+            myWriter.close();
+            System.out.println("\n\nGhi File thanh cong");
+        }
+        catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+
+
     public void xuat(){
         for(int i=0; i<n; i++){
             System.out.println("\n\nThong tin khach hang thu " + (i+1) + ":");
@@ -256,39 +282,49 @@ class QuanLyKH {
 
 
     public void menu(){
-        ds.nhap();
         int chon;
         do{
             System.out.println("\n>Menu-------------------------<");
-            System.out.println("1-Them khach hang");
-            System.out.println("2-Sua khach hang");
-            System.out.println("3-Xoa khach hang");
-            System.out.println("4-Tim kiem khach hang");
-            System.out.println("5-Xuat danh sach khach hang");
-            System.out.println("0-Thoat");
+            System.out.println("1 - Tao danh sach khach hang moi");
+            System.out.println("2 - Them khach hang");
+            System.out.println("3 - Sua khach hang");
+            System.out.println("4 - Xoa khach hang");
+            System.out.println("5 - Tim kiem khach hang");
+            System.out.println("6 - Xuat danh sach khach hang");
+            System.out.println("7 - Tai len danh sach tu File");
+            System.out.println("8 - Ghi du lieu vao File");
+            System.out.println("0 - Thoat");
             System.out.print("Nhap lua chon: ");
             chon = sc.nextInt(); sc.nextLine();
             switch(chon){
                 case 1:
-                    ds.them();
+                    ds.nhap();
                     break;
                 case 2:
-                    ds.sua();
+                    ds.them();
                     break;
                 case 3:
-                    ds.xoa();
+                    ds.sua();
                     break;
                 case 4:
-                    ds.timKiem();
+                    ds.xoa();
                     break;
                 case 5:
+                    ds.timKiem();
+                    break;
+                case 6:
                     ds.xuat();
+                    break;
+                case 7:
+                    ds.docFile();
+                    break;
+                case 8:
+                    ds.ghiFile();
                     break;
                 case 0:
                     break;
                 default:
                     System.out.println("\nLua cho khong hop le\n");
-                    break;
             }
             System.out.println("\n>-----------------------------<");
         }while(chon != 0);
