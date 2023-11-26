@@ -1,16 +1,5 @@
 import java.util.Scanner;
-interface IThem {
-    void them();
-}
-interface IXoa {
-    void sua();
-}
-interface ISua {
-    void xoa();
-}
-interface ITimKiem {
-    void timKiem();
-}
+
 abstract class nguoi {
     protected String hoTen, gioiTinh, diaChi, sdt;
     static Scanner sc = new Scanner(System.in);
