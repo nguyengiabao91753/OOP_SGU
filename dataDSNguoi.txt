@@ -6,7 +6,7 @@
 1,NV03,Tran Van Hoa,Nam,Tay Ninh,0000000012,5000000
 0,KH04,Le Ngoc Thien Thanh,Nu,Nha Trang,0000000004
 1,NV04,Nguyen Thi Diem My,Nu,Da Lat,0000000014,5000000
-0,KH05,Ngo Nguyen Thanh Dat,Nam,Thanh Hoa,0000000005
+0,KH05,Ngo Nguyen Thanh Đat,Nam,Thanh Hoa,0000000005
 1,NV05,Nguyen Đuc Duong,Nam,Quy Nhon,0000000015,3000000
 0,KH06,Nguyen Hong Mai Anh,Nu,Binh Duong,0000000006
-1,NV06,Ha Thi Thanh Thao,Nu,Quy Nhon,0000000016,7000000KH01,Tang Thanh Thuan,Nam,Ho Chi Minh,0000000001
+1,NV06,Ha Thi Thanh Thao,Nu,Quy Nhon,0000000016,7000000
