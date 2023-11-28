@@ -94,7 +94,7 @@ class quanly_hoadon implements crud {
         String manv = hoadon.getMaNV();
         DSNhanVien dsnv = new DSNhanVien();
         for (nhanVien nhanVien : dsnv.getDsnv()) {
-            if (manv.equals(nhanVien.getMaNV())) {
+            if ( nhanVien!=null && nhanVien.getMaNV()!= null && manv.equals(nhanVien.getMaNV())) {
                 return 1;
             }
         }

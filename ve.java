@@ -72,7 +72,6 @@ public class ve {
         System.out.println("Nhập giá vé:");
         gia = nhap.nextInt();
         nhap.nextLine();
-        System.out.println("Nhập mã hành khách: ");
         khachHang.nhap();
         System.out.println("Nhập mã chuyến bay: ");
         String macb = nhap.nextLine();
@@ -119,24 +118,40 @@ class quanly_ve implements crud {
         return 0;
     }
 
-    static int checkkhachhang(ve vemoi) throws Exception{
+    static int checkkhachhang(ve vemoi, DSKhachHang dskh) throws Exception {
         String makh = vemoi.getkhachHang().getMaKH();
-        DSKhachHang dskh = new DSKhachHang();
-        for (khachHang khachHang : dskh.getDskh()) {
-            if(khachHang.getMaKH().equals(makh)){
 
+        for (khachHang khachHang : dskh.getDskh()) {
+            if (khachHang.getMaKH().equals(makh) && khachHang != vemoi.getkhachHang()) {
+                return 1; // ->nhập lại mã->thêm khách hàng mới vào dskh
+            } else if (khachHang == vemoi.getkhachHang()) {
+                return 0; // ->thì ok
             }
         }
-        return 1;
+        return 2; // th: ko trùng mã,ko trùng thông tin nào -> thêm kh mới vào dskh
     }
 
     public void them() throws Exception {
         ve vemoi = new ve();
         vemoi.nhap();
+        // check khach hang
+        DSKhachHang dskh = new DSKhachHang();
+        dskh.docFile();
+        
 
-        // check khách hàng
-        String makh = vemoi.getkhachHang().getMaKH();
-
+        if (checkkhachhang(vemoi, dskh) == 1) {
+            while (checkkhachhang(vemoi, dskh) == 1) {
+                System.out.println("Mã khách hàng đã tồn tại! Vui lòng nhập lại");
+                String makh = nhap.nextLine();
+                vemoi.getkhachHang().setMaKH(makh);
+            }
+            dskh.them(vemoi.getkhachHang());
+            dskh.ghiFile();
+        } else if (checkkhachhang(vemoi, dskh) == 2) {
+            dskh.them(vemoi.getkhachHang());
+            dskh.ghiFile();
+            
+        }
         // check mã vé
         String ma = vemoi.getMa_ve();
         for (ve ve : danhsachve) {
@@ -265,7 +280,7 @@ class quanly_ve implements crud {
         BufferedReader fr = new BufferedReader(new FileReader(file));
         try {
             String line = fr.readLine();
-            int c=0;
+            int c = 0;
             while (line != null) {
                 String[] arr = line.split(",");
                 ve ve = new ve();
@@ -286,7 +301,7 @@ class quanly_ve implements crud {
                             dsKhachHang.docFile();
 
                             for (khachHang khachHang : dsKhachHang.getDskh()) {
-                                if(khachHang.getMaKH().equals(arr[i])){
+                                if (khachHang.getMaKH().equals(arr[i])) {
                                     ve.setkhachHang(khachHang);
                                     c++;
                                     break;
@@ -299,7 +314,8 @@ class quanly_ve implements crud {
                             dscb.docfile();
 
                             for (chuyenbay chuyenbay : dscb.getDanhsachchuyenbay()) {
-                                 if(chuyenbay != null && chuyenbay.getMachuyenbay() != null && chuyenbay.getMachuyenbay().equals(arr[i])){
+                                if (chuyenbay != null && chuyenbay.getMachuyenbay() != null
+                                        && chuyenbay.getMachuyenbay().equals(arr[i])) {
                                     ve.setChuyenbay(chuyenbay);
                                     c++;
                                     break;
@@ -315,11 +331,11 @@ class quanly_ve implements crud {
                     }
 
                 }
-                if(c==5){
+                if (c == 5) {
                     danhsachve.add(ve);
                 }
                 line = fr.readLine();
-                c=0;
+                c = 0;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -331,7 +347,7 @@ class quanly_ve implements crud {
 class hienthiquanlyve {
     public static void main(String[] args) throws Exception {
         quanly_ve quanly_ve = new quanly_ve();
-   
+
         quanly_ve.docfile();
 
         quanly_ve.xuat();

@@ -158,7 +158,7 @@ class DSKhachHang implements crud {
                               + kh.getSdt() + "\n");
             }
             myWriter.close();
-            System.out.println("\n\nGhi File thanh cong");
+            
         }
         catch (IOException e) {
             System.out.println("An error occurred.");
@@ -197,6 +197,12 @@ class DSKhachHang implements crud {
         dskh[n] = new khachHang();
         System.out.println("\n\nNhap thong tin khach hang duoc them: ");
         dskh[n].nhap();
+        n++;
+    }
+
+    public void them(khachHang khachHang){
+        dskh = Arrays.copyOf(dskh,n+1);
+        dskh[n] =khachHang;
         n++;
     }
 
@@ -335,5 +341,6 @@ class DSKH {
     public static void main(String[] args) throws FileNotFoundException {
         QuanLyKH ql1 = new QuanLyKH();
         ql1.menu();
+        
     }
 }
