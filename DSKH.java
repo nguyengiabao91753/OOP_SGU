@@ -78,8 +78,8 @@ class khachHang extends nguoi {
 
 
 class DSKhachHang implements crud {
-    khachHang[] dskh;
-    int n;
+    private khachHang[] dskh;
+    private int n;
     Scanner sc = new Scanner(System.in);
 
 
@@ -113,32 +113,32 @@ class DSKhachHang implements crud {
     }
 
 
-
+    String[][] words = new String[100][];
+    int k;
     public void docFile(){
         try{
             dskh = new khachHang[0];
-            n = 0;
-
+            n = 0; k = 0;
             File fin = new File("dataDSNguoi.txt");
         
             Scanner myReader = new Scanner(fin);
 
             while(myReader.hasNextLine()){
                 String data = myReader.nextLine();
-                String[] words = data.split(",");
-
-                if(Integer.parseInt(words[0]) == 0){
+                words[k] = data.split(",");
+                if(Integer.parseInt(words[k][0]) == 0){
                     dskh = Arrays.copyOf(dskh,n+1);
                     dskh[n] = new khachHang();
 
-                    dskh[n].setMaKH(words[1]);
-                    dskh[n].setHoTen(words[2]);
-                    dskh[n].setGioiTinh(words[3]);
-                    dskh[n].setDiaChi(words[4]);
-                    dskh[n].setSdt(words[5]);
+                    dskh[n].setMaKH(words[k][1]);
+                    dskh[n].setHoTen(words[k][2]);
+                    dskh[n].setGioiTinh(words[k][3]);
+                    dskh[n].setDiaChi(words[k][4]);
+                    dskh[n].setSdt(words[k][5]);
 
                     n++;
                 }
+                k++;
             }
             myReader.close();
         }
@@ -152,10 +152,16 @@ class DSKhachHang implements crud {
 
     public void ghiFile(){
         try{
-            FileWriter myWriter = new FileWriter("dataDSNguoi.txt",true);
+            FileWriter myWriter = new FileWriter("dataDSNguoi.txt");
             for(khachHang kh : dskh){
                 myWriter.write("0," + kh.getMaKH() + "," + kh.getHoTen() + "," + kh.getGioiTinh() + "," + kh.getDiaChi() + ","
                               + kh.getSdt() + "\n");
+            }
+            for(int i = 0; i < k; i++){
+                if(Integer.parseInt(words[i][0]) == 1){
+                    myWriter.write("1," + words[i][1] + "," + words[i][2] + "," + words[i][3] + "," + words[i][4] + ","
+                                  + words[i][5] + "," + words[i][6] + "\n");
+                }
             }
             myWriter.close();
             
