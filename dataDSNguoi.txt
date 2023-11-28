@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 0,KH01,Tang Thanh Thuan,Nam,Ho Chi Minh,0000000001
 1,NV01,Tran Xuan Hung,Nam,Phu Yen,0000000011,3000000
 0,KH02,Nguyen Le Bao Chau,Nam,Binh Đinh,0000000002
@@ -10,3 +11,18 @@
 1,NV05,Nguyen Đuc Duong,Nam,Quy Nhon,0000000015,3000000
 0,KH06,Nguyen Hong Mai Anh,Nu,Binh Duong,0000000006
 1,NV06,Ha Thi Thanh Thao,Nu,Quy Nhon,0000000016,7000000
+=======
+0,kh01,Tang Thanh Thuan,Nam,Ho Chi Minh,0000000001
+1,nv01,Tran Xuan Hung,Nam,Phu Yen,0000000011,3000000
+0,kh02,Nguyen Le Bao Chau,Nam,Binh Đinh,0000000002
+0,kh03,Ngan Que Linh,Nu,Ha Noi,0000000003
+1,nv02,Pham Thi Thuong,Nu,Ninh Thuan,0000000013,7000000
+1,nv03,Tran Van Hoa,Nam,Tay Ninh,0000000012,5000000
+0,kh04,Le Ngoc Thien Thanh,Nu,Nha Trang,0000000004
+1,nv04,Nguyen Thi Diem My,Nu,Da Lat,0000000014,5000000
+0,kh05,Ngo Nguyen Thanh Dat,Nam,Thanh Hoa,0000000005
+1,nv05,Nguyen Đuc Duong,Nam,Quy Nhon,0000000015,3000000
+0,kh06,Nguyen Hong Mai Anh,Nu,Binh Duong,0000000006
+1,nv06,Ha Thi Thanh Thao,Nu,Quy Nhon,0000000016,700000
+0,kh01,Tang Thanh Thuan,Nam,Ho Chi Minh,0000000001
+>>>>>>> 55687b7504ff903f7abd0053f0bb7ad24752e590
