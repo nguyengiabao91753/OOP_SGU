@@ -1,7 +1,15 @@
+import java.io.*;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class HangHangKhong {
+interface IXuat {
+    void xuat();
+}
+
+class HangHangKhong implements IXuat {
     private String tenHang;
     private String maHang;
 
@@ -40,7 +48,7 @@ class HangHangKhong {
     }
 }
 
-class QuanLyHangHangKhong {
+class QuanLyHangHangKhong implements crud {
     private ArrayList<HangHangKhong> danhSachHang;
 
     public QuanLyHangHangKhong() {
@@ -58,13 +66,15 @@ class QuanLyHangHangKhong {
         System.out.println("3. Xóa hãng hàng không");
         System.out.println("4. Sửa thông tin hãng hàng không");
         System.out.println("5. Tìm kiếm hãng hàng không");
+        System.out.println("6. Đọc danh sách hãng hàng không từ file");
+        System.out.println("7. Ghi danh sách hãng hàng không vào file");
         System.out.println("0. Thoát");
     }
 
-    public void hienThiDanhSachHang() {
+    public void xuat() {
         System.out.println("----- Danh Sách Hãng Hàng Không -----");
-        for (HangHangKhong hang : danhSachHang) {
-            System.out.println(hang.getTenHang());
+        for (IXuat hang : danhSachHang) {
+            hang.xuat();
         }
     }
 
@@ -113,7 +123,7 @@ class QuanLyHangHangKhong {
         }
     }
 
-    public void timKiem() {
+    public void tim() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhập tên hãng hàng không cần tìm kiếm: ");
         String tenHang = scanner.nextLine();
@@ -128,6 +138,41 @@ class QuanLyHangHangKhong {
         }
     }
 
+    public void docFile() throws Exception {
+    String tenFile = "HHK.txt";
+    try (BufferedReader br = new BufferedReader(new FileReader(tenFile))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(",");
+            if (parts.length == 2) {
+                HangHangKhong hang = new HangHangKhong(parts[0], parts[1]);
+                themHangHangKhong(hang);
+            } else {
+                System.out.println("Dữ liệu không hợp lệ: " + line);
+            }
+        }
+        System.out.println("Đã đọc danh sách hãng hàng không từ file.");
+    } catch (FileNotFoundException e) {
+        System.out.println("File không tồn tại: " + e.getMessage());
+    } catch (IOException e) {
+        System.out.println("Lỗi khi đọc file: " + e.getMessage());
+    }
+}
+
+public void ghiFile() throws Exception {
+    String tenFile = "HHK.txt";
+    try (FileWriter bw = new FileWriter(tenFile)) {
+        for (HangHangKhong hang : danhSachHang) {
+            bw.write(hang.getTenHang() + "," + hang.getMaHang());
+            bw.write(System.lineSeparator());
+        }
+        System.out.println("Đã ghi danh sách hãng hàng không vào file.");
+    } catch (IOException e) {
+        System.out.println("Lỗi khi ghi file: " + e.getMessage());
+    }
+}
+
+
     private HangHangKhong timHang(String ten) {
         for (HangHangKhong hang : danhSachHang) {
             if (hang.getTenHang().equalsIgnoreCase(ten)) {
@@ -137,7 +182,7 @@ class QuanLyHangHangKhong {
         return null;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         QuanLyHangHangKhong quanLy = new QuanLyHangHangKhong();
         Scanner scanner = new Scanner(System.in);
 
@@ -146,10 +191,11 @@ class QuanLyHangHangKhong {
             quanLy.hienThiMenu();
             System.out.print("Nhập lựa chọn của bạn: ");
             luaChon = scanner.nextInt();
+            scanner.nextLine();
 
             switch (luaChon) {
                 case 1:
-                    quanLy.hienThiDanhSachHang();
+                    quanLy.xuat();
                     break;
                 case 2:
                     quanLy.them();
@@ -161,7 +207,13 @@ class QuanLyHangHangKhong {
                     quanLy.sua();
                     break;
                 case 5:
-                    quanLy.timKiem();
+                    quanLy.tim();
+                    break;
+                case 6:
+                    quanLy.docFile();
+                    break;
+                case 7:
+                    quanLy.ghiFile();
                     break;
                 case 0:
                     System.out.println("Thoát khỏi chương trình.");
