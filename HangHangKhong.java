@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,7 +12,10 @@ public class HangHangKhong {
         this.tenHang = tenHang;
         this.maHang = maHang;
     }
-
+    public HangHangKhong(){
+        tenHang=" ";
+        maHang=" ";
+    }
     public void nhap() {
         Scanner input = new Scanner(System.in);
         System.out.println("Nhập tên hãng hàng không: ");
@@ -29,6 +35,12 @@ public class HangHangKhong {
 
     public String getMaHang() {
         return maHang;
+    }
+    public void setMaHang(String maHang) {
+        this.maHang = maHang;
+    }
+    public void setTenHang(String tenHang) {
+        this.tenHang = tenHang;
     }
 }
 
@@ -90,7 +102,36 @@ class QuanLyHangHangKhong {
         }
         return null;
     }
-
+    public void docfile(){
+        try {
+            BufferedReader sc = new BufferedReader(new FileReader("dataHanghangkhong.txt"));
+            String line = sc.readLine();
+            while (line != null) {
+                String[] arr = line.split(",");
+                HangHangKhong tmp=new HangHangKhong();
+                tmp.setMaHang(arr[0]);
+                tmp.setTenHang(arr[1]);
+                line = sc.readLine();
+                danhSachHang.add(tmp);
+            }
+            sc.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void ghifile(){
+         try {
+            FileWriter fw = new FileWriter("dataHanghangkhong.txt");
+            for(HangHangKhong hang:danhSachHang){
+                fw.write(hang.getMaHang() + "," + hang.getTenHang() + "\n");
+            }
+            fw.close();
+        }
+        catch (Exception ex) {
+            // TODO: handle exception
+            System.out.println(ex);
+        }
+    }
     public static void main(String[] args) {
         QuanLyHangHangKhong quanLy = new QuanLyHangHangKhong();
         Scanner scanner = new Scanner(System.in);

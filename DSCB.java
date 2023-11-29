@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 // import javafx.stage.Window;
 
-public class DSCB {
+public class DSCB implements crud{
     int sochuyenbay;
     chuyenbay[] danhsachchuyenbay;
 
@@ -47,13 +47,34 @@ public class DSCB {
         danhsachchuyenbay[sochuyenbay].nhap();
         sochuyenbay++;
     }
-
-    public void xoa() {
-        danhsachchuyenbay = Arrays.copyOf(danhsachchuyenbay, sochuyenbay - 1);
-        sochuyenbay--;
+    public void sua(){
+        String mabay;
+        Scanner input=new Scanner(System.in);
+        System.out.println("Nhập mã chuyến bay cần thay đổi: ");
+        mabay=input.nextLine();
+        for(int i=0;i<sochuyenbay;i++){
+            if(danhsachchuyenbay[i].getMachuyenbay().equals(mabay)){
+                danhsachchuyenbay[i].nhap();
+                break;
+            }
+        }
+        System.out.println("Không tìm thấy mã chuyến bay cần chỉnh sửa.");
     }
-
-    public void xoa(String ma) {
+    public void tim(){
+        String mabay;
+        Scanner input=new Scanner(System.in);
+        System.out.println("Nhập mã chuyến bay cần tìm: ");
+        mabay=input.nextLine();
+        for(int i=0;i<sochuyenbay;i++){
+            if(danhsachchuyenbay[i].getMachuyenbay().equals(mabay)){
+                danhsachchuyenbay[i].xuat();
+            }
+        }
+        System.out.println("Không tìm thấy mã chuyến bay cần tìm.");
+    }
+    public void xoa() {
+        Scanner input=new Scanner(System.in);
+        String ma=input.nextLine();
         int flag = 0;
         for (int i = 0; i < sochuyenbay; i++) {
             if (danhsachchuyenbay[i].getMachuyenbay().equals(ma)) {
@@ -87,6 +108,7 @@ public class DSCB {
                 danhsachchuyenbay[sochuyenbay].setDiemxuatphat(arr[2]);
                 danhsachchuyenbay[sochuyenbay].setDiemden(arr[3]);
                 danhsachchuyenbay[sochuyenbay].setSoghe(Integer.parseInt(arr[4]));
+                danhsachchuyenbay[sochuyenbay].setMachuyenbay(arr[5]);
                 sochuyenbay++;
                 line = sc.readLine();
             }
@@ -103,7 +125,8 @@ public class DSCB {
                 fw.write(danhsachchuyenbay[i].getMachuyenbay() + ","
                         + danhsachchuyenbay[i].getThoigiankhoihanh() + ","
                         + danhsachchuyenbay[i].getDiemxuatphat() + "," + danhsachchuyenbay[i].getDiemden()
-                        + "," + danhsachchuyenbay[i].getSoghe() + "\n");
+                        + "," + danhsachchuyenbay[i].getSoghe()
+                        + "," + danhsachchuyenbay[i].getMahangkhong() + "\n");
             }
             // fw.write("chào mừng đến với thế giới thần tiên.");
 
@@ -125,14 +148,15 @@ public class DSCB {
             System.out.println("    1.Khởi tạo một danh sách chuyến bay.");
             System.out.println("    2.Xuất danh sách chuyến bay ra màn hình.");
             System.out.println("    3.Thêm chuyến bay vào danh sách.");
-            System.out.println("    4.Xóa phần tử cuối cùng của danh sách.");
+            // System.out.println("    4.Xóa phần tử cuối cùng của danh sách.");
             System.out.println("    5.Xóa chuyến bay theo mã số chuyến.");
             System.out.println("    6.Đọc dữ liệu chuyến bay từ File ra mảng.");
             System.out.println("    7.Lưu dữ liệu.");
+            System.out.println("    8.Quản lý hãng hàng không.");
             System.out.println("    0.Quay lại trang chính.");
             System.out.println("Hãy nhập lựa chọn của bạn!");
             flag = input.nextInt();
-            if (flag > 7 || flag < 0) {
+            if (flag > 8 || flag < 0) {
                 System.out.println("Lựa chọn của bạn không hợp lệ,vui lòng nhập lại!");
                 continue;
             }
@@ -159,13 +183,10 @@ public class DSCB {
                     them();
                     break;
                 case 4:
-                    xoa();
+                    System.out.println("Chức năng đang phát triển");
                     break;
                 case 5:
-                    System.out.println("Nhập mã số chuyến bay cần xóa: ");
-                    input.nextLine();
-                    String cmp = input.nextLine();
-                    xoa(cmp);
+                    xoa();
                     break;
                 case 6:
 
@@ -208,6 +229,36 @@ public class DSCB {
                         System.out.println(ex);
                     }
                     // System.out.println("Du lieu chuyen bay da duoc lay thanh cong!");
+                    break;
+                case 8:
+                    QuanLyHangHangKhong quanLy = new QuanLyHangHangKhong();
+                    Scanner scanner = new Scanner(System.in);
+                    quanLy.docfile();
+                    int luaChon;
+                    do {
+                        quanLy.hienThiMenu();
+                        luaChon = scanner.nextInt();
+            
+                        switch (luaChon) {
+                            case 1:
+                                quanLy.hienThiDanhSachHang();
+                                break;
+                            case 2:
+                                quanLy.them();
+                                break;
+                            case 3:
+                                quanLy.xoa();
+                                break;
+                            case 0:
+                                System.out.println("Thoát khỏi chương trình.");
+                                break;
+                            default:
+                                System.out.println("Lựa chọn không hợp lệ. Hãy chọn lại.");
+                                break;
+                        }
+            
+                    } while (luaChon != 0);
+                    quanLy.ghifile();
                     break;
             }
         }

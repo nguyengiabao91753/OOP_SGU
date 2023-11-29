@@ -1,14 +1,19 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.Serializable;
 import java.util.Scanner;
 
 public class chuyenbay {
     private String machuyenbay;
+    private String mahangkhong;
     private String thoigiankhoihanh;
     private String diemxuatphat;
     private String diemden;
     private int soghe;
     public chuyenbay(){
         machuyenbay=" ";
+        mahangkhong = " ";
         thoigiankhoihanh=" ";
         diemxuatphat=" ";
         diemden=" ";
@@ -16,6 +21,7 @@ public class chuyenbay {
     }
     public chuyenbay(chuyenbay tmp){
         machuyenbay=tmp.machuyenbay;
+        mahangkhong = tmp.mahangkhong;
         thoigiankhoihanh=tmp.thoigiankhoihanh;
         diemxuatphat=tmp.diemxuatphat;
         diemden=tmp.diemden;
@@ -25,6 +31,32 @@ public class chuyenbay {
         Scanner input=new Scanner(System.in);
         System.out.println("Nhập mã chuyến bay: ");
         machuyenbay=input.nextLine();
+        System.out.println("Nhập mã hãng hàng không: ");
+        mahangkhong=input.nextLine();
+        //Kiểm tra mã đó có tồn tại trong file không
+        boolean flag=true;
+        while (flag) {
+            try {
+            BufferedReader fr = new BufferedReader(new FileReader("dataHanghangkhong.txt"));
+            String line = fr.readLine();
+            while (line != null) {
+                String[] arr = line.split(",");
+                if (mahangkhong.equals(arr[0])) {
+                    flag=false;
+                    break;
+                }
+                line = fr.readLine();
+            }
+            
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+            if (flag) {
+                System.out.println("Nhập hàng không không tồn tại,nhập lại.");
+                mahangkhong=input.nextLine();
+            }
+        }
+        
         System.out.println("Nhập thời gian khởi hành: ");
         thoigiankhoihanh=input.nextLine();
         System.out.println("Nhập điểm xuất phát bay: ");
@@ -36,15 +68,10 @@ public class chuyenbay {
         
     }
     public void xuat(){
-        System.out.printf("Mã chuyến bay: %s || Thời gian: %s || Điểm xuất phát: %s || Điểm đến: %s || Tổng số ghế: %d ||\n",machuyenbay,thoigiankhoihanh,diemxuatphat,diemden,soghe);
+        System.out.printf("Mã chuyến bay: %s || Mã hãng hàng không %s || Thời gian: %s || Điểm xuất phát: %s || Điểm đến: %s || Tổng số ghế: %d ||\n",machuyenbay,mahangkhong,thoigiankhoihanh,diemxuatphat,diemden,soghe);
     }
     public String getMachuyenbay() {
         return machuyenbay;
-    }
-    public static void main(String[] argv){
-        chuyenbay m1=new chuyenbay();
-        m1.nhap();
-        m1.xuat();
     }
     public String getThoigiankhoihanh() {
         return thoigiankhoihanh;
@@ -72,5 +99,11 @@ public class chuyenbay {
     }
     public void setSoghe(int soghe) {
         this.soghe = soghe;
+    }
+    public String getMahangkhong() {
+        return mahangkhong;
+    }
+    public void setMahangkhong(String mahangkhong) {
+        this.mahangkhong = mahangkhong;
     }
 }
