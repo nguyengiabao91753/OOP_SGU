@@ -30,7 +30,7 @@ class QuanLyHangHangKhong implements crud {
 
     public void xuat() {
         System.out.println("----- Danh Sách Hãng Hàng Không -----");
-        for (IXuat hang : danhSachHang) {
+        for (HangHangKhong hang : danhSachHang) {
             hang.xuat();
         }
     }
@@ -66,6 +66,8 @@ class QuanLyHangHangKhong implements crud {
         return chon;
     }
 
+    public void xoa(){}
+    
     public void xoa(DSCB dscb) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhập tên hãng hàng không cần xóa: ");
