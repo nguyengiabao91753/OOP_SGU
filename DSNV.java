@@ -91,7 +91,7 @@ class nhanVien extends nguoi {
 
 
 
-class DSNhanVien{
+class DSNhanVien implements crud {
     nhanVien[] dsnv;
     int n;
     Scanner sc = new Scanner(System.in);
@@ -124,30 +124,33 @@ class DSNhanVien{
     }
 
 
-
+    String[][] words = new String[100][];
+    int k;
     public void docFile(){
         try{
+            dsnv = new nhanVien[0];
+            n = 0; k = 0;
             File fin = new File("dataDSNguoi.txt");
         
             Scanner myReader = new Scanner(fin);
 
             while(myReader.hasNextLine()){
                 String data = myReader.nextLine();
-                String[] words = data.split(",");
-
-                if(Integer.parseInt(words[0]) == 1){
+                words[k] = data.split(",");
+                if(Integer.parseInt(words[k][0]) == 1){
                     dsnv = Arrays.copyOf(dsnv,n+1);
                     dsnv[n] = new nhanVien();
 
-                    dsnv[n].setMaNV(words[1]);
-                    dsnv[n].setHoTen(words[2]);
-                    dsnv[n].setGioiTinh(words[3]);
-                    dsnv[n].setDiaChi(words[4]);
-                    dsnv[n].setSdt(words[5]);
-                    dsnv[n].setLuong(Integer.parseInt(words[6]));
+                    dsnv[n].setMaNV(words[k][1]);
+                    dsnv[n].setHoTen(words[k][2]);
+                    dsnv[n].setGioiTinh(words[k][3]);
+                    dsnv[n].setDiaChi(words[k][4]);
+                    dsnv[n].setSdt(words[k][5]);
+                    dsnv[n].setLuong(Integer.parseInt(words[k][6]));
 
                     n++;
                 }
+                k++;
             }
             myReader.close();
         }
@@ -161,10 +164,16 @@ class DSNhanVien{
 
     public void ghiFile(){
         try{
-            FileWriter myWriter = new FileWriter("dataDSNguoi.txt",true);
+            FileWriter myWriter = new FileWriter("dataDSNguoi.txt");
             for(nhanVien nv : dsnv){
                 myWriter.write("1," + nv.getMaNV() + "," + nv.getHoTen() + "," + nv.getGioiTinh() + "," + nv.getDiaChi() + ","
                               + nv.getSdt() + "," + nv.getLuong() + "\n");
+            }
+            for(int i = 0; i < k; i++){
+                if(Integer.parseInt(words[i][0]) == 0){
+                    myWriter.write("0," + words[i][1] + "," + words[i][2] + "," + words[i][3] + "," + words[i][4] + ","
+                                  + words[i][5] + "\n");
+                }
             }
             myWriter.close();
             System.out.println("\n\nGhi File thanh cong");
@@ -196,12 +205,12 @@ class DSNhanVien{
 
 
 
-    public void timKiem(){
+    public void tim(){
         System.out.println("\n\nNhap ma nhan vien can tim: ");
         String tmp = sc.nextLine();
-        timKiem(tmp);
+        tim(tmp);
     }
-    public void timKiem(String ma){
+    public void tim(String ma){
         for(int i = 0; i < n; i++)
             if( dsnv[i].getMaNV().equals(ma) ){
                 dsnv[i].xuat();
@@ -326,7 +335,7 @@ class QuanLyNV {
                     ds.xoa();
                     break;
                 case 5:
-                    ds.timKiem();
+                    ds.tim();
                     break;
                 case 6:
                     ds.xuat();

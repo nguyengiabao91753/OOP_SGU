@@ -10,12 +10,13 @@ public class program {
         Scanner nhap = new Scanner(System.in);
         quanly_ve danhsachve = new quanly_ve();
         DSCB tmp = new DSCB();
-        tmp.docfile();
-        danhsachve.docfile();
         quanly_hoadon quanlyhoadon = new quanly_hoadon();
-
+        quanlyhoadon.docfile();
+        // tmp.docfile(); khỏi đọc file vì đã đọc rồi
+        
+        
         do {
-            System.out.println("Chủ đề: Quản lý bán vé máy bay ");
+            System.out.println("------Quản lý bán vé máy bay------");
             System.out.println("    1. Quản lý khách hàng");
             System.out.println("    2. Quản lý nhân viên");
             System.out.println("    3. Quản lý Tài khoản");
@@ -46,11 +47,11 @@ public class program {
                     break;
                 case 4:
                     System.out.println("Quản lý Chuyến bay");
-
                     tmp.quanlyDSCB();
                     break;
                 case 5:
                     while (again == 1) {
+                        danhsachve.docfile();
                         System.out.println("    Quản lý vé chuyến bay");
                         System.out.println(">---------------------------<");
                         System.out.println("    1. Thêm vé");
@@ -71,6 +72,7 @@ public class program {
                                     for (ve ve : danhsachve.getDanhsachve()) {
                                         if (ve.getTrangthai().equals("da thanh toan")) {
                                             quanlyhoadon.them(ve);
+                                            quanlyhoadon.ghifile();
                                         }
                                     }
                                     break;
@@ -99,10 +101,11 @@ public class program {
                         System.out.println("Bạn có muốn chọn lại?  1: Có / 2: Không");
                         again = nhap.nextInt();
                     }
+                    danhsachve.ghifile();
                     break;
                 case 8:
                     again = 1;
-
+                        quanlyhoadon.docfile();
                     while (again == 1) {
                         System.out.println("    Quản lý hóa đơn");
                         System.out.println(">---------------------------<");
@@ -140,6 +143,7 @@ public class program {
                         System.out.println("Bạn có muốn chọn lại?  1: Có / 2: Không");
                         again = nhap.nextInt();
                     }
+                    quanlyhoadon.ghifile();
                     break;
                 case 9:
                     try {
@@ -158,7 +162,7 @@ public class program {
         } while (chay == 1);
 
         tmp.ghifile();
-        danhsachve.ghifile();
+        
         nhap.close();
     }
 

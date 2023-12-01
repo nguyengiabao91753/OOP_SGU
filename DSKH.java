@@ -77,9 +77,9 @@ class khachHang extends nguoi {
 
 
 
-class DSKhachHang{
-    khachHang[] dskh;
-    int n;
+class DSKhachHang implements crud {
+    private khachHang[] dskh;
+    private int n;
     Scanner sc = new Scanner(System.in);
 
 
@@ -113,32 +113,32 @@ class DSKhachHang{
     }
 
 
-
+    String[][] words = new String[100][];
+    int k;
     public void docFile(){
         try{
             dskh = new khachHang[0];
-            n = 0;
-
+            n = 0; k = 0;
             File fin = new File("dataDSNguoi.txt");
         
             Scanner myReader = new Scanner(fin);
 
             while(myReader.hasNextLine()){
                 String data = myReader.nextLine();
-                String[] words = data.split(",");
-
-                if(Integer.parseInt(words[0]) == 0){
+                words[k] = data.split(",");
+                if(Integer.parseInt(words[k][0]) == 0){
                     dskh = Arrays.copyOf(dskh,n+1);
                     dskh[n] = new khachHang();
 
-                    dskh[n].setMaKH(words[1]);
-                    dskh[n].setHoTen(words[2]);
-                    dskh[n].setGioiTinh(words[3]);
-                    dskh[n].setDiaChi(words[4]);
-                    dskh[n].setSdt(words[5]);
+                    dskh[n].setMaKH(words[k][1]);
+                    dskh[n].setHoTen(words[k][2]);
+                    dskh[n].setGioiTinh(words[k][3]);
+                    dskh[n].setDiaChi(words[k][4]);
+                    dskh[n].setSdt(words[k][5]);
 
                     n++;
                 }
+                k++;
             }
             myReader.close();
         }
@@ -152,13 +152,19 @@ class DSKhachHang{
 
     public void ghiFile(){
         try{
-            FileWriter myWriter = new FileWriter("dataDSNguoi.txt",true);
+            FileWriter myWriter = new FileWriter("dataDSNguoi.txt");
             for(khachHang kh : dskh){
                 myWriter.write("0," + kh.getMaKH() + "," + kh.getHoTen() + "," + kh.getGioiTinh() + "," + kh.getDiaChi() + ","
                               + kh.getSdt() + "\n");
             }
+            for(int i = 0; i < k; i++){
+                if(Integer.parseInt(words[i][0]) == 1){
+                    myWriter.write("1," + words[i][1] + "," + words[i][2] + "," + words[i][3] + "," + words[i][4] + ","
+                                  + words[i][5] + "," + words[i][6] + "\n");
+                }
+            }
             myWriter.close();
-            System.out.println("\n\nGhi File thanh cong");
+            
         }
         catch (IOException e) {
             System.out.println("An error occurred.");
@@ -177,12 +183,12 @@ class DSKhachHang{
 
 
 
-    public void timKiem(){
+    public void tim(){
         System.out.println("\n\nNhap ma khach hang can tim: ");
         String tmp = sc.nextLine();
-        timKiem(tmp);
+        tim(tmp);
     }
-    public void timKiem(String ma){
+    public void tim(String ma){
         for(int i = 0; i < n; i++)
             if( dskh[i].getMaKH().equals(ma) ){
                 dskh[i].xuat();
@@ -197,6 +203,12 @@ class DSKhachHang{
         dskh[n] = new khachHang();
         System.out.println("\n\nNhap thong tin khach hang duoc them: ");
         dskh[n].nhap();
+        n++;
+    }
+
+    public void them(khachHang khachHang){
+        dskh = Arrays.copyOf(dskh,n+1);
+        dskh[n] =khachHang;
         n++;
     }
 
@@ -310,7 +322,7 @@ class QuanLyKH {
                     ds.xoa();
                     break;
                 case 5:
-                    ds.timKiem();
+                    ds.tim();
                     break;
                 case 6:
                     ds.xuat();
@@ -335,5 +347,6 @@ class DSKH {
     public static void main(String[] args) throws FileNotFoundException {
         QuanLyKH ql1 = new QuanLyKH();
         ql1.menu();
+        
     }
 }
