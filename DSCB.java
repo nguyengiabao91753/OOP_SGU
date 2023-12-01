@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 // import javafx.stage.Window;
 
-public class DSCB implements crud{
+public class DSCB implements crud {
     int sochuyenbay;
     chuyenbay[] danhsachchuyenbay;
 
@@ -17,10 +17,11 @@ public class DSCB implements crud{
         this.sochuyenbay = sochuyenbay;
         this.danhsachchuyenbay = danhsachchuyenbay;
     }
-    
+
     public chuyenbay[] getDanhsachchuyenbay() {
         return danhsachchuyenbay;
     }
+
     public void setDanhsachchuyenbay(chuyenbay[] danhsachchuyenbay) {
         this.danhsachchuyenbay = danhsachchuyenbay;
     }
@@ -47,35 +48,38 @@ public class DSCB implements crud{
         danhsachchuyenbay[sochuyenbay].nhap();
         sochuyenbay++;
     }
-    public void sua(){
+
+    public void sua() {
         String mabay;
-        Scanner input=new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("Nhập mã chuyến bay cần thay đổi: ");
-        mabay=input.nextLine();
-        for(int i=0;i<sochuyenbay;i++){
-            if(danhsachchuyenbay[i].getMachuyenbay().equals(mabay)){
+        mabay = input.nextLine();
+        for (int i = 0; i < sochuyenbay; i++) {
+            if (danhsachchuyenbay[i].getMachuyenbay().equals(mabay)) {
                 danhsachchuyenbay[i].nhap();
                 break;
             }
         }
         System.out.println("Không tìm thấy mã chuyến bay cần chỉnh sửa.");
     }
-    public void tim(){
+
+    public void tim() {
         String mabay;
-        Scanner input=new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("Nhập mã chuyến bay cần tìm: ");
-        mabay=input.nextLine();
-        for(int i=0;i<sochuyenbay;i++){
-            if(danhsachchuyenbay[i].getMachuyenbay().equals(mabay)){
+        mabay = input.nextLine();
+        for (int i = 0; i < sochuyenbay; i++) {
+            if (danhsachchuyenbay[i].getMachuyenbay().equals(mabay)) {
                 danhsachchuyenbay[i].xuat();
             }
         }
         System.out.println("Không tìm thấy mã chuyến bay cần tìm.");
     }
+
     public void xoa() {
-        Scanner input=new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("Nhập mã chuyến bay cần xóa: ");
-        String ma=input.nextLine();
+        String ma = input.nextLine();
         int flag = 0;
         for (int i = 0; i < sochuyenbay; i++) {
             if (danhsachchuyenbay[i].getMachuyenbay().equals(ma)) {
@@ -95,22 +99,38 @@ public class DSCB implements crud{
         }
     }
 
+    public void xoa(String macb) {
+        for (int i = 0; i < sochuyenbay; i++) {
+            if (danhsachchuyenbay[i].getMachuyenbay().equals(macb)) {
+                System.out.println("Thuc hien xoa chuyen bay:");
+                danhsachchuyenbay[i].xuat();
+                for (int j = i; j < sochuyenbay; j++) {
+                    danhsachchuyenbay[j] = danhsachchuyenbay[j + 1];
+                }
+                
+                sochuyenbay--;
+                break;
+            }
+
+        }
+    }
+
     public void docfile() throws Exception {
-        QuanLyHangHangKhong newQuan =new QuanLyHangHangKhong();
+        QuanLyHangHangKhong newQuan = new QuanLyHangHangKhong();
         newQuan.docFile();
         try {
             BufferedReader sc = new BufferedReader(new FileReader("dataDSCB.txt"));
             String line = sc.readLine();
             sochuyenbay = 0;
             while (line != null) {
-            boolean flag=true;
+                boolean flag = true;
                 String[] arr = line.split(",");
                 danhsachchuyenbay[sochuyenbay] = new chuyenbay();
                 danhsachchuyenbay[sochuyenbay].setMachuyenbay(arr[0]);
-                for(HangHangKhong tmp : newQuan.getDanhSachHang()){
-                    if(arr[1].equals(tmp.getMaHang())){
+                for (HangHangKhong tmp : newQuan.getDanhSachHang()) {
+                    if (arr[1].equals(tmp.getMaHang())) {
                         danhsachchuyenbay[sochuyenbay].setHang(tmp);
-                        flag=true;
+                        flag = true;
                         break;
                     }
                 }
@@ -132,7 +152,7 @@ public class DSCB implements crud{
             FileWriter fw = new FileWriter("dataDSCB.txt");
             for (int i = 0; i < sochuyenbay; i++) {
                 fw.write(danhsachchuyenbay[i].getMachuyenbay() + ","
-                + danhsachchuyenbay[i].getHang().getMaHang() +","
+                        + danhsachchuyenbay[i].getHang().getMaHang() + ","
                         + danhsachchuyenbay[i].getThoigiankhoihanh() + ","
                         + danhsachchuyenbay[i].getDiemxuatphat() + "," + danhsachchuyenbay[i].getDiemden()
                         + "," + danhsachchuyenbay[i].getSoghe()
@@ -152,7 +172,7 @@ public class DSCB implements crud{
 
     public void quanlyDSCB() throws Exception {
         int flag;
-        QuanLyHangHangKhong dsHangHangKhong=new QuanLyHangHangKhong();
+        QuanLyHangHangKhong dsHangHangKhong = new QuanLyHangHangKhong();
         dsHangHangKhong.docFile();
         docfile();
         while (true) {
@@ -163,9 +183,9 @@ public class DSCB implements crud{
             System.out.println("    3.Thêm chuyến bay vào danh sách.");
             System.out.println("    4.Xem danh sach hãng hàng không.");
             System.out.println("    5.Xóa chuyến bay theo mã số chuyến.");
-            // System.out.println("    6.Đọc dữ liệu chuyến bay từ File ra mảng.");
-            // System.out.println("    7.Lưu dữ liệu.");
-            // System.out.println("    8.Quản lý hãng hàng không.");
+            // System.out.println(" 6.Đọc dữ liệu chuyến bay từ File ra mảng.");
+            // System.out.println(" 7.Lưu dữ liệu.");
+            // System.out.println(" 8.Quản lý hãng hàng không.");
             System.out.println("    0.Quay lại trang chính.");
             System.out.println("Hãy nhập lựa chọn của bạn!");
             flag = input.nextInt();

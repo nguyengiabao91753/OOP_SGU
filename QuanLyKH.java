@@ -15,10 +15,6 @@ class khachHang extends nguoi {
 
 
 
-    public void nhap(){
-        super.nhap();
-    }
-
     @Override public void xuat(){
         System.out.println("Ma khach hang: " + makh);
         System.out.println("Ho ten khach hang: " + hoTen);
@@ -75,18 +71,18 @@ class khachHang extends nguoi {
 
 
 
-class DSkhachHang implements crud {
+class DSKhachHang implements crud {
     private khachHang[] dskh;
     private int n;
     Scanner sc = new Scanner(System.in);
 
 
 
-    public DSkhachHang(){
+    public DSKhachHang(){
         dskh = new khachHang[0];
         n = 0;
     }
-    public DSkhachHang(khachHang[] ds, int nn){
+    public DSKhachHang(khachHang[] ds, int nn){
         dskh = Arrays.copyOf(ds,nn);
         n = nn;
     }
@@ -103,11 +99,11 @@ class DSkhachHang implements crud {
         System.out.println("Nhap so luong khach hang: ");
         n = sc.nextInt(); sc.nextLine();
         dskh = new khachHang[n];
-        for(int i=0; i<n; i++){
+        for(int i = 0; i < n; i++){
             System.out.println("\nNhap thong tin khach hang thu " + (i+1) + ": ");
             dskh[i] = new khachHang();
             dskh[i].nhap();
-            dskh[i].setMakh("kh"+(i+1));
+            dskh[i].setMakh("kh" + (i+1));
         }
     }
 
@@ -199,27 +195,34 @@ class DSkhachHang implements crud {
     public void them(){
         dskh = Arrays.copyOf(dskh,n+1);
         dskh[n] = new khachHang();
-        dskh[n].setMakh("kh"+(n+1));
+        dskh[n].setMakh("kh" + (n+1));
         System.out.println("\n\nNhap thong tin khach hang duoc them: ");
         dskh[n].nhap();
         n++;
     }
 
-    public void them(khachHang khachHang){
+    public void them(khachHang kh){
         dskh = Arrays.copyOf(dskh,n+1);
-        dskh[n] =khachHang;
-        dskh[n].setMakh("kh"+(n+1));
+        dskh[n] = kh;
+        dskh[n].setMakh("kh" + (n+1));
         n++;
     }
 
 
 
-    public void xoa(){
+    public void xoa() throws Exception{
+        //Xoa khach hang
         System.out.println("\n\nNhap ma khach hang can xoa: ");
         String tmp = sc.nextLine();
         xoa(tmp);
+
+        //Tim khach hang vua xoa trong danh sach ve va xoa lun ve do
+        quanly_ve danhsachve = new quanly_ve();
+        danhsachve.docfile();
+        danhsachve.xoa_Makh(tmp);
+        danhsachve.ghifile();
     }
-    public void xoa(String ma){
+    public void xoa(String ma) throws Exception{
         for(int i = 0; i < n; i++){
             if( dskh[i].getMakh().equals(ma) ){
                 for(int j=i; j<n-1; j++){
@@ -288,12 +291,12 @@ class DSkhachHang implements crud {
     }
 }
 
-class QuanLykh {
-    DSkhachHang ds = new DSkhachHang();
+class QuanLyKH {
+    DSKhachHang ds = new DSKhachHang();
     Scanner sc = new Scanner(System.in);
 
 
-    public void menu(){
+    public void menu() throws Exception {
         int chon;
         ds.docFile();
         do{
@@ -336,11 +339,11 @@ class QuanLykh {
         ds.ghiFile();
     }
 }
-
-class DSkh {
-    public static void main(String[] args) throws FileNotFoundException {
-        QuanLykh ql1 = new QuanLykh();
+/*
+class DSKH {
+    public static void main(String[] args) throws FileNotFoundException, Exception {
+        QuanLyKH ql1 = new QuanLyKH();
         ql1.menu();
-        
     }
 }
+*/

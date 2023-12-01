@@ -1,32 +1,30 @@
 import java.util.*;
 import java.io.*;
 class nhanVien extends nguoi {
-    private String maNV;
+    private String manv;
     private int luong;
 
 
     public nhanVien(){
-        maNV = "";
+        manv = "";
         luong = 0;
     }
-    public nhanVien(String maNV, String hoTen, String gioiTinh, String diaChi, String sdt, int luong){
+    public nhanVien(String manv, String hoTen, String gioiTinh, String diaChi, String sdt, int luong){
         super(hoTen,gioiTinh,diaChi,sdt);
-        this.maNV = maNV;
+        this.manv = manv;
         this.luong = luong;
     }
 
 
 
     public void nhap(){
-        System.out.print("Nhap ma nhan vien: ");
-        maNV = sc.nextLine();
         super.nhap();
         System.out.print("Nhap muc luong: ");
         luong = sc.nextInt(); sc.nextLine();
     }
 
     @Override public void xuat(){
-        System.out.println("Ma nhan vien: " + maNV);
+        System.out.println("Ma nhan vien: " + manv);
         System.out.println("Ho ten nhan vien: " + hoTen);
         System.out.println("Gioi tinh: " + gioiTinh);
         System.out.println("Dia chi: " + diaChi);
@@ -36,11 +34,11 @@ class nhanVien extends nguoi {
 
 
 
-    public String getMaNV(){
-        return maNV;
+    public String getManv(){
+        return manv;
     }
-    public void setMaNV(String maNV){
-        this.maNV = maNV;
+    public void setManv(String manv){
+        this.manv = manv;
     }
 
 
@@ -120,6 +118,7 @@ class DSNhanVien implements crud {
             System.out.println("Nhap thong tin nhan vien thu " + (i+1) + ": ");
             dsnv[i] = new nhanVien();
             dsnv[i].nhap();
+            dsnv[i].setManv("nv" + (i+1));
         }
     }
 
@@ -141,7 +140,7 @@ class DSNhanVien implements crud {
                     dsnv = Arrays.copyOf(dsnv,n+1);
                     dsnv[n] = new nhanVien();
 
-                    dsnv[n].setMaNV(words[k][1]);
+                    dsnv[n].setManv(words[k][1]);
                     dsnv[n].setHoTen(words[k][2]);
                     dsnv[n].setGioiTinh(words[k][3]);
                     dsnv[n].setDiaChi(words[k][4]);
@@ -166,7 +165,7 @@ class DSNhanVien implements crud {
         try{
             FileWriter myWriter = new FileWriter("dataDSNguoi.txt");
             for(nhanVien nv : dsnv){
-                myWriter.write("1," + nv.getMaNV() + "," + nv.getHoTen() + "," + nv.getGioiTinh() + "," + nv.getDiaChi() + ","
+                myWriter.write("1," + nv.getManv() + "," + nv.getHoTen() + "," + nv.getGioiTinh() + "," + nv.getDiaChi() + ","
                               + nv.getSdt() + "," + nv.getLuong() + "\n");
             }
             for(int i = 0; i < k; i++){
@@ -198,11 +197,18 @@ class DSNhanVien implements crud {
     public void them(){
         dsnv = Arrays.copyOf(dsnv,n+1);
         dsnv[n] = new nhanVien();
+        dsnv[n].setManv("nv" + (n+1));
         System.out.println("\n\nNhap thong tin nhan vien duoc them: ");
         dsnv[n].nhap();
         n++;
     }
 
+    public void them(nhanVien nv){
+        dsnv = Arrays.copyOf(dsnv,n+1);
+        dsnv[n] = nv;
+        dsnv[n].setManv("nv" + (n+1));
+        n++;
+    }
 
 
     public void tim(){
@@ -212,7 +218,7 @@ class DSNhanVien implements crud {
     }
     public void tim(String ma){
         for(int i = 0; i < n; i++)
-            if( dsnv[i].getMaNV().equals(ma) ){
+            if( dsnv[i].getManv().equals(ma) ){
                 dsnv[i].xuat();
                 break;
             }
@@ -227,7 +233,7 @@ class DSNhanVien implements crud {
     }
     public void xoa(String ma){
         for(int i = 0; i < n; i++){
-            if( dsnv[i].getMaNV().equals(ma) ){
+            if( dsnv[i].getManv().equals(ma) ){
                 for(int j=i; j<n-1; j++){
                     dsnv[j] = dsnv[j+1];
                 }
@@ -247,7 +253,7 @@ class DSNhanVien implements crud {
     }
     public void sua(String ma){
         for(int i = 0; i < n; i++)
-            if( dsnv[i].getMaNV().equals(ma) ){
+            if( dsnv[i].getManv().equals(ma) ){
                 int chon;
                 do{
                     System.out.println("\n>-----------------------------<");
@@ -357,10 +363,11 @@ class QuanLyNV {
         ds.ghiFile();
     }
 }
-
+/* 
 class DSNV {
     public static void main(String[] args){
         QuanLyNV ql1 = new QuanLyNV();
         ql1.menu();
     }
 }
+*/
