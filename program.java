@@ -30,13 +30,12 @@ public class program {
             switch (chon) {
                 case 1:
                     System.out.println("Quản lý khách hàng:");
-                    QuanLykh qlkh = new QuanLykh();
+                    QuanLyKH qlkh = new QuanLyKH();
                     qlkh.menu();
                     break;
                 case 2:
                     System.out.println("Quản lý nhân viên:");
                     QuanLyNV qlnv = new QuanLyNV();
-
                     qlnv.menu();
                     break;
                 case 3:

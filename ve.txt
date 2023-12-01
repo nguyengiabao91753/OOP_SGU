@@ -1,3 +1,0 @@
-ve1,67,kh6,cb1,chua thanh toan
-ve2,34,kh5,cb6,chua thanh toan
-ve3,758333,kh100,cb1,da thanh toan
