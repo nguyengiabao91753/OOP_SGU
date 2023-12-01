@@ -308,6 +308,7 @@ class QuanLyNV {
 
     public void menu(){
         int chon;
+        ds.docFile();
         do{
             System.out.println("\n>Menu-------------------------<");
             System.out.println("1 - Tao danh sach nhan vien moi");
@@ -353,6 +354,7 @@ class QuanLyNV {
             }
             System.out.println("\n>-----------------------------<");
         }while(chon != 0);
+        ds.ghiFile();
     }
 }
 

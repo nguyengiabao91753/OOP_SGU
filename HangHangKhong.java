@@ -9,7 +9,7 @@ interface IXuat {
     void xuat();
 }
 
-class HangHangKhong implements IXuat {
+public class HangHangKhong implements IXuat {
     private String tenHang;
     private String maHang;
 
@@ -27,8 +27,8 @@ class HangHangKhong implements IXuat {
     }
 
     public void xuat() {
-        System.out.printf("Tên hãng hàng không: %s\n", tenHang);
         System.out.printf("Mã hãng hàng không: %s\n", maHang);
+        System.out.printf("Tên hãng hàng không: %s\n", tenHang);
     }
 
     public String getTenHang() {

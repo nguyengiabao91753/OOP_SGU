@@ -8,13 +8,7 @@ public class program {
         int luachon;
         int again = 1;
         Scanner nhap = new Scanner(System.in);
-        quanly_ve danhsachve = new quanly_ve();
-        DSCB tmp = new DSCB();
-        quanly_hoadon quanlyhoadon = new quanly_hoadon();
-        quanlyhoadon.docfile();
-        tmp.docfile();
-        
-        
+
         do {
             System.out.println("------Quản lý bán vé máy bay------");
             System.out.println("    1. Quản lý khách hàng");
@@ -22,11 +16,10 @@ public class program {
             System.out.println("    3. Quản lý Tài khoản");
             System.out.println("    4. Quản lý Chuyến bay");
             System.out.println("    5. Quản lý Vé");
-            System.out.println("    6. Quản lý Chỗ ngồi");
-            System.out.println("    7. Quản lý Hãng hàng không");
-            System.out.println("    8. Quản lý Hóa đơn");
-            System.out.println("    9. Thống kê doanh thu");
-            System.out.println("    10. Thoát");
+            System.out.println("    6. Quản lý Hãng hàng không");
+            System.out.println("    7. Quản lý Hóa đơn");
+            System.out.println("    8. Thống kê doanh thu");
+            System.out.println("    9. Thoát");
             System.out.println(">---------------------------------------<");
             System.out.println("Nhập lựa chọn");
             int chon = inp.nextInt();
@@ -37,22 +30,62 @@ public class program {
             switch (chon) {
                 case 1:
                     System.out.println("Quản lý khách hàng:");
-                    QuanLyKH qlkh = new QuanLyKH();
+                    QuanLykh qlkh = new QuanLykh();
                     qlkh.menu();
                     break;
                 case 2:
                     System.out.println("Quản lý nhân viên:");
                     QuanLyNV qlnv = new QuanLyNV();
+
                     qlnv.menu();
                     break;
+                case 3:
+                    QuanLyUser quanLyuser = new QuanLyUser();
+                    quanLyuser.docFile();
+                    do {
+                        quanLyuser.hienThiMenu();
+                        System.out.print("Nhập lựa chọn của bạn: ");
+                        luachon = inp.nextInt();
+                        inp.nextLine();
+
+                        switch (luachon) {
+                            case 1:
+                                quanLyuser.xuat();
+                                break;
+                            case 2:
+                                quanLyuser.them();
+                                break;
+                            case 3:
+                                quanLyuser.sua();
+                                break;
+                            case 4:
+                                quanLyuser.xoa();
+                                break;
+                            case 5:
+                                quanLyuser.tim();
+                                break;
+                            case 0:
+                                System.out.println("Thoát khỏi chương trình.");
+                                break;
+                            default:
+                                System.out.println("Lựa chọn không hợp lệ. Hãy chọn lại.");
+                                break;
+                        }
+                    } while (luachon != 0);
+                    quanLyuser.ghiFile();
+                    break;
                 case 4:
+                    DSCB tmp = new DSCB();
+                    tmp.docfile();
                     System.out.println("Quản lý Chuyến bay");
 
                     tmp.quanlyDSCB();
+                    tmp.ghifile();
                     break;
                 case 5:
+                    quanly_ve danhsachve = new quanly_ve();
+                    danhsachve.docfile();
                     while (again == 1) {
-                        danhsachve.docfile();
                         System.out.println("    Quản lý vé chuyến bay");
                         System.out.println(">---------------------------<");
                         System.out.println("    1. Thêm vé");
@@ -70,10 +103,12 @@ public class program {
                                 case 1:
 
                                     danhsachve.them();
+                                    quanly_hoadon quanly_hoadon = new quanly_hoadon();
+                                    quanly_hoadon.docfile();
                                     for (ve ve : danhsachve.getDanhsachve()) {
                                         if (ve.getTrangthai().equals("da thanh toan")) {
-                                            quanlyhoadon.them(ve);
-                                            quanlyhoadon.ghifile();
+                                            quanly_hoadon.them(ve);
+                                            quanly_hoadon.ghifile();
                                         }
                                     }
                                     break;
@@ -104,9 +139,46 @@ public class program {
                     }
                     danhsachve.ghifile();
                     break;
-                case 8:
+                case 6:
+                    QuanLyHangHangKhong quanLyhhk = new QuanLyHangHangKhong();
+                    quanLyhhk.docFile();
+                    do {
+                        quanLyhhk.hienThiMenu();
+                        System.out.print("Nhập lựa chọn của bạn: ");
+                        luachon = inp.nextInt();
+                        inp.nextLine();
+
+                        switch (luachon) {
+                            case 1:
+                                quanLyhhk.xuat();
+                                break;
+                            case 2:
+                                quanLyhhk.them();
+                                break;
+                            case 3:
+                                quanLyhhk.xoa();
+                                break;
+                            case 4:
+                                quanLyhhk.sua();
+                                break;
+                            case 5:
+                                quanLyhhk.tim();
+                                break;
+                            case 0:
+                                System.out.println("Thoát khỏi chương trình.");
+                                break;
+                            default:
+                                System.out.println("Lựa chọn không hợp lệ. Hãy chọn lại.");
+                                break;
+                        }
+
+                    } while (luachon != 0);
+                    quanLyhhk.ghiFile();
+                    break;
+                case 7:
+                    quanly_hoadon quanlyhoadon = new quanly_hoadon();
                     again = 1;
-                        quanlyhoadon.docfile();
+                    quanlyhoadon.docfile();
                     while (again == 1) {
                         System.out.println("    Quản lý hóa đơn");
                         System.out.println(">---------------------------<");
@@ -146,7 +218,7 @@ public class program {
                     }
                     quanlyhoadon.ghifile();
                     break;
-                case 9:
+                case 8:
                     try {
                         quanly_hoadon.thongke();
                         System.out.println("\n");
@@ -154,7 +226,7 @@ public class program {
                         e.printStackTrace();
                     }
                     break;
-                case 10:
+                case 9:
                     chay = 0;
                     break;
                 default:
@@ -162,8 +234,6 @@ public class program {
             }
         } while (chay == 1);
 
-        tmp.ghifile();
-        
         nhap.close();
     }
 
