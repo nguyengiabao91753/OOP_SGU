@@ -8,6 +8,7 @@ public class ve {
     private String trangthai;
     private khachHang khachHang;
     private chuyenbay chuyenbay;
+    private String status;
 
     public ve() {
         ma_ve = "";
@@ -15,6 +16,7 @@ public class ve {
         trangthai = "";
         khachHang = new khachHang();
         chuyenbay = new chuyenbay();
+        status = "show";
     }
 
     public ve(String ma_ve, int gia, String trangthai, khachHang khachHang, chuyenbay chuyenbay) {
@@ -64,11 +66,17 @@ public class ve {
     public void setChuyenbay(chuyenbay chuyenbay) {
         this.chuyenbay = chuyenbay;
     }
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public void nhap() {
         Scanner nhap = new Scanner(System.in);
-        System.out.println("Nhập Mã vé:");
-        ma_ve = nhap.nextLine();
+        // System.out.println("Nhập Mã vé:");
+        // ma_ve = nhap.nextLine();
         System.out.println("Nhập giá vé:");
         gia = nhap.nextInt();
         nhap.nextLine();
@@ -99,6 +107,7 @@ class quanly_ve implements crud {
 
     public quanly_ve() {
         danhsachve = new ArrayList<>();
+        
     }
 
     public quanly_ve(List<ve> danhsachve) {
@@ -118,11 +127,11 @@ class quanly_ve implements crud {
         return 0;
     }
 
-    static int checkkhachhang(ve vemoi, DSKhachHang dskh) throws Exception {
-        String makh = vemoi.getkhachHang().getMaKH();
+    static int checkkhachhang(ve vemoi, DSkhachHang dskh) throws Exception {
+        String makh = vemoi.getkhachHang().getMakh();
 
         for (khachHang khachHang : dskh.getDskh()) {
-            if (khachHang.getMaKH().equals(makh) && khachHang != vemoi.getkhachHang()) {
+            if (khachHang.getMakh().equals(makh) && khachHang != vemoi.getkhachHang()) {
                 return 1; // ->nhập lại mã->thêm khách hàng mới vào dskh
             } else if (khachHang == vemoi.getkhachHang()) {
                 return 0; // ->thì ok
@@ -134,33 +143,35 @@ class quanly_ve implements crud {
     public void them() throws Exception {
         ve vemoi = new ve();
         vemoi.nhap();
-        // check khach hang
-        DSKhachHang dskh = new DSKhachHang();
+        // set khach hang
+        DSkhachHang dskh = new DSkhachHang();
         dskh.docFile();
-        
+        dskh.them(vemoi.getkhachHang());
 
-        if (checkkhachhang(vemoi, dskh) == 1) {
-            while (checkkhachhang(vemoi, dskh) == 1) {
-                System.out.println("Mã khách hàng đã tồn tại! Vui lòng nhập lại");
-                String makh = nhap.nextLine();
-                vemoi.getkhachHang().setMaKH(makh);
-            }
-            dskh.them(vemoi.getkhachHang());
-            dskh.ghiFile();
-        } else if (checkkhachhang(vemoi, dskh) == 2) {
-            dskh.them(vemoi.getkhachHang());
-            dskh.ghiFile();
+        // if (checkkhachhang(vemoi, dskh) == 1) {
+        //     while (checkkhachhang(vemoi, dskh) == 1) {
+        //         System.out.println("Mã khách hàng đã tồn tại! Vui lòng nhập lại");
+        //         String makh = nhap.nextLine();
+        //         vemoi.getkhachHang().setMakh(makh);
+        //     }
+        //     dskh.them(vemoi.getkhachHang());
+        //     dskh.ghiFile();
+        // } else if (checkkhachhang(vemoi, dskh) == 2) {
+        //     dskh.them(vemoi.getkhachHang());
+        //     dskh.ghiFile();
             
-        }
-        // check mã vé
-        String ma = vemoi.getMa_ve();
-        for (ve ve : danhsachve) {
-            while (ve.getMa_ve().equals(ma)) {
-                System.out.println("Mã vé đã tồn tại! Vui lòng nhập lại mã vé");
-                ma = nhap.nextLine();
-                vemoi.setMa_ve(ma);
-            }
-        }
+        // }
+        // Set mã vé
+        String ma = "ve"+ (danhsachve.size()+1);
+        vemoi.setMa_ve(ma);
+        // String ma = vemoi.getMa_ve();
+        // for (ve ve : danhsachve) {
+        //     while (ve.getMa_ve().equals(ma)) {
+        //         System.out.println("Mã vé đã tồn tại! Vui lòng nhập lại mã vé");
+        //         ma = nhap.nextLine();
+        //         vemoi.setMa_ve(ma);
+        //     }
+        // }
 
         // check chuyến bay
         while (checkmachuyenbay(vemoi) == 0) {
@@ -187,20 +198,10 @@ class quanly_ve implements crud {
                 System.out.println("Nhập vé mới để sửa");
                 vemoi.nhap();
 
-                // check mã vé
-                String ma = vemoi.getMa_ve();
-                for (ve kiemve : danhsachve) {
-                    while (kiemve.getMa_ve().equals(ma)) {
-                        System.out.println("Mã vé đã tồn tại! Vui lòng nhập lại mã vé");
-                        ma = nhap.nextLine();
-                        vemoi.setMa_ve(ma);
-                    }
-                }
-
                 // check chuyến bay
                 while (checkmachuyenbay(vemoi) == 0) {
                     System.out.println("Mã chuyến bay không tồn tại! Vui lòng nhập lại mã chuyến bay: ");
-                    ma = nhap.nextLine();
+                    String ma = nhap.nextLine();
                     vemoi.getChuyenbay().setMachuyenbay(ma);
                 }
 
@@ -222,7 +223,7 @@ class quanly_ve implements crud {
         int co = 0;
         for (ve ve : danhsachve) {
             if (ve.getMa_ve().equals(ma_xoa)) {
-                danhsachve.remove(ve);
+                ve.setStatus("hidden");
                 co = 1;
                 break;
             }
@@ -264,11 +265,10 @@ class quanly_ve implements crud {
         try {
             FileWriter fw = new FileWriter("ve.txt");
             for (ve ve : danhsachve) {
-                fw.write(ve.getMa_ve() + "," + ve.getGia() + "," + ve.getkhachHang().getMaKH() + ","
-                        + ve.getChuyenbay().getMachuyenbay() + "," + ve.getTrangthai() + "\n");
+                fw.write(ve.getMa_ve() + "," + ve.getGia() + "," + ve.getkhachHang().getMakh() + ","
+                        + ve.getChuyenbay().getMachuyenbay() + "," + ve.getTrangthai() +","+ve.getStatus()+"\n");
             }
             fw.close();
-            System.out.println("ghi file thanh cong");
         } catch (IOException ioe) {
             System.out.println("Exception occurred:");
             ioe.printStackTrace();
@@ -297,11 +297,11 @@ class quanly_ve implements crud {
                             c++;
                             break;
                         case 2:
-                            DSKhachHang dsKhachHang = new DSKhachHang();
+                            DSkhachHang dsKhachHang = new DSkhachHang();
                             dsKhachHang.docFile();
 
                             for (khachHang khachHang : dsKhachHang.getDskh()) {
-                                if (khachHang.getMaKH().equals(arr[i])) {
+                                if (khachHang.getMakh().equals(arr[i])) {
                                     ve.setkhachHang(khachHang);
                                     c++;
                                     break;
@@ -326,12 +326,18 @@ class quanly_ve implements crud {
                             ve.setTrangthai(arr[i]);
                             c++;
                             break;
+                        case 5:
+                            if(arr[i].equals("show")){
+                                ve.setStatus(arr[i]);
+                                c++;
+                            }
+                            break;
                         default:
                             break;
                     }
 
                 }
-                if (c == 5) {
+                if (c == 6) {
                     danhsachve.add(ve);
                 }
                 line = fr.readLine();
@@ -349,8 +355,8 @@ class hienthiquanlyve {
         quanly_ve quanly_ve = new quanly_ve();
 
         quanly_ve.docfile();
-
-        quanly_ve.xuat();
+        System.out.println(quanly_ve.getDanhsachve().size());
+        // quanly_ve.xuat();
         // for (ve ve : quanly_ve.getDanhsachve()) {
         // if(ve.getTrangthai().equals("da thanh toan")){
         // quanly_hoadon.them(ve);

@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Base64;
+
 
 interface IXuat {
     void xuatThongTin();
@@ -12,6 +14,7 @@ interface IXuat {
 public class user implements IXuat {
     private String taiKhoan;
     private String matKhau;
+    private String mkmahoa;
 
     public user(String taiKhoan, String matKhau) {
         this.taiKhoan = taiKhoan;
@@ -71,7 +74,9 @@ public class user implements IXuat {
     }
 
     private String anPassword() {
-        return "********";
+        byte[] mahoa = Base64.getEncoder().encode(matKhau.getBytes());
+        mkmahoa = new String(mahoa);
+        return mkmahoa;
     }
 
     public String getMatKhau() {
@@ -97,8 +102,6 @@ class QuanLyUser implements crud {
         System.out.println("3. Sửa thông tin người dùng");
         System.out.println("4. Xóa người dùng");
         System.out.println("5. Tìm kiếm người dùng");
-        System.out.println("6. Đọc dữ liệu từ file");
-        System.out.println("7. Ghi dữ liệu vào file");
         System.out.println("0. Thoát");
     }
 
@@ -232,45 +235,6 @@ class QuanLyUser implements crud {
     }
 
     public static void main(String[] args) throws Exception {
-        QuanLyUser quanLy = new QuanLyUser();
-        Scanner scanner = new Scanner(System.in);
-
-        int luaChon;
-        do {
-            quanLy.hienThiMenu();
-            System.out.print("Nhập lựa chọn của bạn: ");
-            luaChon = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (luaChon) {
-                case 1:
-                    quanLy.xuat();
-                    break;
-                case 2:
-                    quanLy.them();
-                    break;
-                case 3:
-                    quanLy.sua();
-                    break;
-                case 4:
-                    quanLy.xoa();
-                    break;
-                case 5:
-                    quanLy.tim();
-                    break;
-                case 6:
-                    quanLy.docFile();
-                    break;
-                case 7:
-                    quanLy.ghiFile();
-                    break;
-                case 0:
-                    System.out.println("Thoát khỏi chương trình.");
-                    break;
-                default:
-                    System.out.println("Lựa chọn không hợp lệ. Hãy chọn lại.");
-                    break;
-            }
-        } while (luaChon != 0);
+       
     }
 }

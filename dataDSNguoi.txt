@@ -5,6 +5,7 @@
 0,kh05,Ngo Nguyen Thanh Dat,Nam,Thanh Hoa,0000000005
 0,kh06,Nguyen Hong Mai Anh,Nu,Binh Duong,0000000006
 0,kh010,Nguyen Gia Bao,nam,hoc mon,09264395
+0,kh100,Nguyen Gia Bao,nam,hoc mon,096254
 1,nv01,Tran Xuan Hung,Nam,Phu Yen,0000000011,3000000
 1,nv02,Pham Thi Thuong,Nu,Ninh Thuan,0000000013,7000000
 1,nv03,Tran Van Hoa,Nam,Tay Ninh,0000000012,5000000

@@ -1,28 +1,26 @@
 import java.util.*;
 import java.io.*;
 class khachHang extends nguoi {
-    private String maKH;
+    private String makh;
 
 
     
     public khachHang(){
-        maKH = "";
+        makh = "";
     }
-    public khachHang(String maKH, String hoTen, String gioiTinh, String diaChi, String sdt){
+    public khachHang(String makh, String hoTen, String gioiTinh, String diaChi, String sdt){
         super(hoTen,gioiTinh,diaChi,sdt);
-        this.maKH = maKH;
+        this.makh = makh;
     }
 
 
 
     public void nhap(){
-        System.out.print("Nhap ma khach hang: ");
-        maKH = sc.nextLine();
         super.nhap();
     }
 
     @Override public void xuat(){
-        System.out.println("Ma khach hang: " + maKH);
+        System.out.println("Ma khach hang: " + makh);
         System.out.println("Ho ten khach hang: " + hoTen);
         System.out.println("Gioi tinh: " + gioiTinh);
         System.out.println("Dia chi: " + diaChi);
@@ -31,11 +29,11 @@ class khachHang extends nguoi {
 
 
 
-    public String getMaKH(){
-        return maKH;
+    public String getMakh(){
+        return makh;
     }
-    public void setMaKH(String maKH){
-        this.maKH = maKH;
+    public void setMakh(String makh){
+        this.makh = makh;
     }
 
 
@@ -77,18 +75,18 @@ class khachHang extends nguoi {
 
 
 
-class DSKhachHang implements crud {
+class DSkhachHang implements crud {
     private khachHang[] dskh;
     private int n;
     Scanner sc = new Scanner(System.in);
 
 
 
-    public DSKhachHang(){
+    public DSkhachHang(){
         dskh = new khachHang[0];
         n = 0;
     }
-    public DSKhachHang(khachHang[] ds, int nn){
+    public DSkhachHang(khachHang[] ds, int nn){
         dskh = Arrays.copyOf(ds,nn);
         n = nn;
     }
@@ -109,6 +107,7 @@ class DSKhachHang implements crud {
             System.out.println("\nNhap thong tin khach hang thu " + (i+1) + ": ");
             dskh[i] = new khachHang();
             dskh[i].nhap();
+            dskh[i].setMakh("kh"+(i+1));
         }
     }
 
@@ -117,8 +116,7 @@ class DSKhachHang implements crud {
     int k;
     public void docFile(){
         try{
-            dskh = new khachHang[0];
-            n = 0; k = 0;
+            k = 0;
             File fin = new File("dataDSNguoi.txt");
         
             Scanner myReader = new Scanner(fin);
@@ -130,7 +128,7 @@ class DSKhachHang implements crud {
                     dskh = Arrays.copyOf(dskh,n+1);
                     dskh[n] = new khachHang();
 
-                    dskh[n].setMaKH(words[k][1]);
+                    dskh[n].setMakh(words[k][1]);
                     dskh[n].setHoTen(words[k][2]);
                     dskh[n].setGioiTinh(words[k][3]);
                     dskh[n].setDiaChi(words[k][4]);
@@ -154,7 +152,7 @@ class DSKhachHang implements crud {
         try{
             FileWriter myWriter = new FileWriter("dataDSNguoi.txt");
             for(khachHang kh : dskh){
-                myWriter.write("0," + kh.getMaKH() + "," + kh.getHoTen() + "," + kh.getGioiTinh() + "," + kh.getDiaChi() + ","
+                myWriter.write("0," + kh.getMakh() + "," + kh.getHoTen() + "," + kh.getGioiTinh() + "," + kh.getDiaChi() + ","
                               + kh.getSdt() + "\n");
             }
             for(int i = 0; i < k; i++){
@@ -190,7 +188,7 @@ class DSKhachHang implements crud {
     }
     public void tim(String ma){
         for(int i = 0; i < n; i++)
-            if( dskh[i].getMaKH().equals(ma) ){
+            if( dskh[i].getMakh().equals(ma) ){
                 dskh[i].xuat();
                 break;
             }
@@ -201,6 +199,7 @@ class DSKhachHang implements crud {
     public void them(){
         dskh = Arrays.copyOf(dskh,n+1);
         dskh[n] = new khachHang();
+        dskh[n].setMakh("kh"+(n+1));
         System.out.println("\n\nNhap thong tin khach hang duoc them: ");
         dskh[n].nhap();
         n++;
@@ -209,6 +208,7 @@ class DSKhachHang implements crud {
     public void them(khachHang khachHang){
         dskh = Arrays.copyOf(dskh,n+1);
         dskh[n] =khachHang;
+        dskh[n].setMakh("kh"+(n+1));
         n++;
     }
 
@@ -221,7 +221,7 @@ class DSKhachHang implements crud {
     }
     public void xoa(String ma){
         for(int i = 0; i < n; i++){
-            if( dskh[i].getMaKH().equals(ma) ){
+            if( dskh[i].getMakh().equals(ma) ){
                 for(int j=i; j<n-1; j++){
                     dskh[j] = dskh[j+1];
                 }
@@ -241,7 +241,7 @@ class DSKhachHang implements crud {
     }
     public void sua(String ma){
         for(int i = 0; i < n; i++)
-            if( dskh[i].getMaKH().equals(ma) ){
+            if( dskh[i].getMakh().equals(ma) ){
                 int chon;
                 do{
                     System.out.println("\n>-----------------------------<");
@@ -288,13 +288,14 @@ class DSKhachHang implements crud {
     }
 }
 
-class QuanLyKH {
-    DSKhachHang ds = new DSKhachHang();
+class QuanLykh {
+    DSkhachHang ds = new DSkhachHang();
     Scanner sc = new Scanner(System.in);
 
 
     public void menu(){
         int chon;
+        ds.docFile();
         do{
             System.out.println("\n>Menu-------------------------<");
             System.out.println("1 - Tao danh sach khach hang moi");
@@ -303,8 +304,6 @@ class QuanLyKH {
             System.out.println("4 - Xoa khach hang");
             System.out.println("5 - Tim kiem khach hang");
             System.out.println("6 - Xuat danh sach khach hang");
-            System.out.println("7 - Tai len danh sach tu File");
-            System.out.println("8 - Ghi du lieu vao File");
             System.out.println("0 - Thoat");
             System.out.print("Nhap lua chon: ");
             chon = sc.nextInt(); sc.nextLine();
@@ -327,12 +326,6 @@ class QuanLyKH {
                 case 6:
                     ds.xuat();
                     break;
-                case 7:
-                    ds.docFile();
-                    break;
-                case 8:
-                    ds.ghiFile();
-                    break;
                 case 0:
                     break;
                 default:
@@ -340,12 +333,13 @@ class QuanLyKH {
             }
             System.out.println("\n>-----------------------------<");
         }while(chon != 0);
+        ds.ghiFile();
     }
 }
 
-class DSKH {
+class DSkh {
     public static void main(String[] args) throws FileNotFoundException {
-        QuanLyKH ql1 = new QuanLyKH();
+        QuanLykh ql1 = new QuanLykh();
         ql1.menu();
         
     }

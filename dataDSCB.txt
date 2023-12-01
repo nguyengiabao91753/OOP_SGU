@@ -1,1 +1,2 @@
-CB01,va,22/12/2022,gia lai,binh dinh,17
+cb1,22/12/2022,ha noi,gia lai,15
+cb6,22/11/2022,hcm,gia lai,100

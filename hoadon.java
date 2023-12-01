@@ -53,8 +53,8 @@ public class hoadon {
     }
 
     public void themhoadon() {
-        System.out.println("Nhập mã hóa đơn: ");
-        maHD = nhap.nextLine();
+        // System.out.println("Nhập mã hóa đơn: ");
+        // maHD = nhap.nextLine();
 
         System.out.println("Nhập mã nhân viên: ");
         maNV = nhap.nextLine();
@@ -93,6 +93,7 @@ class quanly_hoadon implements crud {
     static int checkmanv(List<hoadon> quanly_hoadon, hoadon hoadon) throws Exception {
         String manv = hoadon.getMaNV();
         DSNhanVien dsnv = new DSNhanVien();
+        dsnv.docFile();
         for (nhanVien nhanVien : dsnv.getDsnv()) {
             if ( nhanVien!=null && nhanVien.getMaNV()!= null && manv.equals(nhanVien.getMaNV())) {
                 return 1;
@@ -105,15 +106,17 @@ class quanly_hoadon implements crud {
         hoadon hoadon = new hoadon();
         hoadon.setVe(ve);
         hoadon.themhoadon();
-        // check mã hóa đơn
-        String ma = hoadon.getMaHD();
-        for (hoadon duyet : quanly_hoadon) {
-            while (duyet.getMaHD().equals(ma)) {
-                System.out.println("Mã hóa đơn đã tồn tại! Vui lòng nhập lại ");
-                ma = nhap.nextLine();
-                hoadon.setMaHD(ma);
-            }
-        }
+        // SET mã hóa đơn
+        String ma  = "hd"+ (quanly_hoadon.size()+1);
+        hoadon.setMaHD(ma);
+        // String ma = hoadon.getMaHD();
+        // for (hoadon duyet : quanly_hoadon) {
+        //     while (duyet.getMaHD().equals(ma)) {
+        //         System.out.println("Mã hóa đơn đã tồn tại! Vui lòng nhập lại ");
+        //         ma = nhap.nextLine();
+        //         hoadon.setMaHD(ma);
+        //     }
+        // }
         // check mã nhân viên
         while (checkmanv(quanly_hoadon, hoadon) == 0) {
             System.out.println("Mã nhân viên không tồn tại! Vui lòng nhập lại mã nhân viên: ");
@@ -215,7 +218,6 @@ class quanly_hoadon implements crud {
                         + hoadon.getNgaytao());
             }
             fw.close();
-            System.out.println("Ghi file thành công");
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -9,7 +9,7 @@ interface IXuat {
     void xuat();
 }
 
-class HangHangKhong implements IXuat {
+public class HangHangKhong implements IXuat {
     private String tenHang;
     private String maHang;
 
