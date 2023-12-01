@@ -8,7 +8,6 @@ public class program {
         int luachon;
         int again = 1;
         Scanner nhap = new Scanner(System.in);
-
         do {
             System.out.println("------Quản lý bán vé máy bay------");
             System.out.println("    1. Quản lý khách hàng");
@@ -77,7 +76,6 @@ public class program {
                     DSCB tmp = new DSCB();
                     tmp.docfile();
                     System.out.println("Quản lý Chuyến bay");
-
                     tmp.quanlyDSCB();
                     tmp.ghifile();
                     break;
