@@ -8,7 +8,6 @@ public class program {
         int luachon;
         int again = 1;
         Scanner nhap = new Scanner(System.in);
-
         do {
             System.out.println("------Quản lý bán vé máy bay------");
             System.out.println("    1. Quản lý khách hàng");
@@ -30,13 +29,12 @@ public class program {
             switch (chon) {
                 case 1:
                     System.out.println("Quản lý khách hàng:");
-                    QuanLykh qlkh = new QuanLykh();
+                    QuanLyKH qlkh = new QuanLyKH();
                     qlkh.menu();
                     break;
                 case 2:
                     System.out.println("Quản lý nhân viên:");
                     QuanLyNV qlnv = new QuanLyNV();
-
                     qlnv.menu();
                     break;
                 case 3:
@@ -78,7 +76,6 @@ public class program {
                     DSCB tmp = new DSCB();
                     tmp.docfile();
                     System.out.println("Quản lý Chuyến bay");
-
                     tmp.quanlyDSCB();
                     tmp.ghifile();
                     break;

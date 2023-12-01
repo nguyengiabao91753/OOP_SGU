@@ -2,7 +2,7 @@
 import java.io.*;
 import java.util.*;
 
-public class ve {
+class ve {
     private String ma_ve;
     private int gia;
     private String trangthai;
@@ -132,7 +132,7 @@ class quanly_ve implements crud {
         return 0;
     }
 
-    static int checkkhachhang(ve vemoi, DSkhachHang dskh) throws Exception {
+    static int checkkhachhang(ve vemoi, DSKhachHang dskh) throws Exception {
         String makh = vemoi.getkhachHang().getMakh();
 
         for (khachHang khachHang : dskh.getDskh()) {
@@ -149,7 +149,7 @@ class quanly_ve implements crud {
         ve vemoi = new ve();
         vemoi.nhap();
         // set khach hang
-        DSkhachHang dskh = new DSkhachHang();
+        DSKhachHang dskh = new DSKhachHang();
         dskh.docFile();
         dskh.them(vemoi.getkhachHang());
 
@@ -221,10 +221,14 @@ class quanly_ve implements crud {
         }
     }
 
+
     public void xoa() {
         String ma_xoa;
         System.out.println("Nhap mã vé muốn xóa");
         ma_xoa = nhap.nextLine();
+        xoa(ma_xoa);
+    }
+    public void xoa(String ma_xoa) {
         int co = 0;
         for (ve ve : danhsachve) {
             if (ve.getMa_ve().equals(ma_xoa)) {
@@ -237,6 +241,16 @@ class quanly_ve implements crud {
             System.out.println("Mã vé không tồn tại! ");
         }
     }
+
+
+    public void xoa_Makh(String ma_xoa){
+        for (ve ve : danhsachve) 
+            if (ve.getkhachHang().getMakh().equals(ma_xoa)) {
+                ve.setStatus("hidden");
+                break;
+            }
+    }
+
 
     public List<ve> getDanhsachve() {
         return danhsachve;
@@ -260,10 +274,9 @@ class quanly_ve implements crud {
     }
 
     public void xuat() {
-        for (ve ve : danhsachve) {
-            ve.xuat();
-
-        }
+        for (ve ve : danhsachve) 
+            if(ve.getStatus() == "show")
+                ve.xuat();
     }
 
     public void ghifile() throws Exception {
@@ -302,7 +315,7 @@ class quanly_ve implements crud {
                             c++;
                             break;
                         case 2:
-                            DSkhachHang dsKhachHang = new DSkhachHang();
+                            DSKhachHang dsKhachHang = new DSKhachHang();
                             dsKhachHang.docFile();
 
                             for (khachHang khachHang : dsKhachHang.getDskh()) {
@@ -357,7 +370,7 @@ class quanly_ve implements crud {
 
     }
 }
-
+/* 
 class hienthiquanlyve {
     public static void main(String[] args) throws Exception {
         quanly_ve quanly_ve = new quanly_ve();
@@ -436,3 +449,4 @@ class hienthiquanlyve {
         // }
     }
 }
+*/
