@@ -12,10 +12,18 @@ interface IXuat {
 public class HangHangKhong implements IXuat {
     private String tenHang;
     private String maHang;
+    private String status;
+
+    public HangHangKhong() {
+        tenHang = "";
+        maHang = "";
+        status = "show";
+    }
 
     public HangHangKhong(String tenHang, String maHang) {
         this.tenHang = tenHang;
         this.maHang = maHang;
+        this.status = "show";
     }
 
     public void nhap() {
@@ -45,6 +53,14 @@ public class HangHangKhong implements IXuat {
 
     public void setMaHang(String maHang) {
         this.maHang = maHang;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
 
@@ -89,15 +105,25 @@ class QuanLyHangHangKhong implements crud {
         System.out.println("Hãng hàng không mới đã được thêm: " + tenHang);
     }
 
+    static void rangbuoc(String ten, DSCB dscb){
+        for (chuyenbay chuyenbay : dscb.getDanhsachchuyenbay()) {
+            if(chuyenbay)
+        }
+    }
+
     public void xoa() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhập tên hãng hàng không cần xóa: ");
         String tenHang = scanner.nextLine();
-        HangHangKhong hangXoa = timHang(tenHang);
-        if (hangXoa != null) {
-            danhSachHang.remove(hangXoa);
-            System.out.println("Hãng hàng không đã được xóa: " + tenHang);
-        } else {
+        int c = 0;
+        for (HangHangKhong hangHangKhong : danhSachHang) {
+            if (hangHangKhong.getTenHang().equals(tenHang)) {
+                
+                hangHangKhong.setStatus("hidden");
+                System.out.println("Hãng hàng không đã được xóa: " + tenHang);
+            }
+        }
+        if(c==0) {
             System.out.println("Không tìm thấy hãng hàng không có tên: " + tenHang);
         }
     }
@@ -139,39 +165,40 @@ class QuanLyHangHangKhong implements crud {
     }
 
     public void docFile() throws Exception {
-    String tenFile = "HHK.txt";
-    try (BufferedReader br = new BufferedReader(new FileReader(tenFile))) {
-        String line;
-        while ((line = br.readLine()) != null) {
-            String[] parts = line.split(",");
-            if (parts.length == 2) {
-                HangHangKhong hang = new HangHangKhong(parts[0], parts[1]);
-                themHangHangKhong(hang);
-            } else {
-                System.out.println("Dữ liệu không hợp lệ: " + line);
+        String tenFile = "HHK.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(tenFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3) {
+                    if(parts[2].equals("show")){
+                    HangHangKhong hang = new HangHangKhong(parts[0], parts[1]);
+                    themHangHangKhong(hang);
+                    }
+                } else {
+                    System.out.println("Dữ liệu không hợp lệ: " + line);
+                }
             }
+            System.out.println("Đã đọc danh sách hãng hàng không từ file.");
+        } catch (FileNotFoundException e) {
+            System.out.println("File không tồn tại: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Lỗi khi đọc file: " + e.getMessage());
         }
-        System.out.println("Đã đọc danh sách hãng hàng không từ file.");
-    } catch (FileNotFoundException e) {
-        System.out.println("File không tồn tại: " + e.getMessage());
-    } catch (IOException e) {
-        System.out.println("Lỗi khi đọc file: " + e.getMessage());
     }
-}
 
-public void ghiFile() throws Exception {
-    String tenFile = "HHK.txt";
-    try (FileWriter bw = new FileWriter(tenFile)) {
-        for (HangHangKhong hang : danhSachHang) {
-            bw.write(hang.getTenHang() + "," + hang.getMaHang());
-            bw.write(System.lineSeparator());
+    public void ghiFile() throws Exception {
+        String tenFile = "HHK.txt";
+        try (FileWriter bw = new FileWriter(tenFile)) {
+            for (HangHangKhong hang : danhSachHang) {
+                bw.write(hang.getTenHang() + "," + hang.getMaHang()+","+hang.getStatus());
+                bw.write(System.lineSeparator());
+            }
+            System.out.println("Đã ghi danh sách hãng hàng không vào file.");
+        } catch (IOException e) {
+            System.out.println("Lỗi khi ghi file: " + e.getMessage());
         }
-        System.out.println("Đã ghi danh sách hãng hàng không vào file.");
-    } catch (IOException e) {
-        System.out.println("Lỗi khi ghi file: " + e.getMessage());
     }
-}
-
 
     private HangHangKhong timHang(String ten) {
         for (HangHangKhong hang : danhSachHang) {

@@ -246,7 +246,7 @@ class quanly_hoadon implements crud {
                         case 2:
                             quanly_ve quanly_ve = new quanly_ve();
                             quanly_ve.docfile();
-                            for (ve ve : quanly_ve.getDanhsachve()) {
+                            for (ve ve : quanly_ve.getDsve_daydu()) {
                                 if (ve.getMa_ve().equals(arr[i])) {
                                     hoadon.setVe(ve);
                                     c++;

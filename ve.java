@@ -103,15 +103,20 @@ public class ve {
 
 class quanly_ve implements crud {
     private List<ve> danhsachve;
+    private List<ve> dsve_daydu;
     Scanner nhap = new Scanner(System.in);
 
     public quanly_ve() {
         danhsachve = new ArrayList<>();
+        dsve_daydu = new ArrayList<>();
         
     }
 
     public quanly_ve(List<ve> danhsachve) {
         this.danhsachve = danhsachve;
+    }
+    public List<ve> getDsve_daydu() {
+        return dsve_daydu;
     }
 
     static int checkmachuyenbay(ve vemoi) throws Exception {
@@ -340,6 +345,9 @@ class quanly_ve implements crud {
                 if (c == 6) {
                     danhsachve.add(ve);
                 }
+                if(ve.getStatus().equals("show") || ve.getStatus().equals("hidden")){
+                    dsve_daydu.add(ve);
+                }
                 line = fr.readLine();
                 c = 0;
             }
@@ -355,7 +363,11 @@ class hienthiquanlyve {
         quanly_ve quanly_ve = new quanly_ve();
 
         quanly_ve.docfile();
-        System.out.println(quanly_ve.getDanhsachve().size());
+        // quanly_ve.xuat();
+        for (ve ve : quanly_ve.getDsve_daydu()) {
+            ve.xuat();
+        }
+        // System.out.println(quanly_ve.getDanhsachve().size());
         // quanly_ve.xuat();
         // for (ve ve : quanly_ve.getDanhsachve()) {
         // if(ve.getTrangthai().equals("da thanh toan")){
