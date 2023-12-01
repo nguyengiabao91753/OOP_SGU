@@ -12,12 +12,14 @@ public class chuyenbay {
     private String diemxuatphat;
     private String diemden;
     private int soghe;
+    private String status;
     public chuyenbay(){
         machuyenbay=" ";
         hang =new HangHangKhong();
         thoigiankhoihanh=" ";
         diemxuatphat=" ";
         diemden=" ";
+        status = "show";
         soghe=0;
         count++;
     }
@@ -31,6 +33,7 @@ public class chuyenbay {
         diemxuatphat=tmp.diemxuatphat;
         diemden=tmp.diemden;
         soghe=tmp.soghe;
+        status = "show";
     }
     public HangHangKhong getHang() {
         return hang;

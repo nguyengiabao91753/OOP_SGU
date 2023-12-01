@@ -7,6 +7,12 @@ public class program {
         int chay = 1;
         int luachon;
         int again = 1;
+        DSCB tmp = new DSCB();
+        tmp.docfile();
+        quanly_ve danhsachve = new quanly_ve();
+        danhsachve.docfile();
+        quanly_hoadon quanlyhoadon = new quanly_hoadon();
+        quanlyhoadon.docfile();
         Scanner nhap = new Scanner(System.in);
         do {
             System.out.println("------Quản lý bán vé máy bay------");
@@ -73,15 +79,13 @@ public class program {
                     quanLyuser.ghiFile();
                     break;
                 case 4:
-                    DSCB tmp = new DSCB();
-                    tmp.docfile();
+
                     System.out.println("Quản lý Chuyến bay");
                     tmp.quanlyDSCB();
                     tmp.ghifile();
                     break;
                 case 5:
-                    quanly_ve danhsachve = new quanly_ve();
-                    danhsachve.docfile();
+
                     while (again == 1) {
                         System.out.println("    Quản lý vé chuyến bay");
                         System.out.println(">---------------------------<");
@@ -153,7 +157,7 @@ public class program {
                                 quanLyhhk.them();
                                 break;
                             case 3:
-                                quanLyhhk.xoa();
+                                quanLyhhk.xoa(tmp);
                                 break;
                             case 4:
                                 quanLyhhk.sua();
@@ -173,9 +177,8 @@ public class program {
                     quanLyhhk.ghiFile();
                     break;
                 case 7:
-                    quanly_hoadon quanlyhoadon = new quanly_hoadon();
+
                     again = 1;
-                    quanlyhoadon.docfile();
                     while (again == 1) {
                         System.out.println("    Quản lý hóa đơn");
                         System.out.println(">---------------------------<");
