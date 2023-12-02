@@ -20,10 +20,10 @@ public class HangHangKhong implements IXuat {
         status = "show";
     }
 
-    public HangHangKhong(String tenHang, String maHang) {
+    public HangHangKhong(String tenHang, String maHang,String status) {
         this.tenHang = tenHang;
         this.maHang = maHang;
-        this.status = "show";
+        this.status = status;
     }
 
     public void nhap() {

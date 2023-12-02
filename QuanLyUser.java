@@ -24,7 +24,7 @@ public class QuanLyUser implements crud {
 
     public void xuat() {
         System.out.println("----- Danh Sách Người Dùng -----");
-        for (IXuat xuat : danhSachUser) {
+        for (user xuat : danhSachUser) {
             xuat.xuatThongTin();
         }
     }

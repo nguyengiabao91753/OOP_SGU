@@ -9,10 +9,12 @@ public class program {
         int again = 1;
         DSCB tmp = new DSCB();
         tmp.docfile();
+        DSKhachHang dsKhachHang = new DSKhachHang();
+        dsKhachHang.docFile();
         quanly_ve danhsachve = new quanly_ve();
-        danhsachve.docfile();
+        danhsachve.docfile(tmp,dsKhachHang);
         quanly_hoadon quanlyhoadon = new quanly_hoadon();
-        quanlyhoadon.docfile();
+        quanlyhoadon.docfile(danhsachve);
         QuanLyUser quanLyuser = new QuanLyUser();
         quanLyuser.docFile();
         

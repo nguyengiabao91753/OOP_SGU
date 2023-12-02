@@ -192,7 +192,7 @@ public class quanly_ve implements crud {
         }
     }
 
-    public void docfile() throws Exception {
+    public void docfile(DSCB dscb, DSKhachHang dsKhachHang) throws Exception {
         File file = new File("ve.txt");
         BufferedReader fr = new BufferedReader(new FileReader(file));
         try {
@@ -214,8 +214,6 @@ public class quanly_ve implements crud {
                             c++;
                             break;
                         case 2:
-                            DSKhachHang dsKhachHang = new DSKhachHang();
-                            dsKhachHang.docFile();
 
                             for (khachHang khachHang : dsKhachHang.getDskh()) {
                                 if (khachHang.getMakh().equals(arr[i])) {
@@ -227,9 +225,6 @@ public class quanly_ve implements crud {
 
                             break;
                         case 3:
-                            DSCB dscb = new DSCB();
-                            dscb.docfile();
-
                             for (chuyenbay chuyenbay : dscb.getDanhsachchuyenbay()) {
                                 if (chuyenbay != null && chuyenbay.getMachuyenbay() != null
                                         && chuyenbay.getMachuyenbay().equals(arr[i])) {
@@ -244,9 +239,9 @@ public class quanly_ve implements crud {
                             c++;
                             break;
                         case 5:
-                            if(arr[i].equals("show")){
+                            if(!arr[i].equals("show")){
                                 ve.setStatus(arr[i]);
-                                c++;
+                                c=0;
                             }
                             break;
                         default:
@@ -254,7 +249,7 @@ public class quanly_ve implements crud {
                     }
 
                 }
-                if (c == 6) {
+                if (c == 5) {
                     danhsachve.add(ve);
                 }
                 if(ve.getStatus().equals("show") || ve.getStatus().equals("hidden")){

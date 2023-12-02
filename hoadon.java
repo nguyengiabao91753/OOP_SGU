@@ -11,6 +11,7 @@ public class hoadon {
     private ve ve;
     private String ngaytao;
     private String maNV;
+    private String status="show";
     Scanner nhap = new Scanner(System.in);
 
     public hoadon() {
@@ -50,6 +51,13 @@ public class hoadon {
 
     public void setMaHD(String maHD) {
         this.maHD = maHD;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void themhoadon() {

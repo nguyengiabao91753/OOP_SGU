@@ -108,11 +108,11 @@ class hienthiquanlyve {
 
         quanly_ve.docfile();
         // quanly_ve.xuat();
-        for (ve ve : quanly_ve.getDsve_daydu()) {
-            ve.xuat();
-        }
+        // for (ve ve : quanly_ve.getDsve_daydu()) {
+        //     ve.xuat();
+        // }
         // System.out.println(quanly_ve.getDanhsachve().size());
-        // quanly_ve.xuat();
+        quanly_ve.xuat();
         // for (ve ve : quanly_ve.getDanhsachve()) {
         // if(ve.getTrangthai().equals("da thanh toan")){
         // quanly_hoadon.them(ve);
