@@ -138,7 +138,7 @@ public class QuanLyHangHangKhong implements crud {
                     System.out.println("Dữ liệu không hợp lệ: " + line);
                 }
             }
-            System.out.println("Đã đọc danh sách hãng hàng không từ file.");
+            // System.out.println("Đã đọc danh sách hãng hàng không từ file.");
         } catch (FileNotFoundException e) {
             System.out.println("File không tồn tại: " + e.getMessage());
         } catch (IOException e) {
