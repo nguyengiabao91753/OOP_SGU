@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class program {
     static Scanner inp = new Scanner(System.in);
-
+    
     public static void main(String[] args) throws Exception {
         int chay = 1;
         int luachon;
@@ -13,6 +13,11 @@ public class program {
         danhsachve.docfile();
         quanly_hoadon quanlyhoadon = new quanly_hoadon();
         quanlyhoadon.docfile();
+        QuanLyUser quanLyuser = new QuanLyUser();
+        quanLyuser.docFile();
+        
+        QuanLyHangHangKhong quanLyhhk = new QuanLyHangHangKhong();
+        quanLyhhk.docFile();
         Scanner nhap = new Scanner(System.in);
         do {
             System.out.println("------Quản lý bán vé máy bay------");
@@ -44,8 +49,7 @@ public class program {
                     qlnv.menu();
                     break;
                 case 3:
-                    QuanLyUser quanLyuser = new QuanLyUser();
-                    quanLyuser.docFile();
+
                     do {
                         quanLyuser.hienThiMenu();
                         System.out.print("Nhập lựa chọn của bạn: ");
@@ -76,13 +80,13 @@ public class program {
                                 break;
                         }
                     } while (luachon != 0);
-                    quanLyuser.ghiFile();
+
                     break;
                 case 4:
 
                     System.out.println("Quản lý Chuyến bay");
                     tmp.quanlyDSCB();
-                    tmp.ghifile();
+                    
                     break;
                 case 5:
 
@@ -103,13 +107,11 @@ public class program {
                             switch (luachon) {
                                 case 1:
 
-                                    danhsachve.them();
-                                    quanly_hoadon quanly_hoadon = new quanly_hoadon();
-                                    quanly_hoadon.docfile();
+                                    danhsachve.them();                                 
                                     for (ve ve : danhsachve.getDanhsachve()) {
                                         if (ve.getTrangthai().equals("da thanh toan")) {
-                                            quanly_hoadon.them(ve);
-                                            quanly_hoadon.ghifile();
+                                            quanlyhoadon.them(ve);
+                                            
                                         }
                                     }
                                     break;
@@ -138,11 +140,10 @@ public class program {
                         System.out.println("Bạn có muốn chọn lại?  1: Có / 2: Không");
                         again = nhap.nextInt();
                     }
-                    danhsachve.ghifile();
+                    
                     break;
                 case 6:
-                    QuanLyHangHangKhong quanLyhhk = new QuanLyHangHangKhong();
-                    quanLyhhk.docFile();
+
                     do {
                         quanLyhhk.hienThiMenu();
                         System.out.print("Nhập lựa chọn của bạn: ");
@@ -174,7 +175,7 @@ public class program {
                         }
 
                     } while (luachon != 0);
-                    quanLyhhk.ghiFile();
+                    
                     break;
                 case 7:
 
@@ -216,7 +217,7 @@ public class program {
                         System.out.println("Bạn có muốn chọn lại?  1: Có / 2: Không");
                         again = nhap.nextInt();
                     }
-                    quanlyhoadon.ghifile();
+                    
                     break;
                 case 8:
                     try {
@@ -233,8 +234,13 @@ public class program {
                     break;
             }
         } while (chay == 1);
-
+        tmp.ghifile();
+        quanLyuser.ghiFile();
+        quanlyhoadon.ghifile();
+        quanLyhhk.ghiFile();
+        danhsachve.ghifile();
         nhap.close();
+
     }
 
 }

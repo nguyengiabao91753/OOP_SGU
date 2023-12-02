@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-class quanly_hoadon implements crud {
+public class quanly_hoadon implements crud {
     // Map<String, hoadon> quanly_hoadon;
     List<hoadon> quanly_hoadon;
     Scanner nhap = new Scanner(System.in);

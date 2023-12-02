@@ -1,1 +1,4 @@
-Vietnam Airlines,va
+Vietnam Airlines,hhk1
+Vietjet Air,hhk2
+Jetstar Pacific,hhk3
+Bamboo Airways,hhk4

@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.*;
-class quanly_ve implements crud {
+public class quanly_ve implements crud {
     private List<ve> danhsachve;
     private List<ve> dsve_daydu;
     Scanner nhap = new Scanner(System.in);
