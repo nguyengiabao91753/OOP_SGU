@@ -7,11 +7,7 @@ import java.util.Scanner;
 import java.util.Base64;
 
 
-interface IXuat {
-    void xuatThongTin();
-}
-
-public class user implements IXuat {
+public class user {
     private String taiKhoan;
     private String matKhau;
     private String mkmahoa;

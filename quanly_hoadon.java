@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 public class quanly_hoadon implements crud {
     // Map<String, hoadon> quanly_hoadon;
     List<hoadon> quanly_hoadon;
@@ -26,7 +27,7 @@ public class quanly_hoadon implements crud {
         DSNhanVien dsnv = new DSNhanVien();
         dsnv.docFile();
         for (nhanVien nhanVien : dsnv.getDsnv()) {
-            if ( nhanVien!=null && nhanVien.getManv()!= null && manv.equals(nhanVien.getManv())) {
+            if (nhanVien != null && nhanVien.getManv() != null && manv.equals(nhanVien.getManv())) {
                 return 1;
             }
         }
@@ -38,15 +39,15 @@ public class quanly_hoadon implements crud {
         hoadon.setVe(ve);
         hoadon.themhoadon();
         // SET mã hóa đơn
-        String ma  = "hd"+ (quanly_hoadon.size()+1);
+        String ma = "hd" + (quanly_hoadon.size() + 1);
         hoadon.setMaHD(ma);
         // String ma = hoadon.getMaHD();
         // for (hoadon duyet : quanly_hoadon) {
-        //     while (duyet.getMaHD().equals(ma)) {
-        //         System.out.println("Mã hóa đơn đã tồn tại! Vui lòng nhập lại ");
-        //         ma = nhap.nextLine();
-        //         hoadon.setMaHD(ma);
-        //     }
+        // while (duyet.getMaHD().equals(ma)) {
+        // System.out.println("Mã hóa đơn đã tồn tại! Vui lòng nhập lại ");
+        // ma = nhap.nextLine();
+        // hoadon.setMaHD(ma);
+        // }
         // }
         // check mã nhân viên
         while (checkmanv(quanly_hoadon, hoadon) == 0) {
@@ -63,10 +64,10 @@ public class quanly_hoadon implements crud {
         System.out.println("Nhập mã hóa đơn: ");
         String ma = nhap.nextLine();
         hoadon hoadonmoi = new hoadon();
-        int co=0;
+        int co = 0;
         for (hoadon hoadon : quanly_hoadon) {
-            if (hoadon.getMaHD().equals(ma)) {
-        
+            if (hoadon.getMaHD().equals(ma) && hoadon.getStatus().equals("show") ) {
+
                 hoadonmoi.setVe(hoadon.getVe());
                 hoadonmoi.themhoadon();
                 hoadonmoi.setVe(hoadon.getVe());
@@ -90,30 +91,30 @@ public class quanly_hoadon implements crud {
 
                 quanly_hoadon.remove(hoadon);
                 quanly_hoadon.add(hoadonmoi);
-                co=1;
+                co = 1;
                 break;
             }
 
         }
-        if(co==0){
+        if (co == 0) {
             System.out.println("Mã hóa đơn không tồn tại! ");
         }
-        
+
     }
 
     public void xoa() {
         System.out.println("Nhập mã hóa đơn: ");
         String ma = nhap.nextLine();
-        int co=0;
+        int co = 0;
         for (hoadon hoadon : quanly_hoadon) {
-            if (hoadon.getMaHD().equals(ma)) {
-                quanly_hoadon.remove(hoadon);
-                co=1;
+            if (hoadon.getMaHD().equals(ma) && hoadon.getStatus().equals("show") ) {
+                hoadon.setStatus("hidden");
+                co = 1;
                 break;
             }
         }
 
-        if(co==0){
+        if (co == 0) {
             System.out.println("Mã hóa đơn không tồn tại! ");
         }
     }
@@ -121,23 +122,25 @@ public class quanly_hoadon implements crud {
     public void tim() {
         System.out.println("Nhập mã hóa đơn: ");
         String ma = nhap.nextLine();
-        int co=0;
+        int co = 0;
         for (hoadon hoadon : quanly_hoadon) {
-            if (hoadon.getMaHD().equals(ma)) {
+            if (hoadon.getMaHD().equals(ma) && hoadon.getStatus().equals("show")) {
                 hoadon.xuat();
-                co=1;
+                co = 1;
                 break;
             }
         }
 
-        if(co==0){
+        if (co == 0) {
             System.out.println("Mã hóa đơn không tồn tại! ");
         }
     }
 
     public void xuat() {
         for (hoadon hoadon : quanly_hoadon) {
-            hoadon.xuat();
+            if (hoadon.getStatus().equals("show")) {
+                hoadon.xuat();
+            }
         }
     }
 
@@ -146,7 +149,7 @@ public class quanly_hoadon implements crud {
             FileWriter fw = new FileWriter("hoadon.txt");
             for (hoadon hoadon : quanly_hoadon) {
                 fw.write(hoadon.getMaHD() + "," + hoadon.getMaNV() + "," + hoadon.getVe().getMa_ve() + ","
-                        + hoadon.getNgaytao());
+                        + hoadon.getNgaytao() + "," + hoadon.getStatus() + "\n");
             }
             fw.close();
         } catch (Exception e) {
@@ -154,7 +157,7 @@ public class quanly_hoadon implements crud {
         }
     }
 
-    public void docfile() throws Exception {
+    public void docfile(quanly_ve quanly_ve) throws Exception {
         File file = new File("hoadon.txt");
         BufferedReader fr = new BufferedReader(new FileReader(file));
         try {
@@ -175,29 +178,30 @@ public class quanly_hoadon implements crud {
                             c++;
                             break;
                         case 2:
-                            quanly_ve quanly_ve = new quanly_ve();
-                            quanly_ve.docfile();
                             for (ve ve : quanly_ve.getDsve_daydu()) {
                                 if (ve.getMa_ve().equals(arr[i])) {
                                     hoadon.setVe(ve);
                                     c++;
                                 }
                             }
-                            
+
                             break;
                         case 3:
                             hoadon.setNgaytao(arr[i]);
                             c++;
                             break;
+                        case 4:
+                            hoadon.setStatus(arr[i]);
+                            break;
                         default:
                             break;
                     }
                 }
-                if(c==4){
-                quanly_hoadon.add(hoadon);
+                if (c == 4) {
+                    quanly_hoadon.add(hoadon);
                 }
                 line = fr.readLine();
-                c=0;
+                c = 0;
             }
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -131,8 +131,8 @@ public class QuanLyHangHangKhong implements crud {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 2) {
-                    HangHangKhong hang = new HangHangKhong(parts[0], parts[1]);
+                if (parts.length == 3 && parts[2].equals("show")) {
+                    HangHangKhong hang = new HangHangKhong(parts[0], parts[1],parts[2]);
                     themHangHangKhong(hang);
                 } else {
                     System.out.println("Dữ liệu không hợp lệ: " + line);
@@ -150,7 +150,7 @@ public class QuanLyHangHangKhong implements crud {
         String tenFile = "HHK.txt";
         try (FileWriter bw = new FileWriter(tenFile)) {
             for (HangHangKhong hang : danhSachHang) {
-                bw.write(hang.getTenHang() + "," + hang.getMaHang());
+                bw.write(hang.getTenHang() + "," + hang.getMaHang()+",");
                 bw.write(System.lineSeparator());
             }
             System.out.println("Đã ghi danh sách hãng hàng không vào file.");
