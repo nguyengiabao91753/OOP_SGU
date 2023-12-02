@@ -42,7 +42,7 @@ public class chuyenbay {
         this.hang = hang;
     }
     
-    public void nhap(){
+    public void nhap() throws Exception{
         Scanner input=new Scanner(System.in);
         // System.out.println("Nhập mã chuyến bay: ");
         if(getCount()<10){

@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.*;
-class QuanLyHangHangKhong implements crud {
+
+public class QuanLyHangHangKhong implements crud {
+
     private ArrayList<HangHangKhong> danhSachHang;
     Scanner scanner = new Scanner(System.in);
 

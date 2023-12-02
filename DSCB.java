@@ -26,7 +26,7 @@ public class DSCB implements crud {
         this.danhsachchuyenbay = danhsachchuyenbay;
     }
 
-    public void nhap() {
+    public void nhap() throws Exception {
         Scanner input = new Scanner(System.in);
         System.out.println("Nhập số lượng chuyến bay:");
         sochuyenbay = input.nextInt();
@@ -42,14 +42,14 @@ public class DSCB implements crud {
         }
     }
 
-    public void them() {
+    public void them() throws Exception {
         danhsachchuyenbay = Arrays.copyOf(danhsachchuyenbay, sochuyenbay + 1);
         danhsachchuyenbay[sochuyenbay] = new chuyenbay();
         danhsachchuyenbay[sochuyenbay].nhap();
         sochuyenbay++;
     }
 
-    public void sua() {
+    public void sua() throws Exception {
         String mabay;
         Scanner input = new Scanner(System.in);
         System.out.println("Nhập mã chuyến bay cần thay đổi: ");

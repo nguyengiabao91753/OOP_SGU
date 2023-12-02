@@ -1,2 +1,8 @@
-cb1,22/12/2022,ha noi,gia lai,15
-cb6,22/11/2022,hcm,gia lai,100
+cb1,hhk1,22/12/2022,ha noi,gia lai,15
+cb2,hhk1,20/8/2023,ha noi,da nang,103
+cb3,hhk2,22/9/2024,ho chi minh,gia lai,200
+cb4,hhk1,23/7/2024,dak lak,ho chi minh,103
+cb5,hhk3,2/4/2024,da nang,hue,50
+cb6,hhk2,22/11/2022,hcm,gia lai,100
+cb7,hhk4,9/3/2024,ho chi minh,hue,80
+cb8,hhk4,10/1/2024,ca mau,ha noi,200

@@ -1,3 +1,5 @@
-ve1,67,kh6,cb1,chua thanh toan
-ve2,34,kh5,cb6,chua thanh toan
-ve3,758333,kh100,cb1,da thanh toan
+ve1,67000,kh6,cb1,da thanh toan
+ve2,34000,kh5,cb6,da thanh toan
+ve3,75000,kh6,cb1,da thanh toan
+ve4,50000,kh3,cb2,da thanh toan
+ve5,100000,kh4,cb3,da thanh toan

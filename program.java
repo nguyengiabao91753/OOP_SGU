@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class program {
     static Scanner inp = new Scanner(System.in);
-
+    
     public static void main(String[] args) throws Exception {
         int chay = 1;
         int luachon;
@@ -15,6 +15,7 @@ public class program {
         quanlyhoadon.docfile();
         QuanLyUser quanLyuser = new QuanLyUser();
         quanLyuser.docFile();
+        
         QuanLyHangHangKhong quanLyhhk = new QuanLyHangHangKhong();
         quanLyhhk.docFile();
         Scanner nhap = new Scanner(System.in);
