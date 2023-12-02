@@ -46,10 +46,10 @@ public class chuyenbay {
         Scanner input=new Scanner(System.in);
         // System.out.println("Nhập mã chuyến bay: ");
         if(getCount()<10){
-            machuyenbay="CB0"+getCount();
+            machuyenbay="cb0"+getCount();
         }
         else {
-            machuyenbay="CB"+getCount();
+            machuyenbay="cb"+getCount();
         }
         System.out.println("Nhập mã hãng hàng không: ");
         hang.setMaHang(input.nextLine());
