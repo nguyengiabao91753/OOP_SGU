@@ -52,7 +52,7 @@ public class QuanLyHangHangKhong implements crud {
         Scanner nhap = new Scanner(System.in);
         System.out.println(ten + " đang có chuyến bay: ");
         for (chuyenbay chuyenbay : dscb.getDanhsachchuyenbay()) {
-            if (chuyenbay.getHang().getTenHang().equals(ten)) {
+            if ( chuyenbay!=null && chuyenbay.getHang().getTenHang().equals(ten)) {
                 System.out.println(chuyenbay.getMachuyenbay());
             }
         }
@@ -132,7 +132,7 @@ public class QuanLyHangHangKhong implements crud {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length == 3 && parts[2].equals("show")) {
-                    HangHangKhong hang = new HangHangKhong(parts[0], parts[1],parts[2]);
+                    HangHangKhong hang = new HangHangKhong(parts[0], parts[1]);
                     themHangHangKhong(hang);
                 } else {
                     System.out.println("Dữ liệu không hợp lệ: " + line);
