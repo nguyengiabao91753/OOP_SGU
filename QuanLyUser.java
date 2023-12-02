@@ -132,7 +132,7 @@ public class QuanLyUser implements crud {
                     System.out.println("Dữ liệu không hợp lệ: " + line);
                 }
             }
-            System.out.println("Đã đọc danh sách người dùng từ file.");
+            // System.out.println("Đã đọc danh sách người dùng từ file.");
         } catch (IOException e) {
             System.out.println("Lỗi khi đọc file: " + e.getMessage());
         }
