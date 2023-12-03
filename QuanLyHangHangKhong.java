@@ -153,7 +153,7 @@ public class QuanLyHangHangKhong implements crud {
                 bw.write(hang.getTenHang() + "," + hang.getMaHang()+",");
                 bw.write(System.lineSeparator());
             }
-            System.out.println("Đã ghi danh sách hãng hàng không vào file.");
+            // System.out.println("Đã ghi danh sách hãng hàng không vào file.");
         } catch (IOException e) {
             System.out.println("Lỗi khi ghi file: " + e.getMessage());
         }

@@ -208,10 +208,10 @@ public class quanly_hoadon implements crud {
         }
     }
 
-    public static void thongke() throws Exception {
-        quanly_hoadon quanly_hoadon = new quanly_hoadon();
+    public static void thongke(quanly_hoadon quanly_hoadon) throws Exception {
+        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        quanly_hoadon.docfile();
+        
         int[] a = new int[1000];
         int i = 0, t = 0;
         // truyền năm vào mảng
@@ -222,6 +222,7 @@ public class quanly_hoadon implements crud {
                 t = 0;
                 if (a[j] == nam) {
                     t = 1;
+                    break;
                 }
             }
             if (t == 0) {
@@ -230,10 +231,10 @@ public class quanly_hoadon implements crud {
             }
         }
         // sắp xếp mảng tăng dần
-        for (int x = 0; x < 1000 - 1; x++) {
+        for (int x = 0; x < i-1; x++) {
 
-            for (int z = x + 1; z < 1000; z++) {
-                if (a[z] < a[x] && a[z] != 0 && a[x] != 0) {
+            for (int z = x + 1; z < i; z++) {
+                if (a[z] < a[x] ) {
                     int tmp = a[x];
                     a[x] = a[z];
                     a[z] = tmp;
@@ -242,6 +243,7 @@ public class quanly_hoadon implements crud {
 
         }
         // Thống kê
+        System.out.println(">-------Thống kê-------<");
         for (int j = 0; j < i; j++) {
             int sum = 0;
             System.out.println("Năm " + a[j] + ": ");

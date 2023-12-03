@@ -145,7 +145,7 @@ public class QuanLyUser implements crud {
                 fw.write(user.getTaiKhoan() + "," + user.getMatKhau());
                 fw.write(System.lineSeparator());
             }
-            System.out.println("Đã ghi danh sách người dùng vào file.");
+            // System.out.println("Đã ghi danh sách người dùng vào file.");
         } catch (IOException e) {
             System.out.println("Lỗi khi ghi file: " + e.getMessage());
         }
