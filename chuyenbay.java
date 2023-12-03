@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class chuyenbay {
     private String machuyenbay;
     private int count=0;
-    private HangHangKhong hang;
+    private HangHangKhong hang=new HangHangKhong();
     private String thoigiankhoihanh;
     private String diemxuatphat;
     private String diemden;
@@ -21,10 +21,17 @@ public class chuyenbay {
         diemden=" ";
         status = "show";
         soghe=0;
-        count++;
     }
-    public int getCount() {
-        return count;
+    
+    public chuyenbay(int count){
+        machuyenbay=" ";
+        hang =new HangHangKhong();
+        thoigiankhoihanh=" ";
+        diemxuatphat=" ";
+        diemden=" ";
+        status = "show";
+        soghe=0;
+        this.count=count;
     }
     public chuyenbay(chuyenbay tmp){
         machuyenbay=tmp.machuyenbay;
@@ -45,14 +52,15 @@ public class chuyenbay {
     public void nhap() throws Exception{
         Scanner input=new Scanner(System.in);
         // System.out.println("Nhập mã chuyến bay: ");
-        if(getCount()<10){
-            machuyenbay="cb0"+getCount();
+        if(count<10){
+            machuyenbay="cb0"+count;
         }
         else {
-            machuyenbay="cb"+getCount();
+            machuyenbay="cb"+count;
         }
         System.out.println("Nhập mã hãng hàng không: ");
-        hang.setMaHang(input.nextLine());
+        String tmpp=input.nextLine();
+        hang.setMaHang(tmpp);
         //Kiểm tra mã đó có tồn tại trong file không
         boolean flag=true;
         while (flag) {
@@ -82,7 +90,9 @@ public class chuyenbay {
         
     }
     public void xuat(){
-        System.out.printf("Mã chuyến bay: %s || Mã hãng hàng không: %s || Tên hãng hàng không: %s ||Thời gian: %s || Điểm xuất phát: %s || Điểm đến: %s || Tổng số ghế: %d ||\n",machuyenbay,hang.getMaHang(),hang.getTenHang(),thoigiankhoihanh,diemxuatphat,diemden,soghe);
+        if(status.equals("show")){
+            System.out.printf("Mã chuyến bay: %s || Mã hãng hàng không: %s || Tên hãng hàng không: %s ||Thời gian: %s || Điểm xuất phát: %s || Điểm đến: %s || Tổng số ghế: %d ||\n",machuyenbay,hang.getMaHang(),hang.getTenHang(),thoigiankhoihanh,diemxuatphat,diemden,soghe);
+        }
     }
     public String getMachuyenbay() {
         return machuyenbay;
@@ -113,5 +123,11 @@ public class chuyenbay {
     }
     public void setSoghe(int soghe) {
         this.soghe = soghe;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    public String getStatus() {
+        return status;
     }
 }
