@@ -179,15 +179,6 @@ public class quanly_ve implements crud {
             System.out.println("Mã vé không tồn tại! ");
         }
     }
-
-    public void xoa_Makh(String ma_xoa) {
-        for (ve ve : danhsachve)
-            if (ve.getkhachHang().getMakh().equals(ma_xoa)) {
-                ve.setStatus("hidden");
-                break;
-            }
-    }
-
     public List<ve> getDanhsachve() {
         return danhsachve;
     }
@@ -211,7 +202,7 @@ public class quanly_ve implements crud {
 
     public void xuat() {
         for (ve ve : danhsachve)
-            
+            if(ve.getStatus().equals("show"))
                 ve.xuat();
     }
 
@@ -250,27 +241,7 @@ public class quanly_ve implements crud {
                             ve.setGia(gia);
                             c++;
                             break;
-                        case 2:
-
-                            for (khachHang khachHang : dsKhachHang.getDskh()) {
-                                if (khachHang.getMakh().equals(arr[i])) {
-                                    ve.setkhachHang(khachHang);
-                                    c++;
-                                    break;
-                                }
-                            }
-
-                            break;
-                        case 3:
-                            for (chuyenbay chuyenbay : dscb.getDanhsachchuyenbay()) {
-                                if (chuyenbay != null && chuyenbay.getMachuyenbay() != null
-                                        && chuyenbay.getMachuyenbay().equals(arr[i])) {
-                                    ve.setChuyenbay(chuyenbay);
-                                    c++;
-                                    break;
-                                }
-                            }
-                            break;
+                        
                         case 4:
                             ve.setTrangthai(arr[i]);
                             c++;

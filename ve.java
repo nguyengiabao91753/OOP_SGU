@@ -101,7 +101,7 @@ public class ve {
 }
 
 
-
+/* 
 class hienthiquanlyve {
     public static void main(String[] args) throws Exception {
         quanly_ve quanly_ve = new quanly_ve();
@@ -179,4 +179,4 @@ class hienthiquanlyve {
         // again = inp.nextInt();
         // }
     }
-}
+}*/
