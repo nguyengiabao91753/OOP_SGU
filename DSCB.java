@@ -53,46 +53,55 @@ public class DSCB implements crud {
         String mabay;
         Scanner input = new Scanner(System.in);
         System.out.println("Nhập mã chuyến bay cần thay đổi: ");
+        boolean flag=true;
         mabay = input.nextLine();
         for (int i = 0; i < sochuyenbay; i++) {
-            if (danhsachchuyenbay[i].getMachuyenbay().equals(mabay)) {
+            if (danhsachchuyenbay[i].getMachuyenbay().equals(mabay) && danhsachchuyenbay[i].getStatus().equals("show")) {
                 danhsachchuyenbay[i].nhap();
+                flag=false;
                 break;
             }
         }
-        System.out.println("Không tìm thấy mã chuyến bay cần chỉnh sửa.");
+        if(flag){
+            System.out.println("Không tìm thấy mã chuyến bay cần chỉnh sửa.");
+        }
     }
 
     public void tim() {
         String mabay;
         Scanner input = new Scanner(System.in);
         System.out.println("Nhập mã chuyến bay cần tìm: ");
+        boolean flag=true;
         mabay = input.nextLine();
         for (int i = 0; i < sochuyenbay; i++) {
-            if (danhsachchuyenbay[i].getMachuyenbay().equals(mabay)) {
+            if (danhsachchuyenbay[i].getMachuyenbay().equals(mabay) && danhsachchuyenbay[i].getStatus().equals("show")) {
                 danhsachchuyenbay[i].xuat();
+                flag=false;
+                break;
             }
         }
-        System.out.println("Không tìm thấy mã chuyến bay cần tìm.");
+        if(flag){
+            System.out.println("Không tìm thấy mã chuyến bay cần tìm.");
+        }
+        
     }
 
     public void xoa() {
         Scanner input = new Scanner(System.in);
         System.out.println("Nhập mã chuyến bay cần xóa: ");
         String ma = input.nextLine();
-        int flag = 0;
+        boolean flag = true;
         for (int i = 0; i < sochuyenbay; i++) {
             if (danhsachchuyenbay[i].getMachuyenbay().equals(ma)) {
                 System.out.println("Thuc hien xoa chuyen bay:");
                 danhsachchuyenbay[i].xuat();
                 danhsachchuyenbay[i].setStatus("hidden");
-                flag 
-                = 1;
+                flag= false;
                 break;
             }
 
         }
-        if (flag == 0) {
+        if (flag) {
             System.out.println("Không tìm thấy mã chuyến bay cần xóa vui lòng kiểm tra lại!");
         }
     }
@@ -165,10 +174,9 @@ public class DSCB implements crud {
         // System.out.println("Du lieu chuyen bay da duoc lay thanh cong!");
     }
 
-    public void quanlyDSCB() throws Exception {
+    public void quanlyDSCB(QuanLyHangHangKhong quanLyhhk) throws Exception {
         int flag;
-        QuanLyHangHangKhong dsHangHangKhong = new QuanLyHangHangKhong();
-        dsHangHangKhong.docFile();
+        quanLyhhk.docFile();
         docfile();
         while (true) {
             Scanner input = new Scanner(System.in);
@@ -178,13 +186,13 @@ public class DSCB implements crud {
             System.out.println("    3.Thêm chuyến bay vào danh sách.");
             System.out.println("    4.Xem danh sach hãng hàng không.");
             System.out.println("    5.Xóa chuyến bay theo mã số chuyến.");
-            // System.out.println(" 6.Đọc dữ liệu chuyến bay từ File ra mảng.");
+            System.out.println("    6.Chỉnh sửa thông tin chuyến bay.");
             // System.out.println(" 7.Lưu dữ liệu.");
             // System.out.println(" 8.Quản lý hãng hàng không.");
             System.out.println("    0.Quay lại trang chính.");
             System.out.println("Hãy nhập lựa chọn của bạn!");
             flag = input.nextInt();
-            if (flag > 8 || flag < 0) {
+            if (flag > 6 || flag < 0) {
                 System.out.println("Lựa chọn của bạn không hợp lệ,vui lòng nhập lại!");
                 continue;
             }
@@ -213,54 +221,17 @@ public class DSCB implements crud {
                     ghifile();
                     break;
                 case 4:
-                    dsHangHangKhong.xuat();
+                    quanLyhhk.xuat();
                     break;
                 case 5:
                     xoa();
                     ghifile();
                     break;
                 case 6:
-
-                    try {
-                        BufferedReader sc = new BufferedReader(new FileReader("dataDSCB.txt"));
-                        String line = sc.readLine();
-                        sochuyenbay = 0;
-                        while (line != null) {
-                            String[] arr = line.split(",");
-                            danhsachchuyenbay[sochuyenbay] = new chuyenbay();
-                            danhsachchuyenbay[sochuyenbay].setMachuyenbay(arr[0]);
-                            danhsachchuyenbay[sochuyenbay].setThoigiankhoihanh(arr[1]);
-                            danhsachchuyenbay[sochuyenbay].setDiemxuatphat(arr[2]);
-                            danhsachchuyenbay[sochuyenbay].setDiemden(arr[3]);
-                            danhsachchuyenbay[sochuyenbay].setSoghe(Integer.parseInt(arr[4]));
-                            sochuyenbay++;
-                            line = sc.readLine();
-                        }
-                        sc.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    sua();
                     break;
                 case 7:
-                    try {
-                        FileWriter fw = new FileWriter("dataDSCB.txt");
-                        for (int i = 0; i < sochuyenbay; i++) {
-                            fw.write(danhsachchuyenbay[i].getMachuyenbay() + ","
-                                    + danhsachchuyenbay[i].getHang().getMaHang() + ","
-                                    + danhsachchuyenbay[i].getThoigiankhoihanh() + ","
-                                    + danhsachchuyenbay[i].getDiemxuatphat() + "," + danhsachchuyenbay[i].getDiemden()
-                                    + "," + danhsachchuyenbay[i].getSoghe() + "\n");
-                        }
-                        // fw.write("chào mừng đến với thế giới thần tiên.");
-
-                        fw.close();
-                    }
-
-                    catch (Exception ex) {
-                        // TODO: handle exception
-                        System.out.println(ex);
-                    }
-                    // System.out.println("Du lieu chuyen bay da duoc lay thanh cong!");
+                    
                     break;
             }
         }
