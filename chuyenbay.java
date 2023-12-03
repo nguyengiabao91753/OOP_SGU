@@ -52,7 +52,9 @@ public class chuyenbay {
     public void nhap() throws Exception{
         Scanner input=new Scanner(System.in);
         // System.out.println("Nhập mã chuyến bay: ");
+        
             machuyenbay="cb"+count;
+        
         System.out.println("Nhập mã hãng hàng không: ");
         String tmpp=input.nextLine();
         hang.setMaHang(tmpp);

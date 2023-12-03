@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+
 public class quanly_ve implements crud {
     private List<ve> danhsachve;
     private List<ve> dsve_daydu;
@@ -8,12 +9,13 @@ public class quanly_ve implements crud {
     public quanly_ve() {
         danhsachve = new ArrayList<>();
         dsve_daydu = new ArrayList<>();
-        
+
     }
 
     public quanly_ve(List<ve> danhsachve) {
         this.danhsachve = danhsachve;
     }
+
     public List<ve> getDsve_daydu() {
         return dsve_daydu;
     }
@@ -44,37 +46,40 @@ public class quanly_ve implements crud {
         return 2; // th: ko trùng mã,ko trùng thông tin nào -> thêm kh mới vào dskh
     }
 
-    public void them() throws Exception {
+    public void them() {
+    }
+
+    public void them(DSKhachHang dskh, quanly_hoadon quanly_hoadon) throws Exception {
         ve vemoi = new ve();
         vemoi.nhap();
         // set khach hang
-        DSKhachHang dskh = new DSKhachHang();
-        dskh.docFile();
         dskh.them(vemoi.getkhachHang());
 
         // if (checkkhachhang(vemoi, dskh) == 1) {
-        //     while (checkkhachhang(vemoi, dskh) == 1) {
-        //         System.out.println("Mã khách hàng đã tồn tại! Vui lòng nhập lại");
-        //         String makh = nhap.nextLine();
-        //         vemoi.getkhachHang().setMakh(makh);
-        //     }
-        //     dskh.them(vemoi.getkhachHang());
-        //     dskh.ghiFile();
-        // } else if (checkkhachhang(vemoi, dskh) == 2) {
-        //     dskh.them(vemoi.getkhachHang());
-        //     dskh.ghiFile();
-            
+        // while (checkkhachhang(vemoi, dskh) == 1) {
+        // System.out.println("Mã khách hàng đã tồn tại! Vui lòng nhập lại");
+        // String makh = nhap.nextLine();
+        // vemoi.getkhachHang().setMakh(makh);
         // }
+        // dskh.them(vemoi.getkhachHang());
+        // dskh.ghiFile();
+        // } else if (checkkhachhang(vemoi, dskh) == 2) {
+        // dskh.them(vemoi.getkhachHang());
+        // dskh.ghiFile();
+
+        // }
+
         // Set mã vé
-        String ma = "ve"+ (danhsachve.size()+1);
+        String ma = "ve" + (danhsachve.size() + 1);
         vemoi.setMa_ve(ma);
+
         // String ma = vemoi.getMa_ve();
         // for (ve ve : danhsachve) {
-        //     while (ve.getMa_ve().equals(ma)) {
-        //         System.out.println("Mã vé đã tồn tại! Vui lòng nhập lại mã vé");
-        //         ma = nhap.nextLine();
-        //         vemoi.setMa_ve(ma);
-        //     }
+        // while (ve.getMa_ve().equals(ma)) {
+        // System.out.println("Mã vé đã tồn tại! Vui lòng nhập lại mã vé");
+        // ma = nhap.nextLine();
+        // vemoi.setMa_ve(ma);
+        // }
         // }
 
         // check chuyến bay
@@ -83,7 +88,9 @@ public class quanly_ve implements crud {
             ma = nhap.nextLine();
             vemoi.getChuyenbay().setMachuyenbay(ma);
         }
-
+        if (vemoi.getTrangthai().equals("da thanh toan")) {
+            quanly_hoadon.them(vemoi);
+        }
         danhsachve.add(vemoi);
     }
 
@@ -91,7 +98,10 @@ public class quanly_ve implements crud {
         danhsachve.add(ve);
     }
 
-    public void sua() throws Exception {
+    public void sua() {
+    }
+
+    public void sua(quanly_hoadon quanly_hoadon) throws Exception {
         ve vemoi = new ve();
         String ma_sua;
         System.out.println("Nhập mã cần chỉnh sửa");
@@ -99,20 +109,49 @@ public class quanly_ve implements crud {
         int co = 0;
         for (ve ve : danhsachve) {
             if (ve.getMa_ve().equals(ma_sua)) {
-                System.out.println("Nhập vé mới để sửa");
-                vemoi.nhap();
 
-                // check chuyến bay
-                while (checkmachuyenbay(vemoi) == 0) {
-                    System.out.println("Mã chuyến bay không tồn tại! Vui lòng nhập lại mã chuyến bay: ");
-                    String ma = nhap.nextLine();
-                    vemoi.getChuyenbay().setMachuyenbay(ma);
+                if (ve.getTrangthai().equals("da thanh toan")) {
+                    System.out.println("Vé đã thanh toán, không thế chỉnh sửa");
+                    break;
+                } else {
+                    vemoi = ve;
+
+                    System.out.println("1.Sửa chuyến bay");
+                    System.out.println("2. Sửa trạng thái vé (khách hàng đã thanh toán)");
+                    int chon = 0;
+                    chon = nhap.nextInt();
+                    switch (chon) {
+                        case 1:
+                            
+                            System.out.println("Nhập mã chuyến bay: ");
+                            String ma = nhap.nextLine();
+                            vemoi.getChuyenbay().setMachuyenbay(ma);
+                            // check chuyến bay
+                            while (checkmachuyenbay(vemoi) == 0) {
+                                System.out.println("Mã chuyến bay không tồn tại! Vui lòng nhập lại mã chuyến bay: ");
+                                ma = nhap.nextLine();
+                                vemoi.getChuyenbay().setMachuyenbay(ma);
+                            }
+                            System.out.println("Nhập giá:");
+                            int gia = nhap.nextInt();
+                            vemoi.setGia(gia);
+                            break;
+                        case 2:
+                            vemoi.setTrangthai("da thanh toan");
+                            System.out.println("Cập nhật thành công!");
+                            break;
+                        default:
+                            break;
+                    }
+
+                    danhsachve.remove(ve);
+                    danhsachve.add(vemoi);
+                    if (vemoi.getTrangthai().equals("da thanh toan")) {
+                        quanly_hoadon.them(vemoi);
+                    }
+                    co = 1;
+                    break;
                 }
-
-                danhsachve.remove(ve);
-                danhsachve.add(vemoi);
-                co = 1;
-                break;
             }
         }
         if (co == 0) {
@@ -120,13 +159,13 @@ public class quanly_ve implements crud {
         }
     }
 
-
     public void xoa() {
         String ma_xoa;
         System.out.println("Nhap mã vé muốn xóa");
         ma_xoa = nhap.nextLine();
         xoa(ma_xoa);
     }
+
     public void xoa(String ma_xoa) {
         int co = 0;
         for (ve ve : danhsachve) {
@@ -141,15 +180,13 @@ public class quanly_ve implements crud {
         }
     }
 
-
-    public void xoa_Makh(String ma_xoa){
-        for (ve ve : danhsachve) 
+    public void xoa_Makh(String ma_xoa) {
+        for (ve ve : danhsachve)
             if (ve.getkhachHang().getMakh().equals(ma_xoa)) {
                 ve.setStatus("hidden");
                 break;
             }
     }
-
 
     public List<ve> getDanhsachve() {
         return danhsachve;
@@ -173,8 +210,8 @@ public class quanly_ve implements crud {
     }
 
     public void xuat() {
-        for (ve ve : danhsachve) 
-            if(ve.getStatus() == "show")
+        for (ve ve : danhsachve)
+            
                 ve.xuat();
     }
 
@@ -183,7 +220,7 @@ public class quanly_ve implements crud {
             FileWriter fw = new FileWriter("ve.txt");
             for (ve ve : danhsachve) {
                 fw.write(ve.getMa_ve() + "," + ve.getGia() + "," + ve.getkhachHang().getMakh() + ","
-                        + ve.getChuyenbay().getMachuyenbay() + "," + ve.getTrangthai() +","+ve.getStatus()+"\n");
+                        + ve.getChuyenbay().getMachuyenbay() + "," + ve.getTrangthai() + "," + ve.getStatus() + "\n");
             }
             fw.close();
         } catch (IOException ioe) {
@@ -239,9 +276,9 @@ public class quanly_ve implements crud {
                             c++;
                             break;
                         case 5:
-                            if(!arr[i].equals("show")){
+                            if (!arr[i].equals("show")) {
                                 ve.setStatus(arr[i]);
-                                c=0;
+                                c = 0;
                             }
                             break;
                         default:
@@ -252,7 +289,7 @@ public class quanly_ve implements crud {
                 if (c == 5) {
                     danhsachve.add(ve);
                 }
-                if(ve.getStatus().equals("show") || ve.getStatus().equals("hidden")){
+                if (ve.getStatus().equals("show") || ve.getStatus().equals("hidden")) {
                     dsve_daydu.add(ve);
                 }
                 line = fr.readLine();

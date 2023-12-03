@@ -31,7 +31,7 @@ public class program {
             System.out.println("    6. Quản lý Hãng hàng không");
             System.out.println("    7. Quản lý Hóa đơn");
             System.out.println("    8. Thống kê doanh thu");
-            System.out.println("    9. Thoát");
+            System.out.println("    0. Thoát");
             System.out.println(">---------------------------------------<");
             System.out.println("Nhập lựa chọn");
             int chon = inp.nextInt();
@@ -95,7 +95,7 @@ public class program {
                         System.out.println("    Quản lý vé chuyến bay");
                         System.out.println(">---------------------------<");
                         System.out.println("    1. Thêm vé");
-                        System.out.println("    2. Sửa vé");
+                        System.out.println("    2. Cập nhật vé");
                         System.out.println("    3. Xóa vé");
                         System.out.println("    4. Tìm vé theo mã vé");
                         System.out.println("    5. Xuất toàn bộ vé");
@@ -108,16 +108,10 @@ public class program {
                             switch (luachon) {
                                 case 1:
 
-                                    danhsachve.them();                                 
-                                    for (ve ve : danhsachve.getDanhsachve()) {
-                                        if (ve.getTrangthai().equals("da thanh toan")) {
-                                            quanlyhoadon.them(ve);
-                                            
-                                        }
-                                    }
+                                    danhsachve.them(dsKhachHang,quanlyhoadon);
                                     break;
                                 case 2:
-                                    danhsachve.sua();
+                                    danhsachve.sua(quanlyhoadon);
                                     break;
                                 case 3:
 
@@ -222,15 +216,12 @@ public class program {
                     break;
                 case 8:
                     try {
-                        quanly_hoadon.thongke();
+                        quanly_hoadon.thongke(quanlyhoadon);
                         System.out.println("\n");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    break;
-                case 9:
-                    chay = 0;
-                    break;
+                    break;               
                 default:
                     break;
             }
