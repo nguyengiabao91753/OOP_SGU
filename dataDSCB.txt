@@ -1,4 +1,8 @@
-cb01,hhk1,23/12/2022,phu yen,binh dinh,33,show
-cb02,hhk2,25/12/2022,ca mau,ha noi,53,show
-cb03,hhk3,1/1/2023,da nang,gia lai,55,show
-cb04,hhk4,2/1/2023,ha noi,ho chi minh,75,show
+cb1,hhk1,22/12/2022,ha noi,gia lai,15,hidden
+cb2,hhk1,20/8/2023,ha noi,da nang,103,show
+cb3,hhk2,22/9/2024,ho chi minh,gia lai,200,show
+cb4,hhk1,23/7/2024,dak lak,ho chi minh,103,show
+cb5,hhk3,2/4/2024,da nang,hue,50,show
+cb6,hhk2,22/11/2022,hcm,gia lai,100,show
+cb7,hhk4,9/3/2024,ho chi minh,hue,80,show
+cb8,hhk4,10/1/2024,ca mau,ha noi,200,show

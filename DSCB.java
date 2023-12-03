@@ -85,7 +85,7 @@ public class DSCB implements crud {
             if (danhsachchuyenbay[i].getMachuyenbay().equals(ma)) {
                 System.out.println("Thuc hien xoa chuyen bay:");
                 danhsachchuyenbay[i].xuat();
-                danhsachchuyenbay[i].setStatus("0");
+                danhsachchuyenbay[i].setStatus("hidden");
                 flag 
                 = 1;
                 break;
@@ -94,6 +94,18 @@ public class DSCB implements crud {
         }
         if (flag == 0) {
             System.out.println("Không tìm thấy mã chuyến bay cần xóa vui lòng kiểm tra lại!");
+        }
+    }
+    public void xoa(String ma){
+         for (int i = 0; i < sochuyenbay; i++) {
+            if (danhsachchuyenbay[i].getMachuyenbay().equals(ma)) {
+                System.out.println("Thuc hien xoa chuyen bay:");
+                danhsachchuyenbay[i].xuat();
+                danhsachchuyenbay[i].setStatus("hidden");
+                
+                break;
+            }
+
         }
     }
     public void docfile() throws Exception {

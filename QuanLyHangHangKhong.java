@@ -60,7 +60,7 @@ public class QuanLyHangHangKhong implements crud {
         String chon = nhap.nextLine();
         if (chon.equals("Y")) {
             for (chuyenbay chuyenbay : dscb.getDanhsachchuyenbay()) {
-                if (chuyenbay.getHang().getTenHang().equals(ten)) {
+                if (chuyenbay!=null && chuyenbay.getHang().getTenHang().equals(ten)) {
                     dscb.xoa(chuyenbay.getMachuyenbay());
                 }
             }
@@ -150,7 +150,7 @@ public class QuanLyHangHangKhong implements crud {
         String tenFile = "HHK.txt";
         try (FileWriter bw = new FileWriter(tenFile)) {
             for (HangHangKhong hang : danhSachHang) {
-                bw.write(hang.getTenHang() + "," + hang.getMaHang()+",");
+                bw.write(hang.getTenHang() + "," + hang.getMaHang()+","+hang.getStatus());
                 bw.write(System.lineSeparator());
             }
             // System.out.println("Đã ghi danh sách hãng hàng không vào file.");

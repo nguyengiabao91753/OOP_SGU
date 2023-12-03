@@ -211,7 +211,7 @@ public class quanly_ve implements crud {
 
     public void xuat() {
         for (ve ve : danhsachve)
-            if (ve.getStatus() == "show")
+            
                 ve.xuat();
     }
 

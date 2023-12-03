@@ -31,7 +31,7 @@ public class program {
             System.out.println("    6. Quản lý Hãng hàng không");
             System.out.println("    7. Quản lý Hóa đơn");
             System.out.println("    8. Thống kê doanh thu");
-            System.out.println("    9. Thoát");
+            System.out.println("    0. Thoát");
             System.out.println(">---------------------------------------<");
             System.out.println("Nhập lựa chọn");
             int chon = inp.nextInt();
@@ -222,10 +222,7 @@ public class program {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    break;
-                case 9:
-                    chay = 0;
-                    break;
+                    break;               
                 default:
                     break;
             }
