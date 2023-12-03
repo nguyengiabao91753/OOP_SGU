@@ -95,7 +95,7 @@ public class DSCB implements crud {
             if (danhsachchuyenbay[i].getMachuyenbay().equals(ma)) {
                 System.out.println("Thuc hien xoa chuyen bay:");
                 danhsachchuyenbay[i].xuat();
-                danhsachchuyenbay[i].setStatus("0");
+                danhsachchuyenbay[i].setStatus("hidden");
                 flag= false;
                 break;
             }

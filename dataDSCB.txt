@@ -1,6 +1,6 @@
 cb01,hhk2,23/12/2022,phu yen,binh dinh,33,show
 cb02,hhk2,25/12/2022,ca mau,ha noi,53,show
 cb03,hhk3,1/1/2023,da nang,gia lai,55,show
-cb04,hhk4,2/1/2023,ha noi,ho chi minh,75,0
+cb04,hhk4,2/1/2023,ha noi,ho chi minh,75,hidden
 cb0,hhk2,3/1/2023,vung tau,ca mau,47,show
-cb6,hhk2,4/1/2023,h… n?i,hu?,68,show
+cb6,hhk2,4/1/2023,hï¿½ n?i,hu?,68,show
