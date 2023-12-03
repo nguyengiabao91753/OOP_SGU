@@ -87,8 +87,7 @@ public class program {
                 case 4:
 
                     System.out.println("Quản lý Chuyến bay");
-                    tmp.quanlyDSCB();
-                    
+                    tmp.quanlyDSCB(quanLyhhk);
                     break;
                 case 5:
 
