@@ -31,7 +31,7 @@ public class DSCB implements crud {
         System.out.println("Nhập số lượng chuyến bay:");
         sochuyenbay = input.nextInt();
         for (int i = 0; i < sochuyenbay; i++) {
-            danhsachchuyenbay[i] = new chuyenbay();
+            danhsachchuyenbay[i] = new chuyenbay(i+1);
             danhsachchuyenbay[i].nhap();
         }
     }
@@ -44,7 +44,7 @@ public class DSCB implements crud {
 
     public void them() throws Exception {
         danhsachchuyenbay = Arrays.copyOf(danhsachchuyenbay, sochuyenbay + 1);
-        danhsachchuyenbay[sochuyenbay] = new chuyenbay();
+        danhsachchuyenbay[sochuyenbay] = new chuyenbay(sochuyenbay+1);
         danhsachchuyenbay[sochuyenbay].nhap();
         sochuyenbay++;
     }
@@ -85,11 +85,9 @@ public class DSCB implements crud {
             if (danhsachchuyenbay[i].getMachuyenbay().equals(ma)) {
                 System.out.println("Thuc hien xoa chuyen bay:");
                 danhsachchuyenbay[i].xuat();
-                for (int j = i; j < sochuyenbay; j++) {
-                    danhsachchuyenbay[j] = danhsachchuyenbay[j + 1];
-                }
-                flag = 1;
-                sochuyenbay--;
+                danhsachchuyenbay[i].setStatus("0");
+                flag 
+                = 1;
                 break;
             }
 
@@ -98,23 +96,6 @@ public class DSCB implements crud {
             System.out.println("Không tìm thấy mã chuyến bay cần xóa vui lòng kiểm tra lại!");
         }
     }
-
-    public void xoa(String macb) {
-        for (int i = 0; i < sochuyenbay; i++) {
-            if (danhsachchuyenbay[i].getMachuyenbay().equals(macb)) {
-                System.out.println("Thuc hien xoa chuyen bay:");
-                danhsachchuyenbay[i].xuat();
-                for (int j = i; j < sochuyenbay; j++) {
-                    danhsachchuyenbay[j] = danhsachchuyenbay[j + 1];
-                }
-                
-                sochuyenbay--;
-                break;
-            }
-
-        }
-    }
-
     public void docfile() throws Exception {
         QuanLyHangHangKhong newQuan = new QuanLyHangHangKhong();
         newQuan.docFile();
@@ -138,6 +119,7 @@ public class DSCB implements crud {
                 danhsachchuyenbay[sochuyenbay].setDiemxuatphat(arr[3]);
                 danhsachchuyenbay[sochuyenbay].setDiemden(arr[4]);
                 danhsachchuyenbay[sochuyenbay].setSoghe(Integer.parseInt(arr[5]));
+                danhsachchuyenbay[sochuyenbay].setStatus(arr[6]);
                 sochuyenbay++;
                 line = sc.readLine();
             }
@@ -156,6 +138,7 @@ public class DSCB implements crud {
                         + danhsachchuyenbay[i].getThoigiankhoihanh() + ","
                         + danhsachchuyenbay[i].getDiemxuatphat() + "," + danhsachchuyenbay[i].getDiemden()
                         + "," + danhsachchuyenbay[i].getSoghe()
+                        +","+ danhsachchuyenbay[i].getStatus()
                         + "\n");
             }
             // fw.write("chào mừng đến với thế giới thần tiên.");
