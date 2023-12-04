@@ -87,8 +87,8 @@ public class hoadon {
 class Main {
     public static void main(String[] args) throws Exception {
         quanly_hoadon quanlyhoadon = new quanly_hoadon();
-        quanlyhoadon.docfile();
-        quanlyhoadon.xuat();
+        // quanly_hoadon.docfile();
+        // quanly_hoadon.xuat();
         // quanly_hoadon.thongke();
         // quanly_hoadon quanly_hoadon = new quanly_hoadon();
         // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy

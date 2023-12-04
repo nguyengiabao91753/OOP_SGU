@@ -151,7 +151,7 @@ public class QuanLyUser implements crud {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    //public static void main(String[] args) throws Exception {
 
-    }
+    //}
 }

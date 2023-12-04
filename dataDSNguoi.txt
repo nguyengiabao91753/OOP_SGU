@@ -1,13 +1,13 @@
-0,kh1,Tang Thanh Thuan,Nam,Ho Chi Minh,0000000001
-0,kh2,Nguyen Le Bao Chau,Nam,Binh Đinh,0000000002
-0,kh3,Ngan Que Linh,Nu,Ha Noi,0000000003
-0,kh4,Le Ngoc Thien Thanh,Nu,Nha Trang,0000000004
-0,kh5,Ngo Nguyen Thanh Dat,Nam,Thanh Hoa,0000000005
-0,kh6,Nguyen Hong Mai Anh,Nu,Binh Duong,0000000006
-0,kh7,Nguyen Gia Bao,nam,hoc mon,09264395
-1,nv1,Tran Xuan Hung,Nam,Phu Yen,0000000011,3000000
-1,nv2,Pham Thi Thuong,Nu,Ninh Thuan,0000000013,7000000
-1,nv3,Tran Van Hoa,Nam,Tay Ninh,0000000012,5000000
-1,nv4,Nguyen Thi Diem My,Nu,Da Lat,0000000014,5000000
-1,nv5,Nguyen Đuc Duong,Nam,Quy Nhon,0000000015,3000000
-1,nv6,Ha Thi Thanh Thao,Nu,Quy Nhon,0000000016,700000
+0,kh1,Tang Thanh Thuan,Nam,Ho Chi Minh,0000000001,show
+0,kh2,Nguyen Le Bao Chau,Nam,Binh Đinh,0000000002,show
+0,kh3,Ngan Que Linh,Nu,Ha Noi,0000000003,show
+0,kh4,Le Ngoc Thien Thanh,Nu,Nha Trang,0000000004,show
+0,kh5,Ngo Nguyen Thanh Dat,Nam,Thanh Hoa,0000000005,show
+0,kh6,Nguyen Hong Mai Anh,Nu,Binh Duong,0000000006,show
+0,kh7,Nguyen Gia Bao,nam,hoc mon,09264395,show
+1,nv1,Tran Xuan Hung,Nam,Phu Yen,0000000011,3000000,show
+1,nv2,Pham Thi Thuong,Nu,Ninh Thuan,0000000013,7000000,show
+1,nv3,Tran Van Hoa,Nam,Tay Ninh,0000000012,5000000,show
+1,nv4,Nguyen Thi Diem My,Nu,Da Lat,0000000014,5000000,show
+1,nv5,Nguyen Đuc Duong,Nam,Quy Nhon,0000000015,3000000,show
+1,nv6,Ha Thi Thanh Thao,Nu,Quy Nhon,0000000016,700000,show

@@ -45,6 +45,7 @@ public class program {
                     QuanLyKH qlkh = new QuanLyKH();
                     qlkh.menu();
                     break;
+ 
                 case 2:
                     System.out.println("Quản lý nhân viên:");
                     QuanLyNV qlnv = new QuanLyNV();
@@ -171,7 +172,7 @@ public class program {
 
                     } while (luachon != 0);
                     
-                    break;
+                    break; 
                 case 7:
 
                     again = 1;
@@ -221,7 +222,7 @@ public class program {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    break;               
+                    break;             
                 default:
                     chay=0;
                     break;

@@ -179,15 +179,6 @@ public class quanly_ve implements crud {
             System.out.println("Mã vé không tồn tại! ");
         }
     }
-
-    public void xoa_Makh(String ma_xoa) {
-        for (ve ve : danhsachve)
-            if (ve.getkhachHang().getMakh().equals(ma_xoa)) {
-                ve.setStatus("hidden");
-                break;
-            }
-    }
-
     public List<ve> getDanhsachve() {
         return danhsachve;
     }
@@ -211,7 +202,7 @@ public class quanly_ve implements crud {
 
     public void xuat() {
         for (ve ve : danhsachve)
-            
+            if(ve.getStatus().equals("show"))
                 ve.xuat();
     }
 
