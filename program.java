@@ -223,6 +223,7 @@ public class program {
                     }
                     break;               
                 default:
+                    chay=0;
                     break;
             }
         } while (chay == 1);

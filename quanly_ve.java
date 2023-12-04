@@ -266,6 +266,7 @@ public class quanly_ve implements crud {
                                 if (chuyenbay != null && chuyenbay.getMachuyenbay() != null
                                         && chuyenbay.getMachuyenbay().equals(arr[i])) {
                                     ve.setChuyenbay(chuyenbay);
+                                    
                                     c++;
                                     break;
                                 }
@@ -286,6 +287,7 @@ public class quanly_ve implements crud {
                     }
 
                 }
+                
                 if (c == 5) {
                     danhsachve.add(ve);
                 }
