@@ -23,6 +23,7 @@ public class program {
         
         QuanLyHangHangKhong quanLyhhk = new QuanLyHangHangKhong();
         quanLyhhk.docFile();
+
         Scanner nhap = new Scanner(System.in);
         do {
             System.out.println("------Quản lý bán vé máy bay------");

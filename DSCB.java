@@ -176,8 +176,6 @@ public class DSCB implements crud {
 
     public void quanlyDSCB(QuanLyHangHangKhong dshhk) throws Exception {
         int flag;
-        
-       
         while (true) {
             Scanner input = new Scanner(System.in);
             System.out.println("-------->Menu quản lý chuyến bay--------<");
@@ -186,6 +184,7 @@ public class DSCB implements crud {
             System.out.println("    2.Thêm chuyến bay vào danh sách.");
             System.out.println("    3.Xóa chuyến bay theo mã số chuyến.");
             System.out.println("    4.Chỉnh sửa thông tin chuyến bay.");
+            System.out.println("    5.Xuất thông tin chuyến bay theo mã hãng hàng không.");
             // System.out.println(" 7.Lưu dữ liệu.");
             // System.out.println(" 8.Quản lý hãng hàng không.");
             System.out.println("    0.Quay lại trang chính.");
@@ -212,8 +211,18 @@ public class DSCB implements crud {
                 case 4:
                     sua();
                     break;
-                default:
+                case 5:
+                    System.out.println("Xuất chuyến bay theo mã hãng hàng không.");
+                    for(HangHangKhong tmp: quanLyhhk.getDanhSachHang()){
+                        for(int i=0;i<sochuyenbay;i++){
+                            if(tmp.getMaHang().equals(danhsachchuyenbay[i].getHang().getMaHang())){
+                                danhsachchuyenbay[i].xuat();
+                            }
+                        }
+                        // System.out.println(tmp.getMaHang());
+                    }
                     break;
+                    
             }
         }
     }
