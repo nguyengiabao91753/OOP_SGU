@@ -1,13 +1,11 @@
 import java.util.*;
 //import java.io.*;
 class QuanLyKH {
-    DSKhachHang ds = new DSKhachHang();
     Scanner sc = new Scanner(System.in);
 
 
-    public void menu() throws Exception {
+    public void menu(DSKhachHang dsKhachHang) throws Exception {
         int chon;
-        ds.docFile();
         do{
             System.out.println("\n>Menu-------------------------<");
             System.out.println("1 - Tao danh sach khach hang moi");
@@ -21,22 +19,22 @@ class QuanLyKH {
             chon = sc.nextInt(); sc.nextLine();
             switch(chon){
                 case 1:
-                    ds.nhap();
+                    dsKhachHang.nhap();
                     break;
                 case 2:
-                    ds.them();
+                    dsKhachHang.them();
                     break;
                 case 3:
-                    ds.sua();
+                    dsKhachHang.sua();
                     break;
                 case 4:
-                    ds.xoa();
+                    dsKhachHang.xoa();
                     break;
                 case 5:
-                    ds.tim();
+                    dsKhachHang.tim();
                     break;
                 case 6:
-                    ds.xuat();
+                    dsKhachHang.xuat();
                     break;
                 case 0:
                     break;
@@ -45,7 +43,6 @@ class QuanLyKH {
             }
             System.out.println("\n>-----------------------------<");
         }while(chon != 0);
-        ds.ghiFile();
     }
 }
 /*

@@ -11,6 +11,9 @@ public class program {
         tmp.docfile();
         DSKhachHang dsKhachHang = new DSKhachHang();
         dsKhachHang.docFile();
+        DSNhanVien dsNhanVien = new DSNhanVien();
+        dsNhanVien.docFile();
+
         quanly_ve danhsachve = new quanly_ve();
         danhsachve.docfile(tmp,dsKhachHang);
         quanly_hoadon quanlyhoadon = new quanly_hoadon();
@@ -43,13 +46,12 @@ public class program {
                 case 1:
                     System.out.println("Quản lý khách hàng:");
                     QuanLyKH qlkh = new QuanLyKH();
-                    qlkh.menu();
-                    break;
- 
+                    qlkh.menu(dsKhachHang);
+                    break; 
                 case 2:
                     System.out.println("Quản lý nhân viên:");
                     QuanLyNV qlnv = new QuanLyNV();
-                    qlnv.menu();
+                    qlnv.menu(dsNhanVien);
                     break;
                 case 3:
 
@@ -233,8 +235,9 @@ public class program {
         quanlyhoadon.ghifile();
         quanLyhhk.ghiFile();
         danhsachve.ghifile();
+        dsKhachHang.ghiFile();
+        dsNhanVien.ghiFile();
         nhap.close();
-
     }
 
 }

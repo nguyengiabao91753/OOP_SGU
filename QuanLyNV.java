@@ -5,9 +5,9 @@ class QuanLyNV {
 
 
 
-    public void menu(){
+    public void menu(DSNhanVien dsNhanVien){
         int chon;
-        ds.docFile();
+        dsNhanVien.docFile();
         do{
             System.out.println("\n>Menu-------------------------<");
             System.out.println("1 - Tao danh sach nhan vien moi");
@@ -23,28 +23,28 @@ class QuanLyNV {
             chon = sc.nextInt(); sc.nextLine();
             switch(chon){
                 case 1:
-                    ds.nhap();
+                    dsNhanVien.nhap();
                     break;
                 case 2:
-                    ds.them();
+                    dsNhanVien.them();
                     break;
                 case 3:
-                    ds.sua();
+                    dsNhanVien.sua();
                     break;
                 case 4:
-                    ds.xoa();
+                    dsNhanVien.xoa();
                     break;
                 case 5:
-                    ds.tim();
+                    dsNhanVien.tim();
                     break;
                 case 6:
-                    ds.xuat();
+                    dsNhanVien.xuat();
                     break;
                 case 7:
-                    ds.docFile();
+                    dsNhanVien.docFile();
                     break;
                 case 8:
-                    ds.ghiFile();
+                    dsNhanVien.ghiFile();
                     break;
                 case 0:
                     break;
@@ -53,7 +53,6 @@ class QuanLyNV {
             }
             System.out.println("\n>-----------------------------<");
         }while(chon != 0);
-        ds.ghiFile();
     }
 }
 /* 

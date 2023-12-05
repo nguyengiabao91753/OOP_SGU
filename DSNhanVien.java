@@ -87,7 +87,7 @@ class DSNhanVien implements crud {
                 }
             }
             myWriter.close();
-            System.out.println("\n\nGhi File thanh cong");
+            // System.out.println("\n\nGhi File thanh cong");
         }
         catch (IOException e) {
             System.out.println("An error occurred.");

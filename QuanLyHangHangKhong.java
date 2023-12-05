@@ -25,15 +25,15 @@ public class QuanLyHangHangKhong implements crud {
         System.out.println("3. Xóa hãng hàng không");
         System.out.println("4. Sửa thông tin hãng hàng không");
         System.out.println("5. Tìm kiếm hãng hàng không");
-        System.out.println("6. Đọc danh sách hãng hàng không từ file");
-        System.out.println("7. Ghi danh sách hãng hàng không vào file");
         System.out.println("0. Thoát");
     }
 
     public void xuat() {
         System.out.println("----- Danh Sách Hãng Hàng Không -----");
         for (HangHangKhong hang : danhSachHang) {
-            hang.xuat();
+            if(hang.getStatus().equals("show")){
+                hang.xuat();
+            }
         }
     }
 
@@ -41,8 +41,9 @@ public class QuanLyHangHangKhong implements crud {
 
         System.out.print("Nhập tên hãng hàng không mới: ");
         String tenHang = scanner.nextLine();
-        System.out.print("Nhập mã hãng hàng không mới: ");
-        String maHang = scanner.nextLine();
+        // System.out.print("Nhập mã hãng hàng không mới: ");
+        String maHang = "hhk"+(danhSachHang.size() +1);
+
         HangHangKhong hangMoi = new HangHangKhong(tenHang, maHang);
         themHangHangKhong(hangMoi);
         System.out.println("Hãng hàng không mới đã được thêm: " + tenHang);
@@ -76,7 +77,7 @@ public class QuanLyHangHangKhong implements crud {
         String tenHang = scanner.nextLine();
         int c = 0;
         for (HangHangKhong hangHangKhong : danhSachHang) {
-            if (hangHangKhong.getTenHang().equals(tenHang)) {
+            if (hangHangKhong.getTenHang().equals(tenHang) && hangHangKhong.getStatus().equals("show")) {
                 if (rangbuoc(tenHang, dscb).equals("Y")) {
                     hangHangKhong.setStatus("hidden");
                     System.out.println("Hãng hàng không đã được xóa: " + tenHang);
@@ -161,7 +162,7 @@ public class QuanLyHangHangKhong implements crud {
 
     private HangHangKhong timHang(String ten) {
         for (HangHangKhong hang : danhSachHang) {
-            if (hang.getTenHang().equalsIgnoreCase(ten)) {
+            if (hang.getTenHang().equalsIgnoreCase(ten) && hang.getStatus().equals("show")) {
                 return hang;
             }
         }
@@ -194,12 +195,6 @@ public class QuanLyHangHangKhong implements crud {
                     break;
                 case 5:
                     quanLy.tim();
-                    break;
-                case 6:
-                    quanLy.docFile();
-                    break;
-                case 7:
-                    quanLy.ghiFile();
                     break;
                 case 0:
                     System.out.println("Thoát khỏi chương trình.");

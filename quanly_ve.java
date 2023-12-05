@@ -3,12 +3,12 @@ import java.util.*;
 
 public class quanly_ve implements crud {
     private List<ve> danhsachve;
-    private List<ve> dsve_daydu;
+    
     Scanner nhap = new Scanner(System.in);
 
     public quanly_ve() {
         danhsachve = new ArrayList<>();
-        dsve_daydu = new ArrayList<>();
+
 
     }
 
@@ -16,9 +16,7 @@ public class quanly_ve implements crud {
         this.danhsachve = danhsachve;
     }
 
-    public List<ve> getDsve_daydu() {
-        return dsve_daydu;
-    }
+
 
     static int checkmachuyenbay(ve vemoi) throws Exception {
         String macb = vemoi.getChuyenbay().getMachuyenbay();
@@ -108,7 +106,7 @@ public class quanly_ve implements crud {
         ma_sua = nhap.nextLine();
         int co = 0;
         for (ve ve : danhsachve) {
-            if (ve.getMa_ve().equals(ma_sua)) {
+            if (ve.getMa_ve().equals(ma_sua) && ve.getStatus().equals("show")) {
 
                 if (ve.getTrangthai().equals("da thanh toan")) {
                     System.out.println("Vé đã thanh toán, không thế chỉnh sửa");
@@ -169,7 +167,7 @@ public class quanly_ve implements crud {
     public void xoa(String ma_xoa) {
         int co = 0;
         for (ve ve : danhsachve) {
-            if (ve.getMa_ve().equals(ma_xoa)) {
+            if (ve.getMa_ve().equals(ma_xoa) && ve.getStatus().equals("show") ) {
                 ve.setStatus("hidden");
                 co = 1;
                 break;
@@ -189,7 +187,7 @@ public class quanly_ve implements crud {
         ma_tim = nhap.nextLine();
         int co = 0;
         for (ve ve : danhsachve) {
-            if (ve.getMa_ve().equals(ma_tim)) {
+            if (ve.getMa_ve().equals(ma_tim) && ve.getStatus().equals("show")) {
                 ve.xuat();
                 co = 1;
                 break;
@@ -268,10 +266,10 @@ public class quanly_ve implements crud {
                             c++;
                             break;
                         case 5:
-                            if (!arr[i].equals("show")) {
+                           
                                 ve.setStatus(arr[i]);
-                                c = 0;
-                            }
+                                c ++;
+                            
                             break;
                         default:
                             break;
@@ -279,12 +277,10 @@ public class quanly_ve implements crud {
 
                 }
                 
-                if (c == 5) {
+                if (c == 6) {
                     danhsachve.add(ve);
                 }
-                if (ve.getStatus().equals("show") || ve.getStatus().equals("hidden")) {
-                    dsve_daydu.add(ve);
-                }
+                
                 line = fr.readLine();
                 c = 0;
             }

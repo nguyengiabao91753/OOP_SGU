@@ -1,0 +1,6 @@
+ve1,67000,kh6,cb1,da thanh toan,show
+ve2,34000,kh5,cb6,da thanh toan,show
+ve3,75000,kh6,cb1,da thanh toan,show
+ve4,50000,kh3,cb2,da thanh toan,show
+ve5,100000,kh4,cb3,da thanh toan,show
+ve6,150000,kh1,cb2,da thanh toan,show
