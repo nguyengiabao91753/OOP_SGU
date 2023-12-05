@@ -181,18 +181,18 @@ public class DSCB implements crud {
         while (true) {
             Scanner input = new Scanner(System.in);
             System.out.println("-------->Menu quản lý chuyến bay--------<");
-            System.out.println("    1.Khởi tạo một danh sách chuyến bay.");
-            System.out.println("    2.Xuất danh sách chuyến bay ra màn hình.");
-            System.out.println("    3.Thêm chuyến bay vào danh sách.");
-            System.out.println("    4.Xem danh sach hãng hàng không.");
-            System.out.println("    5.Xóa chuyến bay theo mã số chuyến.");
-            System.out.println("    6.Chỉnh sửa thông tin chuyến bay.");
+            // System.out.println("    1.Khởi tạo một danh sách chuyến bay.");
+            System.out.println("    1.Xuất danh sách chuyến bay ra màn hình.");
+            System.out.println("    2.Thêm chuyến bay vào danh sách.");
+            System.out.println("    3.Xem danh sach hãng hàng không.");
+            System.out.println("    4.Xóa chuyến bay theo mã số chuyến.");
+            System.out.println("    5.Chỉnh sửa thông tin chuyến bay.");
             // System.out.println(" 7.Lưu dữ liệu.");
             // System.out.println(" 8.Quản lý hãng hàng không.");
             System.out.println("    0.Quay lại trang chính.");
             System.out.println("Hãy nhập lựa chọn của bạn!");
             flag = input.nextInt();
-            if (flag > 6 || flag < 0) {
+            if (flag > 5 || flag < 0) {
                 System.out.println("Lựa chọn của bạn không hợp lệ,vui lòng nhập lại!");
                 continue;
             }
@@ -201,37 +201,20 @@ public class DSCB implements crud {
             }
             switch (flag) {
                 case 1:
-                    System.out.println(
-                            "Bạn có chắc khởi tạo, danh sách sẽ được khởi tạo từ đầu. Ấn 'co' để tiếp tục hoặc phím bất kỳ để thoát.");
-                    input.nextLine();
-                    String flag1 = input.nextLine();
-                    if (flag1.equals("co")) {
-                        sochuyenbay = 0;
-                        danhsachchuyenbay = new chuyenbay[1000];
-                        nhap();
-                    }
-                    ghifile();
-                    break;
-                case 2:
                     System.out.println("Xuất danh sách chuyến bay.");
                     xuat();
                     break;
-                case 3:
+                case 2:
                     them();
-                    ghifile();
                     break;
-                case 4:
+                case 3:
                     quanLyhhk.xuat();
                     break;
-                case 5:
+                case 4:
                     xoa();
-                    ghifile();
                     break;
-                case 6:
+                case 5:
                     sua();
-                    break;
-                case 7:
-                    
                     break;
             }
         }
