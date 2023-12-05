@@ -2,3 +2,4 @@ Vietnam Airlines,hhk1,show
 Vietjet Air,hhk2,show
 Jetstar Pacific,hhk3,show
 Bamboo Airways,hhk4,show
+Viettel Airline,hhk5,show

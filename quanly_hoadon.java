@@ -139,6 +139,7 @@ public class quanly_hoadon implements crud {
     public void xuat() {
         for (hoadon hoadon : quanly_hoadon) {
             if (hoadon.getStatus().equals("show")) {
+                System.out.println("------------------------------------");
                 hoadon.xuat();
             }
         }
@@ -178,7 +179,7 @@ public class quanly_hoadon implements crud {
                             c++;
                             break;
                         case 2:
-                            for (ve ve : quanly_ve.getDsve_daydu()) {
+                            for (ve ve : quanly_ve.getDanhsachve()) {
                                 if (ve.getMa_ve().equals(arr[i])) {
                                     hoadon.setVe(ve);
                                     c++;

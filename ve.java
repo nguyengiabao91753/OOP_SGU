@@ -94,25 +94,30 @@ public class ve {
         System.out.println("    Hành khách: ");
         getkhachHang().xuat();
         System.out.println("\n    Chuyến bay: ");
-        getChuyenbay().xuat();
+        System.out.printf("Mã chuyến bay: %s || Mã hãng hàng không: %s || Tên hãng hàng không: %s ||Thời gian: %s || Điểm xuất phát: %s || Điểm đến: %s || Tổng số ghế: %d ||\n",getChuyenbay().getMachuyenbay(),getChuyenbay().getHang().getMaHang(),getChuyenbay().getHang().getTenHang(),getChuyenbay().getThoigiankhoihanh(),getChuyenbay().getDiemxuatphat(),getChuyenbay().getDiemden(),getChuyenbay().getSoghe());
         System.out.println("\n    Gía: " + gia);
         System.out.println("    Trạng thái: " + trangthai);
     }
 }
 
 
-
+/* 
 class hienthiquanlyve {
     public static void main(String[] args) throws Exception {
         quanly_ve quanly_ve = new quanly_ve();
+        DSCB dscb = new DSCB();
+        dscb.docfile();
+        for (chuyenbay chuyenbay : dscb.getDanhsachchuyenbay()) {
+            System.out.println(chuyenbay.getMachuyenbay());
+        }
 
-        quanly_ve.docfile();
+        // quanly_ve.docfile();
         // quanly_ve.xuat();
         // for (ve ve : quanly_ve.getDsve_daydu()) {
         //     ve.xuat();
         // }
         // System.out.println(quanly_ve.getDanhsachve().size());
-        quanly_ve.xuat();
+        // quanly_ve.xuat();
         // for (ve ve : quanly_ve.getDanhsachve()) {
         // if(ve.getTrangthai().equals("da thanh toan")){
         // quanly_hoadon.them(ve);
@@ -179,4 +184,4 @@ class hienthiquanlyve {
         // again = inp.nextInt();
         // }
     }
-}
+}*/

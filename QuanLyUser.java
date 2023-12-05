@@ -25,7 +25,9 @@ public class QuanLyUser implements crud {
     public void xuat() {
         System.out.println("----- Danh Sách Người Dùng -----");
         for (user xuat : danhSachUser) {
-            xuat.xuatThongTin();
+            if(xuat.getStatus().equals("show")){
+                xuat.xuatThongTin();
+            }
         }
     }
 
@@ -89,7 +91,7 @@ public class QuanLyUser implements crud {
         String taiKhoan = scanner.nextLine();
         user userXoa = timUser(taiKhoan);
         if (userXoa != null) {
-            danhSachUser.remove(userXoa);
+            userXoa.setStatus("hidden");
             System.out.println("Người dùng đã được xóa: " + taiKhoan);
         } else {
             System.out.println("Không tìm thấy người dùng có tài khoản: " + taiKhoan);
@@ -112,7 +114,7 @@ public class QuanLyUser implements crud {
 
     private user timUser(String taiKhoan) {
         for (user user : danhSachUser) {
-            if (user.getTaiKhoan().equalsIgnoreCase(taiKhoan)) {
+            if (user.getTaiKhoan().equalsIgnoreCase(taiKhoan) && user.getStatus().equals("show")) {
                 return user;
             }
         }
@@ -125,7 +127,7 @@ public class QuanLyUser implements crud {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 2) {
+                if (parts.length == 3 && parts[2].equals("show")) {
                     user user = new user(parts[0], parts[1]);
                     themUser(user);
                 } else {
@@ -142,7 +144,7 @@ public class QuanLyUser implements crud {
         String tenFile = "USER.txt";
         try (FileWriter fw = new FileWriter(tenFile)) {
             for (user user : danhSachUser) {
-                fw.write(user.getTaiKhoan() + "," + user.getMatKhau());
+                fw.write(user.getTaiKhoan() + "," + user.getMatKhau()+","+user.getStatus());
                 fw.write(System.lineSeparator());
             }
             // System.out.println("Đã ghi danh sách người dùng vào file.");
@@ -151,7 +153,7 @@ public class QuanLyUser implements crud {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    //public static void main(String[] args) throws Exception {
 
-    }
+    //}
 }

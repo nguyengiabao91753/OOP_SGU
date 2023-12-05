@@ -11,10 +11,12 @@ public class user {
     private String taiKhoan;
     private String matKhau;
     private String mkmahoa;
+    private String status="show";
 
     public user(String taiKhoan, String matKhau) {
         this.taiKhoan = taiKhoan;
         this.matKhau = matKhau;
+        status = "show";
     }
 
     public String getTaiKhoan() {
@@ -25,6 +27,12 @@ public class user {
         this.taiKhoan = taiKhoan;
     }
 
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
     public void nhap(ArrayList<user> danhSachUser) {
         Scanner scanner = new Scanner(System.in);
 
