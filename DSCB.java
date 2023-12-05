@@ -182,16 +182,15 @@ public class DSCB implements crud {
             // System.out.println("    1.Khởi tạo một danh sách chuyến bay.");
             System.out.println("    1.Xuất danh sách chuyến bay ra màn hình.");
             System.out.println("    2.Thêm chuyến bay vào danh sách.");
-            System.out.println("    3.Xem danh sach hãng hàng không.");
-            System.out.println("    4.Xóa chuyến bay theo mã số chuyến.");
-            System.out.println("    5.Chỉnh sửa thông tin chuyến bay.");
-            System.out.println("    6.Xuất thông tin chuyến bay theo mã hãng hàng không.");
+            System.out.println("    3.Xóa chuyến bay theo mã số chuyến.");
+            System.out.println("    4.Chỉnh sửa thông tin chuyến bay.");
+            System.out.println("    5.Xuất thông tin chuyến bay theo mã hãng hàng không.");
             // System.out.println(" 7.Lưu dữ liệu.");
             // System.out.println(" 8.Quản lý hãng hàng không.");
             System.out.println("    0.Quay lại trang chính.");
             System.out.println("Hãy nhập lựa chọn của bạn!");
             flag = input.nextInt();
-            if (flag > 7 || flag < 0) {
+            if (flag > 5 || flag < 0) {
                 System.out.println("Lựa chọn của bạn không hợp lệ,vui lòng nhập lại!");
                 continue;
             }
@@ -207,15 +206,12 @@ public class DSCB implements crud {
                     them();
                     break;
                 case 3:
-                    quanLyhhk.xuat();
-                    break;
-                case 4:
                     xoa();
                     break;
-                case 5:
+                case 4:
                     sua();
                     break;
-                case 6:
+                case 5:
                     System.out.println("Xuất chuyến bay theo mã hãng hàng không.");
                     for(HangHangKhong tmp: quanLyhhk.getDanhSachHang()){
                         for(int i=0;i<sochuyenbay;i++){
@@ -226,6 +222,7 @@ public class DSCB implements crud {
                         // System.out.println(tmp.getMaHang());
                     }
                     break;
+                    
             }
         }
     }
