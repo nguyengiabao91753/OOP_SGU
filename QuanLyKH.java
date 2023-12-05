@@ -8,32 +8,28 @@ class QuanLyKH {
         int chon;
         do{
             System.out.println("\n>Menu-------------------------<");
-            System.out.println("1 - Tao danh sach khach hang moi");
-            System.out.println("2 - Them khach hang");
-            System.out.println("3 - Sua khach hang");
-            System.out.println("4 - Xoa khach hang");
-            System.out.println("5 - Tim kiem khach hang");
-            System.out.println("6 - Xuat danh sach khach hang");
+            System.out.println("1 - Them khach hang");
+            System.out.println("2 - Sua khach hang");
+            System.out.println("3 - Xoa khach hang");
+            System.out.println("4 - Tim kiem khach hang");
+            System.out.println("5 - Xuat danh sach khach hang");
             System.out.println("0 - Thoat");
             System.out.print("Nhap lua chon: ");
             chon = sc.nextInt(); sc.nextLine();
             switch(chon){
                 case 1:
-                    dsKhachHang.nhap();
-                    break;
-                case 2:
                     dsKhachHang.them();
                     break;
-                case 3:
+                case 2:
                     dsKhachHang.sua();
                     break;
-                case 4:
+                case 3:
                     dsKhachHang.xoa();
                     break;
-                case 5:
+                case 4:
                     dsKhachHang.tim();
                     break;
-                case 6:
+                case 5:
                     dsKhachHang.xuat();
                     break;
                 case 0:
