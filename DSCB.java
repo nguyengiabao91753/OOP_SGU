@@ -184,13 +184,14 @@ public class DSCB implements crud {
             System.out.println("    2.Thêm chuyến bay vào danh sách.");
             System.out.println("    3.Xóa chuyến bay theo mã số chuyến.");
             System.out.println("    4.Chỉnh sửa thông tin chuyến bay.");
-            System.out.println("    5.Xuất thông tin chuyến bay theo mã hãng hàng không.");
+            System.out.println("    5.Tìm kiếm chuyến bay.");
+            System.out.println("    6.Xuất thông tin chuyến bay theo mã hãng hàng không.");
             // System.out.println(" 7.Lưu dữ liệu.");
             // System.out.println(" 8.Quản lý hãng hàng không.");
             System.out.println("    0.Quay lại trang chính.");
             System.out.println("Hãy nhập lựa chọn của bạn!");
             flag = input.nextInt();
-            if (flag > 5 || flag < 0) {
+            if (flag > 6 || flag < 0) {
                 System.out.println("Lựa chọn của bạn không hợp lệ,vui lòng nhập lại!");
                 continue;
             }
@@ -212,6 +213,9 @@ public class DSCB implements crud {
                     sua();
                     break;
                 case 5:
+                    tim();
+                    break;
+                case 6:
                     System.out.println("Xuất chuyến bay theo mã hãng hàng không.");
                     for(HangHangKhong tmp: quanLyhhk.getDanhSachHang()){
                         for(int i=0;i<sochuyenbay;i++){
