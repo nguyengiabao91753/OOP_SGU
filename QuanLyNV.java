@@ -7,44 +7,31 @@ class QuanLyNV {
 
     public void menu(DSNhanVien dsNhanVien){
         int chon;
-        dsNhanVien.docFile();
         do{
             System.out.println("\n>Menu-------------------------<");
-            System.out.println("1 - Tao danh sach nhan vien moi");
-            System.out.println("2 - Them nhan vien");
-            System.out.println("3 - Sua nhan vien");
-            System.out.println("4 - Xoa nhan vien");
-            System.out.println("5 - Tim kiem nhan vien");
-            System.out.println("6 - Xuat danh sach nhan vien");
-            System.out.println("7 - Tai len danh sach tu File");
-            System.out.println("8 - Ghi du lieu vao File");
+            System.out.println("1 - Them nhan vien");
+            System.out.println("2 - Sua nhan vien");
+            System.out.println("3 - Xoa nhan vien");
+            System.out.println("4 - Tim kiem nhan vien");
+            System.out.println("5 - Xuat danh sach nhan vien");
             System.out.println("0 - Thoat");
             System.out.print("Nhap lua chon: ");
             chon = sc.nextInt(); sc.nextLine();
             switch(chon){
                 case 1:
-                    dsNhanVien.nhap();
-                    break;
-                case 2:
                     dsNhanVien.them();
                     break;
-                case 3:
+                case 2:
                     dsNhanVien.sua();
                     break;
-                case 4:
+                case 3:
                     dsNhanVien.xoa();
                     break;
-                case 5:
+                case 4:
                     dsNhanVien.tim();
                     break;
-                case 6:
+                case 5:
                     dsNhanVien.xuat();
-                    break;
-                case 7:
-                    dsNhanVien.docFile();
-                    break;
-                case 8:
-                    dsNhanVien.ghiFile();
                     break;
                 case 0:
                     break;
