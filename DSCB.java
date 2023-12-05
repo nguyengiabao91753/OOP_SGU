@@ -176,8 +176,6 @@ public class DSCB implements crud {
 
     public void quanlyDSCB(QuanLyHangHangKhong quanLyhhk) throws Exception {
         int flag;
-        quanLyhhk.docFile();
-        docfile();
         while (true) {
             Scanner input = new Scanner(System.in);
             System.out.println("-------->Menu quản lý chuyến bay--------<");
@@ -187,12 +185,13 @@ public class DSCB implements crud {
             System.out.println("    3.Xem danh sach hãng hàng không.");
             System.out.println("    4.Xóa chuyến bay theo mã số chuyến.");
             System.out.println("    5.Chỉnh sửa thông tin chuyến bay.");
+            System.out.println("    6.Xuất thông tin chuyến bay theo mã hãng hàng không.");
             // System.out.println(" 7.Lưu dữ liệu.");
             // System.out.println(" 8.Quản lý hãng hàng không.");
             System.out.println("    0.Quay lại trang chính.");
             System.out.println("Hãy nhập lựa chọn của bạn!");
             flag = input.nextInt();
-            if (flag > 5 || flag < 0) {
+            if (flag > 7 || flag < 0) {
                 System.out.println("Lựa chọn của bạn không hợp lệ,vui lòng nhập lại!");
                 continue;
             }
@@ -215,6 +214,17 @@ public class DSCB implements crud {
                     break;
                 case 5:
                     sua();
+                    break;
+                case 6:
+                    System.out.println("Xuất chuyến bay theo mã hãng hàng không.");
+                    for(HangHangKhong tmp: quanLyhhk.getDanhSachHang()){
+                        for(int i=0;i<sochuyenbay;i++){
+                            if(tmp.getMaHang().equals(danhsachchuyenbay[i].getHang().getMaHang())){
+                                danhsachchuyenbay[i].xuat();
+                            }
+                        }
+                        // System.out.println(tmp.getMaHang());
+                    }
                     break;
             }
         }
